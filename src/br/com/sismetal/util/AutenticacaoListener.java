@@ -1,7 +1,5 @@
 package br.com.sismetal.util;
 
-import java.io.IOException;
-
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
@@ -15,10 +13,13 @@ public class AutenticacaoListener implements PhaseListener{
 
 	@Override
 	public void afterPhase(PhaseEvent arg0) {
+		
 		String paginaAtual = Faces.getViewId();		
-		boolean pagAuten = paginaAtual.contains("faces/admin/pages/autenticacao.xhtml");
+		boolean pagAuten = false;
+		pagAuten = paginaAtual.contains("faces/admin/pages/autenticacao.xhtml");
 		if(!pagAuten) {
-			AutenticacaoBeans autenticacaoBeans = Faces.getSessionAttribute("autenticacaoBeans");
+			AutenticacaoBeans autenticacaoBeans = null;
+			autenticacaoBeans = Faces.getSessionAttribute("autenticacaoBeans");
 			if(autenticacaoBeans == null) {
 				
 				Faces.navigate("faces/admin/pages/autenticacao.xhtml");

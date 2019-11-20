@@ -12,16 +12,21 @@
 	<h:form id="formListagemEmpres">
 		<p:panel  header="Lista de Emprestimos">
 			<p:dataTable id="dttabelaEmpres" emptyMessage="Nenhum registro encontrado." 
-				 var="emprestimoFerramenta"  value="#{emprestimoFerramentaBeans.emprestimoFerramentasLista}" paginator="true" rows="5" 
+				 var="emprestimoFerramenta"  value="#{emprestimoFerramentaRelatorioBeans.emprestimoFerramentasRel}" paginator="true" rows="5" 
 				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                         rowsPerPageTemplate="3,10,15"
-				>
+				><f:facet name="header">
+						<p:commandButton value=" Imprimir" 
+							actionListener="#{emprestimoFerramentaRelatorioBeans.imprimir}"
+							 />
+							</f:facet>
 
 				<p:column headerText="funcionario almoxarife">
 					<h:outputText value="#{emprestimoFerramenta.funcionarioAlmoxarifado.nome}" />
 				</p:column>
 
-				<p:column headerText="funcionario fabrica" filterBy="#{emprestimoFerramenta.funcionarioFabrica.nome}">
+				<p:column headerText="funcionario fabrica" filterBy="#{emprestimoFerramenta.funcionarioFabrica.nome}"
+				filterMatchMode="contains">
 					<h:outputText value="#{emprestimoFerramenta.funcionarioFabrica.nome}" />
 				</p:column>
 				
@@ -44,7 +49,7 @@
 			</p:dataTable>	
 					<f:facet name="footer">
            <h:outputText value="Existem " />
-           <h:outputText value="#{fn:length(emprestimoFerramentaBeans.emprestimoFerramentasLista)}" />
+           <h:outputText value="#{fn:length(emprestimoFerramentaRelatorioBeans.emprestimoFerramentasRel)}" />
            <h:outputText value=" ferramentas cadastradas. " />
              
             
