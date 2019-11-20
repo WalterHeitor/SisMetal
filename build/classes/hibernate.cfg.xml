@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- Configurações de conexão do banco de dados -->
+		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="connection.url">jdbc:postgresql://localhost:5432/metalger</property>
+		<property name="connection.username">postgres</property>
+		<property name="connection.password">mariaclara</property>
+		<property name="connection.pool_size">1</property>
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<!-- Ativar o gerenciamento automático de contexto de sessão do Hibernatet -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- Desativar o cache de segundo nível-org.hibernate.ejb.HibernatePersistence- org.hibernate.cache.internal.NoCacheProvider-->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+		<!-- Exibe os comandos sql -->
+		<property name="show_sql">true</property>
+
+		<!-- Eliminar e recriar o esquema do banco de dados na inicialização  validate-->
+		<property name="hbm2ddl.auto">validate</property>
+
+ 
+		<mapping class="br.com.sismetal.doumain.Funcionario" />
+		<mapping class="br.com.sismetal.doumain.Ferramenta" />
+		<mapping class="br.com.sismetal.doumain.Telefone" />
+		<mapping class="br.com.sismetal.doumain.Endereco" />
+		<mapping class="br.com.sismetal.doumain.EmprestimoFerramenta" />
+		<mapping class="br.com.sismetal.doumain.DevolucaoFerramentaEstragada" />
+	
+	</session-factory>
+
+</hibernate-configuration>

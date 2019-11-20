@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="conteudo">
+
+	<h:form id="formListagemEmpres">
+		<p:panel  header="Lista de Emprestimos">
+			<p:dataTable id="dttabelaEmpres" emptyMessage="Nenhum registro encontrado." 
+				 var="emprestimoFerramenta"  value="#{emprestimoFerramentaBeans.emprestimoFerramentasLista}" paginator="true" rows="5" 
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                        rowsPerPageTemplate="3,10,15"
+				>
+
+				<p:column headerText="funcionario almoxarife">
+					<h:outputText value="#{emprestimoFerramenta.funcionarioAlmoxarifado.nome}" />
+				</p:column>
+
+				<p:column headerText="funcionario fabrica" filterBy="#{emprestimoFerramenta.funcionarioFabrica.nome}">
+					<h:outputText value="#{emprestimoFerramenta.funcionarioFabrica.nome}" />
+				</p:column>
+				
+				<p:column headerText="Data Saida">
+					<h:outputText value="#{emprestimoFerramenta.dt_saida_emp}">
+					<f:convertDateTime locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Data Entrega">
+					<h:outputText value="#{emprestimoFerramenta.dt_entrega}">
+					<f:convertDateTime locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Descrição ferramenta" filterBy="#{emprestimoFerramenta.ferramenta.descricao_ferr}">
+					<h:outputText value="#{emprestimoFerramenta.ferramenta.descricao_ferr}"/>
+				</p:column>
+				
+			</p:dataTable>	
+					<f:facet name="footer">
+           <h:outputText value="Existem " />
+           <h:outputText value="#{fn:length(emprestimoFerramentaBeans.emprestimoFerramentasLista)}" />
+           <h:outputText value=" ferramentas cadastradas. " />
+             
+            
+       </f:facet>
+		</p:panel>
+	</h:form>
+</ui:define>
+</ui:composition>

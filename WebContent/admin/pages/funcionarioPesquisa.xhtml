@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</h:head>
+<h:body>
+
+<h:form id="formListagem">
+		<p:panel header="Lista de Funcionarios">
+			<p:dataTable id="dttabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{funcionarioBeans.funcionarios}"
+				var="funcionario" rows="6">
+				
+
+				<p:column headerText="Matricula" filterBy="#{funcionario.matricula}">
+					<h:outputText value="#{funcionario.matricula}" />
+				</p:column>
+
+				<p:column headerText="Nome" filterBy="#{funcionario.nome}">
+					<h:outputText value="#{funcionario.nome}" />
+				</p:column>
+
+				<p:column headerText="CPF" filterBy="#{funcionario.cpf_func}">
+					<h:outputText value="#{funcionario.cpf_func}" />
+				</p:column>
+
+				<p:column headerText="Cargo">
+					<h:outputText value="#{funcionario.cargo_func}" />
+				</p:column>
+
+				<p:column headerText="Status">
+					<h:outputText value="#{funcionario.status_func}" />
+				</p:column>
+
+				<p:column headerText="Email">
+					<h:outputText value="#{funcionario.email_func}" />
+				</p:column>				
+				<p:column headerText="Senha">
+					<h:outputText value="#{funcionario.senha}" />
+				</p:column>
+				<p:column headerText="Opções">					
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{funcionarioBeans.editar}"
+						oncomplete="/pages/emprestimoFerramenta.xhtml">
+						<f:attribute name="funcEditarSelecionado" value="#{funcionario}" />
+					</p:commandButton>
+					<p:button value="BB"  outcome="/pages/emprestimoFerramenta.xhtml" accesskey="">
+					<f:attribute name="funcEditarSelecionado" value="#{funcionario}" />
+					</p:button>
+				</p:column>				
+			</p:dataTable>		
+		</p:panel>
+	</h:form>
+
+</h:body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+	<!--  <ui:insert name="metadata" /> -->
+<h:head>
+	<h:outputStylesheet library="css" name="folhaEstilo.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>SisMetalGer</title>
+</h:head>
+<h:body>
+	 <p:growl id="mensagem" life="5000" />
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" header="Sistema SisMetalGer"
+			resizable="false" closable="false" collapsible="false">
+
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="12%" resizable="false"
+			closable="false" collapsible="false">
+			<ui:insert name="menu" />
+			<h:form>
+				<p:panelMenu>
+					<p:submenu label="Arquivo">
+						<p:menuitem value="Principal"   outcome="/admin/pages/index.xhtml" />
+						<p:menuitem value="Sair" />
+					</p:submenu>
+					<p:submenu label="Cadastros">
+						<p:menuitem value="Funcionarios" outcome="/admin/pages/funcionarios.xhtml" />
+						<p:menuitem value="Ferramentas" outcome="/admin/pages/ferramenta.xhtml" />
+					</p:submenu>
+					<p:submenu label="Ferramentas">
+						<p:menuitem value="Emprestimos" outcome="/admin/pages/emprestimoFerramenta2.xhtml" 
+						actionListener="#{emprestimoFerramentaBeans.novoEmprestimo()}"/>
+						<p:menuitem value="Devolução" outcome="/admin/pages/devolucaoEmprestimoFerramenta.xhtml"/>
+					</p:submenu>
+					<p:submenu label="Ajuda">
+					</p:submenu>
+				</p:panelMenu>
+			</h:form>
+		</p:layoutUnit>
+		<p:layoutUnit position="center" resizable="false" closable="false"
+			collapsible="false">
+			<ui:insert name="conteudo" />
+		</p:layoutUnit>
+ 		<p:layoutUnit position="south" 
+			header="Desenvolvido por Walter Heitor Freitas Oliveira" 
+ 			resizable="false" closable="false" collapsible="false"> 
+ 		</p:layoutUnit> 
+	</p:layout>
+
+</h:body>
+</html>

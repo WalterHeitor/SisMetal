@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="funcionario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ca416979-9827-4dd9-a3f0-bc7fecfbf582">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[ZnVuY2lvbmFyaW8gQVMgLDk4LDYyLDdkYzc4ODVjLThmZjQtNGU2Ni04ZjI3LWQ1MDc0M2Q3OTE3
+Yjs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="metalger Adapter "/>
+	<queryString language="SQL">
+		<![CDATA[SELECT funcionario.cargo_func,
+	funcionario.cpf_func,
+	funcionario.email_func,
+	funcionario.nome,
+	funcionario.setor,
+	funcionario.status_func
+FROM funcionario
+ORDER BY funcionario.nome ASC]]>
+	</queryString>
+	<field name="cargo_func" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cargo_func"/>
+	</field>
+	<field name="cpf_func" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cpf_func"/>
+	</field>
+	<field name="email_func" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email_func"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+	</field>
+	<field name="setor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="setor"/>
+	</field>
+	<field name="status_func" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="status_func"/>
+	</field>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="-30" y="0" width="580" height="79" uuid="f4668778-3783-483a-990e-c7b239a035cc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Rockwell Extra Bold" size="26"/>
+				</textElement>
+				<text><![CDATA[Relatorio de Funcionarios  SisMetalGer]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="31" uuid="31ec40c2-45fa-4359-818f-30977a28b5a7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="18c659ff-7bb1-45a9-897b-a2cca6e799db"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" isBold="true"/>
+				</textElement>
+				<text><![CDATA[nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="1" width="80" height="30" uuid="684dc601-1132-48ed-b5b0-e3fbbd571398">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7022c6b0-bfa3-443f-adb4-6cf36fbf05a1"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" isBold="true"/>
+				</textElement>
+				<text><![CDATA[cargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="110" height="30" uuid="5aee483b-7f1e-4085-a130-4be7fe6142da">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3761d626-04dd-414f-899f-1a4730b38bd2"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" isBold="true"/>
+				</textElement>
+				<text><![CDATA[cpf_func]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="1" width="80" height="30" uuid="99c34440-6c55-43a4-85f8-8aeb2625e224">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="12f955f2-0fe5-40a1-8929-58dab18b9944"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" isBold="true"/>
+				</textElement>
+				<text><![CDATA[setor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="1" width="76" height="30" uuid="1447598f-51be-4adb-8d64-7ef1b6616bc8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="53f52812-e78c-464c-9497-4921ec252741"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" isBold="true"/>
+				</textElement>
+				<text><![CDATA[status_func]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="0" width="90" height="30" uuid="04796ddc-33e7-4ca9-a125-c2197a67be02">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="809d12c8-46c4-485f-b037-e6d19f30cbd4"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" isBold="true"/>
+				</textElement>
+				<text><![CDATA[email_func]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="3e663685-c14b-4fb5-a97a-8d9f4ee66083">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="18c659ff-7bb1-45a9-897b-a2cca6e799db"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="80" height="30" uuid="2f624cfb-8afb-4a4b-8e3f-ef57c24a9da7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7022c6b0-bfa3-443f-adb4-6cf36fbf05a1"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cargo_func}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="110" height="30" uuid="e6f6f1b5-c3a6-4b41-b533-ee1f1beddd1f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3761d626-04dd-414f-899f-1a4730b38bd2"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cpf_func}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="80" height="30" uuid="cce3c5af-0da8-421f-8e22-f589654a7e93">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="12f955f2-0fe5-40a1-8929-58dab18b9944"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{setor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="76" height="30" uuid="0e2363ea-4be8-48be-9bec-aab334ccaddd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="53f52812-e78c-464c-9497-4921ec252741"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{status_func}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="0" width="100" height="30" uuid="e08ff814-43d8-43a9-9c9c-11a1d2ceb10d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="809d12c8-46c4-485f-b037-e6d19f30cbd4"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email_func}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="0" width="480" height="30" uuid="53c7d94d-eed7-4445-99fc-6ba9c6436a49"/>
+				<text><![CDATA[Desenvolvido por Walter Heitor]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

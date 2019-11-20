@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/Templates/modeloSistema.xhtml"
+	>
+	<ui:define name="conteudo" >
+	<h:form id="formListagem">
+		<p:panel header="Lista de Ferramentas">
+			<p:dataTable id="dttabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{ferramentaBeans.ferramentas}"
+				var="ferramenta" rows="6">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+						actionListener="#{ferramentaBeans.novo()}"
+						update=":mensagem :formCadastro:pnGridCadastro" />
+				</f:facet>
+
+				<p:column headerText="Codigo"
+					filterBy="#{ferramenta.codigoBarra}">
+					<h:outputText value="#{ferramenta.codigoBarra}" />
+				</p:column>
+
+				<p:column headerText="Descrição"
+					filterBy="#{ferramenta.descricao_ferr}">
+					<h:outputText value="#{ferramenta.descricao_ferr}" />
+				</p:column>
+
+				<p:column headerText="Categoria"
+					filterBy="#{ferramenta.categoria_ferr}">
+					<h:outputText value="#{ferramenta.categoria_ferr}" />
+				</p:column>
+
+				<p:column headerText="Local da Ferramenta">
+					<h:outputText value="#{ferramenta.local_ferr}" />
+				</p:column>
+
+				<p:column headerText="Status">
+					<h:outputText value="#{ferramenta.status}" />
+				</p:column>
+
+				<p:column headerText="Data Entrega">
+					<h:outputText value="#{ferramenta.dt_entrega_ferr}">
+					<f:convertDateTime locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Nota Fiscal">
+					<h:outputText value="#{ferramenta.num_nota_fiscal_ferr}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{ferramentaBeans.excluir}"
+						update=":mensagem :formListagem:dttabela ">
+						<p:confirm header="Confirmação"
+							message="Deseja excluir o ferramenta?" icon="ui-icon-alert" />
+						<f:attribute name="ferrExcluirSelecionado" value="#{ferramenta}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{ferramentaBeans.editar}"
+						update=":mensagem  :formEditar:pnGridEditar"
+						oncomplete="PF('dialogoEditar').show();">
+						<f:attribute name="ferrEditarSelecionado" value="#{ferramenta}" />
+					</p:commandButton>
+				</p:column>	
+				<f:facet name="footer">
+           <h:outputText value="Existem " />
+           <h:outputText value="#{fn:length(ferramentaBeans.ferramentas)}" />
+           <h:outputText value=" ferramentas cadastradas. " />          
+       </f:facet>
+			</p:dataTable>
+
+
+
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</p:panel>
+	</h:form>
+	
+	<!-- Dialogo de cadastro -->
+	<p:dialog header="ferramenta - Cadastro" widgetVar="dialogo"
+		draggable="false" resizable="false" global="true" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid columns="2" id="pnGridCadastro">
+				<p:outputLabel for="cod" value="Codigo:" />
+				<p:inputText id="cod"
+					value="#{ferramentaBeans.ferramenta.codigoBarra}" 
+					required="true" requiredMessage="'O campo codigo e obrigatorio!!!"/>
+
+				<p:outputLabel for="desc" value="Descrição:" />
+				<p:inputText id="desc"
+					value="#{ferramentaBeans.ferramenta.descricao_ferr}"
+					required="true" requiredMessage="'O campo descrição e obrigatorio!!!" />
+
+				<p:outputLabel for="cat" value="Categoria:" />
+				<p:selectOneMenu value="#{ferramentaBeans.ferramenta.categoria_ferr}"
+				id="cat" required="true" requiredMessage="'O campo Categoria e obrigatorio!!!">
+				<f:selectItem itemValue="Manual" itemLabel="Manual" />
+				<f:selectItem itemValue="Eletrica" itemLabel="Eletrica" />
+				<f:selectItem itemValue="Equipamento-pesado" itemLabel="Equipamento-pesado" />
+				</p:selectOneMenu>
+				<p:outputLabel for="loc" value="Local:" />
+				<p:inputText id="loc"
+					value="#{ferramentaBeans.ferramenta.local_ferr}"
+					required="true" requiredMessage="'O campo local e obrigatorio!!!">
+				</p:inputText>
+
+				<p:outputLabel  value="Status" />
+				<p:selectOneMenu value="#{ferramentaBeans.ferramenta.status}" >
+
+					<f:selectItem itemValue="não-emprestado" itemLabel="não-emprestado" />
+					<!--  <f:selectItem itemValue="emprestado" itemLabel="emprestado" />
+					<f:selectItem itemValue="estragada" itemLabel="estragada" />-->
+				</p:selectOneMenu>
+				
+				<p:outputLabel for="dtEntr" value="Data entrega:"/>
+				<p:calendar id="dtEntr" value="#{ferramentaBeans.ferramenta.dt_entrega_ferr}"
+				required="true" requiredMessage="'O campo Data entrega e obrigatorio!!!"/>
+				
+				<p:outputLabel for="nfis" value="Numero da nota fiscal:" />
+				<p:inputText id="nfis" 
+					value="#{ferramentaBeans.ferramenta.num_nota_fiscal_ferr}"
+					required="true" requiredMessage="'O campo Numero da nota fiscal e obrigatorio!!!">
+				</p:inputText>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar"
+					actionListener="#{ferramentaBeans.salvar}"
+					update=":mensagem  :formCadastro:pnGridCadastro :formListagem:dttabela " />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	<!-- dialogo editar -->
+
+	<p:dialog header="ferramenta - Editar" widgetVar="dialogoEditar"
+		draggable="false" resizable="false" global="true" closable="false">
+		<h:form id="formEditar">
+			<h:panelGrid columns="2" id="pnGridEditar">
+				<p:outputLabel value="Codigo:" />
+				<p:inputText  readonly="true"
+					value="#{ferramentaBeans.ferramenta.codigoBarra}" />
+
+				<p:outputLabel value="Descrição:" />
+				<p:inputText 
+					value="#{ferramentaBeans.ferramenta.descricao_ferr}" />
+
+				<p:outputLabel value="Categoria:" />
+				<p:inputText 
+					value="#{ferramentaBeans.ferramenta.categoria_ferr}" />
+
+				<p:outputLabel value="Local:" />
+				<p:inputText maxlength="8" 
+					value="#{ferramentaBeans.ferramenta.local_ferr}">
+				</p:inputText>
+
+				<p:outputLabel value="Status" />
+				<p:selectOneMenu value="#{ferramentaBeans.ferramenta.status}">
+
+					<f:selectItem itemValue="não-emprestado" itemLabel="não-emprestado" />
+					<f:selectItem itemValue="emprestado" itemLabel="emprestado" />
+					<f:selectItem itemValue="estragada" itemLabel="estragada" />
+
+				</p:selectOneMenu>
+				<p:outputLabel value="Data entrega:"/>
+				<p:calendar value="#{ferramentaBeans.ferramenta.dt_entrega_ferr}"/>
+				
+				<p:outputLabel value="Numero da nota fiscal:" />
+				<p:inputText maxlength="8" size="30"
+					value="#{ferramentaBeans.ferramenta.num_nota_fiscal_ferr}">
+				</p:inputText>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar"
+					actionListener="#{ferramentaBeans.salvarEditar}"
+					update=":mensagem  :formEditar:pnGridEditar :formListagem:dttabela " />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogoEditar').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</ui:define>
+</ui:composition>

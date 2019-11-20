@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="conteudo">
+
+		<h:form id="formListagem">
+			<p:panel header="Lista de Funcionarios">
+				<p:dataTable id="dttabela"
+					emptyMessage="Nenhum registro encontrado." paginator="true"
+					value="#{funcionarioBeans.funcionarios}" var="funcionario" rows="6">
+					<f:facet name="header">
+						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+							actionListener="#{funcionarioBeans.novo}"
+							update=":mensagem :formCadastro:pnGridCadastro" />
+						<p:button value="Listar Telefones"
+							outcome="/admin/pages/listartelefones.xhtml" />
+						<p:button value="Listar Endereços"
+							outcome="/admin/pages/listarEnderecos.xhtml" />
+					</f:facet>
+
+					<p:column headerText="Matricula"
+						filterBy="#{funcionario.matricula}">
+						<h:outputText value="#{funcionario.matricula}" />
+					</p:column>
+
+					<p:column headerText="Nome" filterBy="#{funcionario.nome}">
+						<h:outputText value="#{funcionario.nome}" />
+					</p:column>
+
+					<p:column headerText="CPF" filterBy="#{funcionario.cpf_func}">
+						<h:outputText value="#{funcionario.cpf_func}" />
+					</p:column>
+
+					<p:column headerText="Setor">
+						<h:outputText value="#{funcionario.setor}" />
+					</p:column>
+
+					<p:column headerText="Cargo">
+						<h:outputText value="#{funcionario.cargo_func}" />
+					</p:column>
+
+					<p:column headerText="Status">
+						<h:outputText value="#{funcionario.status_func}" />
+					</p:column>
+
+					<p:column headerText="Email">
+						<h:outputText value="#{funcionario.email_func}" />
+					</p:column>
+
+					<p:column headerText="Senha">
+						<h:outputText value="#{funcionario.senha}" />
+					</p:column>
+
+					<p:column headerText="Opções">
+
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{funcionarioBeans.excluir}"
+							update=":mensagem :formListagem:dttabela ">
+							<p:confirm header="Confirmação"
+								message="Deseja excluir o funcionario?" icon="ui-icon-alert" />
+							<f:attribute name="funcExcluirSelecionado" value="#{funcionario}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil"
+							actionListener="#{funcionarioBeans.editar}"
+							update=":mensagem  :formEditar:pnGridEditar"
+							oncomplete="PF('dialogoEditar').show();">
+							<f:attribute name="funcEditarSelecionado" value="#{funcionario}" />
+						</p:commandButton>
+
+
+					</p:column>
+					<p:column headerText="Telefone">
+						<p:commandButton icon="ui-icon-circle-plus"
+							oncomplete="PF('dialogoTel').show();"
+							update=":formListagem:dttabela"
+							actionListener="#{telefoneBeans.puxarFuncionarioTable}">
+							<f:attribute name="funcTelefoneSelecionado"
+								value="#{funcionario}" />
+						</p:commandButton>
+
+					</p:column>
+					<p:column headerText="Endereço">
+						<p:commandButton icon="ui-icon-circle-plus"
+							oncomplete="PF('dialogoEnder').show();"
+							actionListener="#{enderecoBeans.puxarFuncionarioTable}">
+							<f:attribute name="funcEnderecoSelecionado"
+								value="#{funcionario}" />
+						</p:commandButton>
+					</p:column>
+					<f:facet name="footer">
+						<h:outputText value="Existem " />
+						<h:outputText value="#{fn:length(funcionarioBeans.funcionarios)}" />
+						<h:outputText value=" colaboradores cadastrados. " />
+					</f:facet>
+				</p:dataTable>
+
+
+
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</p:panel>
+		</h:form>
+		<!-- Dialogo de cadastro -->
+		<p:dialog global="true" header="Funcionarios - Cadastro"
+			widgetVar="dialogo" draggable="false" resizable="false"
+			closable="false">
+			<h:form id="formCadastro">
+				<h:panelGrid columns="2" id="pnGridCadastro">
+					<p:outputLabel value="Matricula:" />
+					<p:inputText maxlength="50" size="30"
+						value="#{funcionarioBeans.funcionario.matricula}" />
+
+					<p:outputLabel value="CPF:" />
+					<p:inputMask mask="999.999.999-99" maxlength="50" size="30"
+						value="#{funcionarioBeans.funcionario.cpf_func}">
+					</p:inputMask>
+
+					<p:outputLabel value="Nome:" />
+					<p:inputText maxlength="100" size="30"
+						value="#{funcionarioBeans.funcionario.nome}" />
+
+					<p:outputLabel value="Email:" />
+					<p:inputText maxlength="30" size="30"
+						value="#{funcionarioBeans.funcionario.email_func}" />
+
+					<p:outputLabel value="Senha" />
+					<p:password maxlength="8" size="30"
+						value="#{funcionarioBeans.funcionario.senha}">
+						<f:validateBean />
+					</p:password>
+
+					<p:outputLabel value="Setor:" />
+					<p:selectOneMenu value="#{funcionarioBeans.funcionario.setor}">
+						<f:selectItem itemValue="" itemLabel="selecione o setor" />
+						<f:selectItem itemValue="fabrica" itemLabel="fabrica" />
+						<f:selectItem itemValue="almoxarifado" itemLabel="almoxarifado" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Cargo:" />
+					<p:selectOneMenu value="#{funcionarioBeans.funcionario.cargo_func}">
+						<f:selectItem itemValue="" itemLabel="selecione o cargo" />
+						<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
+						<f:selectItem itemValue="Gerente" itemLabel="Gerente" />
+						<f:selectItem itemValue="Encarregado" itemLabel="Encarregado" />
+						<f:selectItem itemValue="Caldereiro" itemLabel="Caldereiro" />
+						<f:selectItem itemValue="Soldador" itemLabel="Soldador" />
+						<f:selectItem itemValue="Pintor" itemLabel="Pintor" />
+						<f:selectItem itemValue="Torneiro" itemLabel="Torneiro" />
+						<f:selectItem itemValue="Almoxarife" itemLabel="Almoxarife" />
+						<f:selectItem itemValue="Auxiliar" itemLabel="Auxiliar" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Status" />
+					<p:selectOneMenu
+						value="#{funcionarioBeans.funcionario.status_func}">
+
+						<f:selectItem itemValue="Ativo" itemLabel="Ativo" />
+						<!--  <f:selectItem itemValue="Inativo" itemLabel="Inativo" />  -->
+
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{funcionarioBeans.salvar()}"
+						update=":mensagem  :formCadastro:pnGridCadastro :formListagem:dttabela " />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+		<!-- Dialogo de editar -->
+
+		<p:dialog global="true" header="Funcionarios - Editar"
+			widgetVar="dialogoEditar" draggable="false" resizable="false"
+			closable="false">
+			<h:form id="formEditar">
+				<h:panelGrid columns="2" id="pnGridEditar">
+					<p:outputLabel value="Matricula:" />
+					<p:inputText maxlength="50" size="30" readonly="true"
+						value="#{funcionarioBeans.funcionario.matricula}" />
+
+					<p:outputLabel value="CPF:" />
+					<p:inputMask mask="999.999.999-99" maxlength="50" size="30"
+						value="#{funcionarioBeans.funcionario.cpf_func}">
+					</p:inputMask>
+
+					<p:outputLabel value="Nome:" />
+					<p:inputText maxlength="100" size="30"
+						value="#{funcionarioBeans.funcionario.nome}" />
+
+					<p:outputLabel value="Email:" />
+					<p:inputText maxlength="30" size="30"
+						value="#{funcionarioBeans.funcionario.email_func}" />
+
+					<p:outputLabel value="Senha" />
+					<p:inputText maxlength="8" size="30"
+						value="#{funcionarioBeans.funcionario.senha}">
+						<!-- <f:validateBean /> -->
+						<f:selectItem itemValue="Inativo" itemLabel="Inativo" />
+					</p:inputText>
+
+					<p:outputLabel value="Setor:" />
+					<p:selectOneMenu value="#{funcionarioBeans.funcionario.setor}">
+						<f:selectItem itemValue="" itemLabel="selecione o setor" />
+						<f:selectItem itemValue="fabrica" itemLabel="fabrica" />
+						<f:selectItem itemValue="almoxarifado" itemLabel="almoxarifado" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Cargo:" />
+					<p:selectOneMenu value="#{funcionarioBeans.funcionario.cargo_func}">
+						<f:selectItem itemValue="" itemLabel="selecione o cargo" />
+						<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
+						<f:selectItem itemValue="Gerente" itemLabel="Gerente" />
+						<f:selectItem itemValue="Encarregado" itemLabel="Encarregado" />
+						<f:selectItem itemValue="Caldereiro" itemLabel="Caldereiro" />
+						<f:selectItem itemValue="Soldador" itemLabel="Soldador" />
+						<f:selectItem itemValue="Pintor" itemLabel="Pintor" />
+						<f:selectItem itemValue="Torneiro" itemLabel="Torneiro" />
+						<f:selectItem itemValue="Almoxarife" itemLabel="Almoxarife" />
+						<f:selectItem itemValue="Auxiliar" itemLabel="Auxiliar" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Status" />
+					<p:selectOneMenu
+						value="#{funcionarioBeans.funcionario.status_func}">
+						<f:selectItem itemValue="Ativo" itemLabel="Ativo" />
+						<f:selectItem itemValue="Inativo" itemLabel="Inativo" />
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{funcionarioBeans.salvarEditar()}"
+						update=":mensagem  :formEditar:pnGridEditar :formListagem:dttabela " />
+					<p:commandButton value="Fechar"
+						oncomplete="PF('dialogoEditar').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		<!-- Dialogo Telefone -->
+		<p:dialog global="true" header="Telefone - Cadastro"
+			widgetVar="dialogoTel" draggable="false" resizable="false"
+			closable="false">
+			<h:form id="formCadastroTel">
+				<h:panelGrid columns="2" id="pnGridCadastroTel">
+					<p:outputLabel value="Numero do Telefone" />
+					<p:inputText maxlength="50" size="30"
+						value="#{telefoneBeans.telefone.num_telefone}" />
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{telefoneBeans.salvarTelefone}"
+						update=":mensagem  :formCadastroTel:pnGridCadastroTel " />
+					<p:commandButton value="Fechar"
+						oncomplete="PF('dialogoTel').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+		<!-- Dialogo Endereco -->
+		<p:dialog global="true" header="Endereco - Cadastro"
+			widgetVar="dialogoEnder" draggable="false" resizable="false"
+			closable="false">
+			<h:form id="formCadastroEnder">
+				<h:panelGrid columns="2" id="pnGridCadastroEnder">
+					<p:outputLabel value="Largadouro:" />
+					<p:inputText maxlength="200" size="60"
+						value="#{enderecoBeans.endereco.largadouro}"
+						placeholder="Avenida, rua, edificio, numero ou apartamento." />
+
+					<p:outputLabel value="Cidade:" />
+					<p:inputText maxlength="200" size="60"
+						value="#{enderecoBeans.endereco.cidade}" placeholder="Cidade." />
+
+					<p:outputLabel value="Estado" />
+					<p:inputText maxlength="200" size="60"
+						value="#{enderecoBeans.endereco.estado}" placeholder="Estado." />
+
+					<p:outputLabel value="CEP" />
+					<p:inputText maxlength="200" size="60"
+						value="#{enderecoBeans.endereco.cep}" placeholder="CEP." />
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{enderecoBeans.salvar()}"
+						update=":mensagem  :formCadastroEnder:pnGridCadastroEnder " />
+					<p:commandButton value="Fechar"
+						oncomplete="PF('dialogoEnder').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

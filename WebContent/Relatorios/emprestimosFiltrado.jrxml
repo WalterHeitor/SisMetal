@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="emprestimos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fac23fa6-1fe3-471f-9749-8e0539be9a94">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SisMetal Data Adapter "/>
+	<parameter name="nomeColaborador" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT emprestimo_ferramenta.id_emprestimo_ferramenta,
+	funcionario.nome AS Almoxarifado,
+	funcionario2.nome AS Colaborador,
+	emprestimo_ferramenta.dt_entrega,
+	emprestimo_ferramenta.dt_saida_emp,
+	ferramenta.descricao_ferr
+FROM emprestimo_ferramenta,
+	funcionario,
+	funcionario funcionario2,
+	ferramenta
+WHERE 
+	 emprestimo_ferramenta.funcionario_almoxarifado = funcionario.matricula 
+	 AND emprestimo_ferramenta.funcionario_fabrica = funcionario2.matricula 
+	 AND emprestimo_ferramenta.ferramenta_codigo_barra = ferramenta.codigobarra 
+	 AND funcionario2.nome LIKE $P{nomeColaborador}]]>
+	</queryString>
+	<field name="id_emprestimo_ferramenta" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id_emprestimo_ferramenta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emprestimo_ferramenta"/>
+	</field>
+	<field name="almoxarifado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="almoxarifado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="colaborador" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="colaborador"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="dt_entrega" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="dt_entrega"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emprestimo_ferramenta"/>
+	</field>
+	<field name="dt_saida_emp" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="dt_saida_emp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emprestimo_ferramenta"/>
+	</field>
+	<field name="descricao_ferr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descricao_ferr"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ferramenta"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="60" uuid="385c0a01-e02b-4a63-9303-80eb35317a57"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="20"/>
+				</textElement>
+				<text><![CDATA[Relatorio Emprestimo Ferramenta Filtrado]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="83" height="20" uuid="b0168d00-ef0d-4731-bbf9-76910afbe4a3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43905b04-890a-48ab-be46-a1f1ded3709e"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[almoxarifado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="83" y="0" width="77" height="20" uuid="9a9c2841-496f-4fb2-9bc5-3a4be3447f87">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f2563c96-7128-427a-933a-b3fa4b4d5883"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[colaborador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="70" height="20" uuid="486ab42d-c6d5-4b99-895a-aeab7085cf72">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d7665ec7-aef3-4a0e-9fa0-9c08494fc90e"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[dt_entrega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="90" height="20" uuid="fa383789-5c97-4cf5-ab9a-63425e4b8b21">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3ceaa7b5-34dc-4733-9b2a-edb48b125648"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[dt_saida_emp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="230" height="38" uuid="71b1bbd8-e918-4ec8-b0f3-78fd8c815f73">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b2a1ce5b-7dc2-4382-9728-b5e364d2b8ca"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[descricao_ferr]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="10" width="83" height="20" uuid="0dd6cd9c-c40e-49cb-ba80-c788e030cd51">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43905b04-890a-48ab-be46-a1f1ded3709e"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{almoxarifado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="10" width="79" height="20" uuid="949ab1cb-40d7-4984-996d-109e7909574b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f2563c96-7128-427a-933a-b3fa4b4d5883"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{colaborador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="10" width="70" height="20" uuid="7a460437-6d57-4be6-8d86-cce7ea9a40fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d7665ec7-aef3-4a0e-9fa0-9c08494fc90e"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dt_entrega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="10" width="88" height="20" uuid="c18c0470-6feb-4b2a-a6c0-3b2abdd97ec3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3ceaa7b5-34dc-4733-9b2a-edb48b125648"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dt_saida_emp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="10" width="230" height="44" uuid="72c92f10-6b20-4123-8d84-d07814454741">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b2a1ce5b-7dc2-4382-9728-b5e364d2b8ca"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao_ferr}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

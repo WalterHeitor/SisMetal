@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	template="/Templates/modeloSistema.xhtml"
+	>
+	<ui:define name="conteudo" >
+		<p:dialog header="Autenticação do usuario" closable="false" draggable="false"
+		resizable="false" global="true" visible="true">
+		<h:form>
+			<h:panelGrid columns="2">
+				<p:outputLabel for="email" value="Email:" />
+				<p:inputText id="email" value="#{autenticacaoBeans.funcionario.email_func}"
+					required="true" requiredMessage="O campo Email é obrigatório" />
+
+				<p:outputLabel for="senha" value="Senha:" />
+				<p:password id="senha" value="#{autenticacaoBeans.funcionario.senha}"
+				maxlength="8" size="20" required="true"
+					requiredMessage="O campo Senha é obrigatório" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="1">
+				<p:commandButton value="Entrar" actionListener="#{autenticacaoBeans.autenticar}" update=":mensagem" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+	</ui:define>
+	
+	
+	
+	
+</ui:composition>
