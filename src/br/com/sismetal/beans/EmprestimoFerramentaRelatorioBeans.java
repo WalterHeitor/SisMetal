@@ -95,7 +95,7 @@ public class EmprestimoFerramentaRelatorioBeans implements Serializable{
 			System.out.println("EEEEE");
 			Connection conexao = HibernateUtil.getConexao();
 			System.out.println("conexao"+conexao);
-			
+			 
 				JasperPrint relatorio = JasperFillManager.fillReport(caminho, parametros, conexao);
 			
 		System.out.println("FFFFFFF");
