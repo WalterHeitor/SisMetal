@@ -1,6 +1,7 @@
 package br.com.sismetal.beans;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -53,6 +54,16 @@ public class AutenticacaoBeans {
 			
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean temPermisCadastrar(List<String>permissoes) {
+		
+		for (String permissao: permissoes) {
+			if(usuarioLogado.getCargo_func().equals(permissao)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

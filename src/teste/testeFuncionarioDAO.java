@@ -1,5 +1,6 @@
 package teste;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import br.com.sismetal.doumain.EmprestimoFerramenta;
 import br.com.sismetal.doumain.Ferramenta;
 import br.com.sismetal.doumain.Funcionario;
 import br.com.sismetal.doumain.Telefone;
+import br.com.sismetal.util.HibernateUtil;
 
 
 public class testeFuncionarioDAO {
@@ -108,7 +110,7 @@ public class testeFuncionarioDAO {
 		fdao.salvar(f);
 		System.out.println("funcionario salvo com sucesso");		
 	}
-	@Test
+	
 	public void autenticar() {
 		String email ="jeferson@gmail";
 		String senha ="123456";
@@ -116,5 +118,15 @@ public class testeFuncionarioDAO {
 		FuncionarioDAO fdao = new FuncionarioDAO();
 		Funcionario f = fdao.autenticar(email, senha);
 		System.out.println("Funcionario Autentica:  "+f);
+	}
+	@Test
+	public void testconexao() {
+		try {
+			Connection conexao = HibernateUtil.getConexao();
+			System.out.println("sucesso conexao");
+			System.out.println(conexao);
+		} catch (Exception e) {
+			System.out.println("erro ao conexao"+ e);
+		}
 	}
 }
