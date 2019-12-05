@@ -33,9 +33,15 @@
 			<attribute name="maven.scope" value="compile"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.1.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/Templates/jasperreports-6.1.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/Jasper/jasperreports-6.1.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jasperreports-6.1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.1.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jasperreports-6.10.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cdi-api-1.0-SP1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-digester-2.1.jar"/>
+	<classpathentry exported="true" kind="con" path="net.sf.jasperreports.JR_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="com.jaspersoft.server.JRS_CONTAINER"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -34,6 +34,11 @@
 		<mapping class="br.com.sismetal.doumain.Endereco" />
 		<mapping class="br.com.sismetal.doumain.EmprestimoFerramenta" />
 		<mapping class="br.com.sismetal.doumain.DevolucaoFerramentaEstragada" />
+		<mapping class="br.com.sismetal.doumain.Cliente"/>
+		<mapping class="br.com.sismetal.doumain.Insumo"/>
+		<mapping class="br.com.sismetal.doumain.Projeto"/>
+		<mapping class="br.com.sismetal.doumain.OrdemServicoInsumo"/>
+		<mapping class="br.com.sismetal.doumain.OrdemServico"/>
 	
 	</session-factory>
 

@@ -82,14 +82,14 @@
 						</p:commandButton>
 						
 					</p:column>
-
-				</p:dataTable>
 				<f:facet name="footer">
 					<h:outputText value="Existem " />
 					<h:outputText
 						value="#{fn:length(emprestimoFerramentaBeans.emprestimoFerramentaEmprestado)}" />
 					<h:outputText value=" ferramentas emprestadas. " />
 				</f:facet>
+				</p:dataTable>
+				
 			</p:panel>
 		</h:form>
 		<!-- Listagem para devoluçao -->
@@ -151,14 +151,14 @@
 								value="#{emprestimoFerramenta}" />
 						</p:commandButton>
 					</p:column>
-
-				</p:dataTable>
 				<f:facet name="footer">
 					<h:outputText value="Existem " />
 					<h:outputText
 						value="#{fn:length(emprestimoFerramentaBeans.emprestimoFerramentaDevolvidas)}" />
 					<h:outputText value=" ferramentas á serem devolvidas. " />
 				</f:facet>
+				</p:dataTable>
+				
 				<p:commandButton value="Devolver" actionListener="#{emprestimoFerramentaBeans.merge}"
 				update="mensagem"/>
 			</p:panel>
