@@ -8,6 +8,8 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	template="/Templates/modeloSistema.xhtml">
 	<ui:define name="conteudo">
+	<h:outputText
+			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
 
 		<p:commandButton icon="ui-icon-circle-plus"
 			value="Adicionar funcionario fabrica"

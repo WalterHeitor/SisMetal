@@ -17,6 +17,18 @@ public class ProjetoBeans {
 	private Projeto projeto;
 	private List<Projeto>projetos;
 	
+	public Projeto getProjeto() {
+		return projeto;
+	}
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
+	}
+	public List<Projeto> getProjetos() {
+		return projetos;
+	}
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
+	}
 	public void novo() {
 		projeto = new Projeto();
 	}

@@ -8,8 +8,29 @@
 	template="/Templates/modeloSistema.xhtml"
 	>
 	<ui:define name="conteudo" >
-		<h:outputLabel>principal</h:outputLabel>
+		
 		<h:outputText value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
+		
+		<h:form id="formListagem">
+			<p:panel header="Lista de Projetos">
+				<p:dataTable id="dttabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{projetoBeans.projetos}"
+				var="ferramenta" rows="6">
+				<f:facet name="header">
+				<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"/>
+				</f:facet>
+				<p:column headerText="Codigo"></p:column>
+				<p:column headerText="Titulo"></p:column>
+				<p:column headerText="Subtitulo"></p:column>
+				<p:column headerText="Local"></p:column>
+				<p:column headerText="Projetado"></p:column>
+				<p:column headerText="Desenhado"></p:column>
+				<p:column headerText="Aprovado"></p:column>
+				<p:column headerText="Revisado"></p:column>
+				<p:column headerText="Opções"></p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
 	
 	</ui:define>
 	
