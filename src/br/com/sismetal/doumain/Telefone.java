@@ -25,11 +25,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "telefone")
-/*@NamedQueries(
-		{@NamedQuery(name="Telefone.buscarPorMatricula", query="SELECT telefone FROM Telefone telefone, Funcionario funcionario"
-		+"WHERE telefone.funcionario.matricula = :funcionario.matricula")
-		}
-		)*/
+
 public class Telefone implements Serializable{
 
 	@Id
@@ -44,6 +40,11 @@ public class Telefone implements Serializable{
     @JoinColumn(name="matricula",
     referencedColumnName="matricula", nullable=true)
     Funcionario funcionario;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="id_cliente",
+    referencedColumnName="id_cliente", nullable=true)
+    Cliente cliente;
 
 	public Long getId_telefone() {
 		return id_telefone;

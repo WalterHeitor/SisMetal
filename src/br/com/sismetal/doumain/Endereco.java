@@ -46,6 +46,11 @@ public class Endereco implements Serializable{
     @JoinColumn(name="funcionario_matricula",
     referencedColumnName="matricula", nullable=true)
     Funcionario funcionario;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="id_cliente",
+    referencedColumnName="id_cliente", nullable=true)
+    Cliente cliente;
 
 	public Integer getId_endereco() {
 		return id_endereco;

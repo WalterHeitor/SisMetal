@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="conteudo">
+		<h:outputText
+			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
+
+		<h:form id="formListagem">
+			<p:panel header="Lista de Clientes">
+				<p:dataTable id="dttabela"
+					emptyMessage="Nenhum registro encontrado." paginator="true"
+					value="#{clienteBeans.clientes}" var="cliente" rows="6">
+					<f:facet name="header">
+						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
+					</f:facet>
+					<p:column headerText="Codigo">
+						<h:outputText value="#{cliente.id_cliente}" />
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{cliente.nome}" />
+					</p:column>
+
+					<p:column headerText="Fantasia">
+						<h:outputText value="#{cliente.fantasia}" />
+					</p:column>
+
+					<p:column headerText="Cnpj">
+						<h:outputText value="#{cliente.cnpj}" />
+					</p:column>
+
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{clienteBeans.excluir}"
+							update=":mensagem :formListagem:dttabela ">
+							<p:confirm header="Confirmação"
+								message="Deseja excluir o cliente?" icon="ui-icon-alert" />
+							<f:attribute name="cliExcluirSelecionado" value="#{cliente}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil"
+							actionListener="#{clienteBeans.puxarCliente}"
+							update=":mensagem  :formClienteEditar:pnlGcliEditar"
+							oncomplete="PF('dialogoEditar').show();">
+							<f:attribute name="cliEditarSelecionado" value="#{cliente}" />
+						</p:commandButton>
+					</p:column>
+					<f:facet name="footer">
+						<h:outputText value="Existem " />
+						<h:outputText value="#{fn:length(clienteBeans.clientes)}" />
+						<h:outputText value=" clientes cadastrados. " />
+					</f:facet>
+				</p:dataTable>
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</p:panel>
+		</h:form>
+
+<!-- Cadastro -->
+		<p:dialog header="Cliente" widgetVar="dialogo" draggable="false"
+			resizable="false" global="true" closable="false">
+			<h:form id="formCliente">
+				<p:panelGrid columns="1" id="pnlGcli">
+					<p:outputLabel value="Nome:" for="nm" />
+					<p:inputText id="nm" value="#{clienteBeans.cliente.nome}" />
+					<p:outputLabel value="Fantasia:" for="ft" />
+					<p:inputText id="ft" value="#{clienteBeans.cliente.fantasia}" />
+					<p:outputLabel value="CNPJ:" for="cn" />
+					<p:inputText id="cn" value="#{clienteBeans.cliente.cnpj}" />
+					<p:outputLabel value="Razão Social" for="rz" />
+					<p:inputText id="rz" value="#{clienteBeans.cliente.razao_social}" />
+				</p:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{clienteBeans.salvar()}"
+						update=":mensagem :formListagem:dttabela :formCliente:pnlGcli" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+<!-- Editar -->
+		<p:dialog header="Cliente" widgetVar="dialogoEditar" draggable="false"
+			resizable="false" global="true" closable="false">
+			<h:form id="formClienteEditar">
+				<p:panelGrid columns="1" id="pnlGcliEditar">
+					<p:outputLabel value="Codigo" for="co" />
+					<p:inputText id="co" value="#{clienteBeans.cliente.id_cliente}" readonly="true" />
+					<p:outputLabel value="Nome:" for="nm" />
+					<p:inputText id="nm" value="#{clienteBeans.cliente.nome}" />
+					<p:outputLabel value="Fantasia:" for="ft" />
+					<p:inputText id="ft" value="#{clienteBeans.cliente.fantasia}" />
+					<p:outputLabel value="CNPJ:" for="cn" />
+					<p:inputText id="cn" value="#{clienteBeans.cliente.cnpj}" />
+					<p:outputLabel value="Razão Social" for="rz" />
+					<p:inputText id="rz" value="#{clienteBeans.cliente.razao_social}" />
+				</p:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Editar"
+						actionListener="#{clienteBeans.editar}"
+						update=":mensagem :formListagem:dttabela :formCliente:pnlGcli" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogoEditar').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+
+
+
+
+</ui:composition>

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -23,6 +24,7 @@ public class Cliente implements Serializable {
 
 	@Id
     @GeneratedValue(generator="optimized-sequence-emprestimo_ferramenta")
+	//@Column(unique = true)
     private Long id_cliente;
     @Column
 	private String nome;
