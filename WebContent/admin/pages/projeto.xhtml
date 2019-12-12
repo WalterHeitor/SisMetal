@@ -15,22 +15,79 @@
 			<p:panel header="Lista de Projetos">
 				<p:dataTable id="dttabela" emptyMessage="Nenhum registro encontrado."
 				paginator="true" value="#{projetoBeans.projetos}"
-				var="ferramenta" rows="6">
+				var="projeto" rows="6">
 				<f:facet name="header">
 				<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"/>
 				</f:facet>
-				<p:column headerText="Codigo"></p:column>
-				<p:column headerText="Titulo"></p:column>
-				<p:column headerText="Subtitulo"></p:column>
-				<p:column headerText="Local"></p:column>
-				<p:column headerText="Projetado"></p:column>
-				<p:column headerText="Desenhado"></p:column>
-				<p:column headerText="Aprovado"></p:column>
-				<p:column headerText="Revisado"></p:column>
-				<p:column headerText="Opções"></p:column>
+				<p:column headerText="Codigo"><h:outputText value="#{projeto.id_projeto}"/></p:column>
+				<p:column headerText="Titulo"><h:outputText value="#{projeto.titulo_projeto}"/></p:column>
+				<p:column headerText="Subtitulo"><h:outputText value="#{projeto.subtitulo_projeto}"/></p:column>
+				<p:column headerText="Local"><h:outputText value="#{projeto.local_projeto}"/></p:column>
+				<p:column headerText="Projetado"><h:outputText value="#{projeto.projetado}"/></p:column>
+				<p:column headerText="Desenhado"><h:outputText value="#{projeto.desenhado}"/></p:column>
+				<p:column headerText="Aprovado"><h:outputText value="#{projeto.aprovado}"/></p:column>
+				<p:column headerText="Revisado"><h:outputText value="#{projeto.revisado}"/></p:column>
+				<p:column headerText="Opções"><p:commandButton icon="ui-icon-trash"
+							actionListener="#{projetoBeans.excluir}"
+							update=":mensagem :formListagem:dttabela ">
+							<p:confirm header="Confirmação"
+								message="Deseja excluir o cliente?" icon="ui-icon-alert" />
+							<f:attribute name="proExcluirSelecionado" value="#{projeto}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil"
+							actionListener="#{projetoBeans.puxarCliente}"
+							update=":mensagem  :dialogoEdi:pngEdi"
+							oncomplete="PF('dialogoEdi').show();">
+							<f:attribute name="proEditarSelecionado" value="#{projeto}" />
+						</p:commandButton></p:column>
 				</p:dataTable>
 			</p:panel>
 		</h:form>
+		
+		<p:dialog header="Projeto" widgetVar="dialogo" draggable="false"
+			resizable="false" global="true" closable="false">
+			<h:form id="formCad">
+			<p:panelGrid columns="2" id="pngCad" >
+			<p:outputLabel value="Codigo:"/><p:inputText value="#{projetoBeans.projeto.id_projeto}"/>
+			<p:outputLabel value="Titulo:"/><p:inputText value="#{projetoBeans.projeto.titulo_projeto}"/>
+			<p:outputLabel value="Subtitulo:"/><p:inputText value="#{projetoBeans.projeto.subtitulo_projeto}"/>
+			<p:outputLabel value="Local:"/><p:inputText value="#{projetoBeans.projeto.local_projeto}"/>
+			<p:outputLabel value="Projetado:"/><p:inputText value="#{projetoBeans.projeto.projetado}"/>
+			<p:outputLabel value="Desenhado:"/><p:inputText value="#{projetoBeans.projeto.desenhado}"/>
+			<p:outputLabel value="Aprovado:"/><p:inputText value="#{projetoBeans.projeto.aprovado}"/>
+			<p:outputLabel value="Revisado:"/><p:inputText value="#{projetoBeans.projeto.revisado}"/>
+			</p:panelGrid>
+			<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{projetoBeans.salvar}"
+						update=":mensagem :formListagem:dttabela :formCliente:pnlGcli" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+			</h:form>		
+		</p:dialog>
+		
+				<p:dialog header="Projeto" widgetVar="dialogoEdi" draggable="false"
+			resizable="false" global="true" closable="false">
+			<h:form id="formEdi">
+			<p:panelGrid columns="2" id="pngEdi" >
+			<p:outputLabel value="Codigo:"/><p:inputText value="#{projetoBeans.projeto.id_projeto}"/>
+			<p:outputLabel value="Titulo:"/><p:inputText value="#{projetoBeans.projeto.titulo_projeto}"/>
+			<p:outputLabel value="Subtitulo:"/><p:inputText value="#{projetoBeans.projeto.subtitulo_projeto}"/>
+			<p:outputLabel value="Local:"/><p:inputText value="#{projetoBeans.projeto.local_projeto}"/>
+			<p:outputLabel value="Projetado:"/><p:inputText value="#{projetoBeans.projeto.projetado}"/>
+			<p:outputLabel value="Desenhado:"/><p:inputText value="#{projetoBeans.projeto.desenhado}"/>
+			<p:outputLabel value="Aprovado:"/><p:inputText value="#{projetoBeans.projeto.aprovado}"/>
+			<p:outputLabel value="Revisado:"/><p:inputText value="#{projetoBeans.projeto.revisado}"/>
+			</p:panelGrid>
+			<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{projetoBeans.editar}"
+						update=":mensagem :formListagem:dttabela :formCliente:pnlGcli" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogoEdi').hide();" />
+			</h:panelGrid>
+			</h:form>		
+		</p:dialog>
 	
 	</ui:define>
 	

@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
@@ -30,6 +33,18 @@ public class Projeto implements Serializable {
     private String revisado;
     @Column
     private String aprovado;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="cliente",
+    referencedColumnName="id_cliente", nullable=true)
+    Cliente cliente;
+    
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 	public String getId_projeto() {
 		return id_projeto;
 	}
@@ -82,8 +97,16 @@ public class Projeto implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public String toString() {
+		return "Projeto [id_projeto=" + id_projeto + ", local_projeto=" + local_projeto + ", titulo_projeto="
+				+ titulo_projeto + ", subtitulo_projeto=" + subtitulo_projeto + ", projetado=" + projetado
+				+ ", desenhado=" + desenhado + ", revisado=" + revisado + ", aprovado=" + aprovado + ", cliente="
+				+ cliente + "]";
+	}
 	public Projeto(String id_projeto, String local_projeto, String titulo_projeto, String subtitulo_projeto,
-			String projetado, String desenhado, String revisado, String aprovado) {
+			String projetado, String desenhado, String revisado, String aprovado, Cliente cliente) {
 		super();
 		this.id_projeto = id_projeto;
 		this.local_projeto = local_projeto;
@@ -93,12 +116,7 @@ public class Projeto implements Serializable {
 		this.desenhado = desenhado;
 		this.revisado = revisado;
 		this.aprovado = aprovado;
-	}
-	@Override
-	public String toString() {
-		return "Projeto [id_projeto=" + id_projeto + ", local_projeto=" + local_projeto + ", titulo_projeto="
-				+ titulo_projeto + ", subtitulo_projeto=" + subtitulo_projeto + ", projetado=" + projetado
-				+ ", desenhado=" + desenhado + ", revisado=" + revisado + ", aprovado=" + aprovado + "]";
+		this.cliente = cliente;
 	}
 	@Override
 	public int hashCode() {

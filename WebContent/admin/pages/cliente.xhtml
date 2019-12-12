@@ -39,7 +39,7 @@
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{clienteBeans.excluir}"
 							update=":mensagem :formListagem:dttabela ">
-							<p:confirm header="Confirmação"
+							<p:confirm header="Confirmação de exclusão"
 								message="Deseja excluir o cliente?" icon="ui-icon-alert" />
 							<f:attribute name="cliExcluirSelecionado" value="#{cliente}" />
 						</p:commandButton>
@@ -67,10 +67,10 @@
 		</h:form>
 
 <!-- Cadastro -->
-		<p:dialog header="Cliente" widgetVar="dialogo" draggable="false"
+		<p:dialog header="Cadastro - Cliente" widgetVar="dialogo" draggable="false"
 			resizable="false" global="true" closable="false">
 			<h:form id="formCliente">
-				<p:panelGrid columns="1" id="pnlGcli">
+				<p:panelGrid columns="2" id="pnlGcli">
 					<p:outputLabel value="Nome:" for="nm" />
 					<p:inputText id="nm" value="#{clienteBeans.cliente.nome}" />
 					<p:outputLabel value="Fantasia:" for="ft" />
@@ -90,10 +90,10 @@
 		</p:dialog>
 		
 <!-- Editar -->
-		<p:dialog header="Cliente" widgetVar="dialogoEditar" draggable="false"
+		<p:dialog header="Editar - Cliente" widgetVar="dialogoEditar" draggable="false"
 			resizable="false" global="true" closable="false">
 			<h:form id="formClienteEditar">
-				<p:panelGrid columns="1" id="pnlGcliEditar">
+				<p:panelGrid columns="2" id="pnlGcliEditar">
 					<p:outputLabel value="Codigo" for="co" />
 					<p:inputText id="co" value="#{clienteBeans.cliente.id_cliente}" readonly="true" />
 					<p:outputLabel value="Nome:" for="nm" />

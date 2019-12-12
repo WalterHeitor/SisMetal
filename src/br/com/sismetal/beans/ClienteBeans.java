@@ -62,7 +62,7 @@ public class ClienteBeans {
 			novo();
 			cliente = (Cliente) event.getComponent().getAttributes().get("cliEditarSelecionado");
 		} catch (Exception e) {
-			Messages.addFlashGlobalError("Ocorreu u erro ao tentar salvar o cliente!!!");
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar selecionar o cliente!!!");
 			e.printStackTrace();
 		}
 	}
