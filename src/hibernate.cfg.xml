@@ -38,6 +38,7 @@
 		<mapping class="br.com.sismetal.doumain.Insumo"/>
 		<mapping class="br.com.sismetal.doumain.Projeto"/>
 		<mapping class="br.com.sismetal.doumain.OrdemServicoInsumo"/>
+		<mapping class="br.com.sismetal.doumain.OrdemServicoMaoObra"/>
 		<mapping class="br.com.sismetal.doumain.OrdemServico"/>
 	
 	</session-factory>

@@ -66,9 +66,9 @@
 			</p:panel>
 		</h:form>
 
-<!-- Cadastro -->
-		<p:dialog header="Cadastro - Cliente" widgetVar="dialogo" draggable="false"
-			resizable="false" global="true" closable="false">
+		<!-- Cadastro -->
+		<p:dialog header="Cadastro - Cliente" widgetVar="dialogo"
+			draggable="false" resizable="false" global="true" closable="false">
 			<h:form id="formCliente">
 				<p:panelGrid columns="2" id="pnlGcli">
 					<p:outputLabel value="Nome:" for="nm" />
@@ -88,14 +88,15 @@
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
-		
-<!-- Editar -->
-		<p:dialog header="Editar - Cliente" widgetVar="dialogoEditar" draggable="false"
-			resizable="false" global="true" closable="false">
+
+		<!-- Editar -->
+		<p:dialog header="Editar - Cliente" widgetVar="dialogoEditar"
+			draggable="false" resizable="false" global="true" closable="false">
 			<h:form id="formClienteEditar">
 				<p:panelGrid columns="2" id="pnlGcliEditar">
 					<p:outputLabel value="Codigo" for="co" />
-					<p:inputText id="co" value="#{clienteBeans.cliente.id_cliente}" readonly="true" />
+					<p:inputText id="co" value="#{clienteBeans.cliente.id_cliente}"
+						readonly="true" />
 					<p:outputLabel value="Nome:" for="nm" />
 					<p:inputText id="nm" value="#{clienteBeans.cliente.nome}" />
 					<p:outputLabel value="Fantasia:" for="ft" />
@@ -109,7 +110,8 @@
 					<p:commandButton value="Editar"
 						actionListener="#{clienteBeans.editar}"
 						update=":mensagem :formListagem:dttabela :formCliente:pnlGcli" />
-					<p:commandButton value="Fechar" oncomplete="PF('dialogoEditar').hide();" />
+					<p:commandButton value="Fechar"
+						oncomplete="PF('dialogoEditar').hide();" />
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
