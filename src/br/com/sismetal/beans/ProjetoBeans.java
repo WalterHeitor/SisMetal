@@ -100,9 +100,14 @@ public class ProjetoBeans {
 	
 	@PostConstruct
 	public void listar() {
-		ProjetoDAO projetoDAO = new ProjetoDAO();
-		projetos = projetoDAO.listar();
-		novo();
+		try {
+			ProjetoDAO projetoDAO = new ProjetoDAO();
+			projetos = projetoDAO.listar();
+			novo();
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar Listar os Projetos!!!");
+			e.printStackTrace();
+		}
 	}
 	
 }
