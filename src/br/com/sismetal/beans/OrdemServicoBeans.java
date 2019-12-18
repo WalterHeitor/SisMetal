@@ -75,6 +75,24 @@ public class OrdemServicoBeans {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar salvar o Ordem de Serviço!!!");
 		}
 	}
+	public void puxarOsEditar(ActionEvent event) {
+		try {
+			novo();
+			ordemServico = (OrdemServico) event.getComponent().getAttributes().get("OS_SelecionadoEd");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar selcionar o projeto!!!");
+			e.printStackTrace();
+		}
+	}
+	public void puxarOsExcluir(ActionEvent event) {
+		try {
+			novo();
+			ordemServico = (OrdemServico) event.getComponent().getAttributes().get("OS_SelecionadoEx");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar selcionar o projeto!!!");
+			e.printStackTrace();
+		}
+	}
 	public void puxarProjeto(ActionEvent event) {
 		try {
 			novoProjeto();
