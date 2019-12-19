@@ -150,7 +150,7 @@
 			<p:dialog header="Adicionar - Cliente" widgetVar="dialogoCliente" draggable="false"
 			resizable="false" global="true" closable="false">
 				<p:panel header="Lista de Clientes">
-					<p:dataTable id="dttabela"
+					<p:dataTable id="dttabelaCliente"
 						emptyMessage="Nenhum registro encontrado." paginator="true"
 						value="#{clienteBeans.clientes}" var="cliente" rows="6">
 
@@ -181,7 +181,10 @@
 							<h:outputText value="Existem " />
 							<h:outputText value="#{fn:length(clienteBeans.clientes)}" />
 							<h:outputText value=" clientes cadastrados. " />
+							<p:commandButton value="Fechar"
+						oncomplete="PF('dialogoCliente').hide();" />
 						</f:facet>
+						
 					</p:dataTable>
 				</p:panel>
 			</p:dialog>

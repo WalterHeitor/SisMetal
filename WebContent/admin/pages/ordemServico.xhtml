@@ -72,9 +72,19 @@
 						value="#{ordemServicoBeans.ordemServico.id_ordem_servico}" />
 					<p:outputLabel value="Data prevista:" />
 					<p:calendar value="#{ordemServicoBeans.ordemServico.dt_prevista}" />
-					<p:outputLabel value="Projeto: #{projetoBeans.projeto.id_projeto}" />
-					<p:button value="Adicionar Projeto" outcome="PF('dialogoProjeto').show();" />
+					
+					<p:outputLabel value="Projeto: #{ordemServicoBeans.projeto.id_projeto}" />
+					<p:commandButton value="Adicionar Projeto" oncomplete="PF('dialogoProjeto').show();"/>
+					
+					<p:outputLabel value="Encarregado: #{ordemServicoBeans.funcionarioGerente.nome}" />
+					<p:commandButton value="Adicionar Encarregado" oncomplete="PF('dialogoFuncionario).show();" />
 				</p:panelGrid>
+				<h:panelGrid columns="2">				
+					<p:commandButton value="Salvar"
+						actionListener="#{projetoBeans.salvar}"
+						update=":mensagem :formListagem:dttabela :formCad:pngCad" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				</h:panelGrid>
 			</h:form>
 		</p:dialog>
 		<!-- Editar -->
@@ -85,13 +95,16 @@
 				</p:panelGrid>
 			</h:form>
 		</p:dialog>
-		<p:dialog header="Lista de Projetos" widgetVar="dialogoProjeto"
-			draggable="false" resizable="false" closable="false" global="true">
-			<h:form id="dialogoProj">
+		
+		
+		<h:form id="formAdcProjeto">
+			<p:dialog header="Adicionar - Projeto" widgetVar="dialogoProjeto" draggable="false"
+			resizable="false" global="true" closable="false">
 				<p:panel header="Lista de Projetos">
-					<p:dataTable id="dttabelaProj"
+					<p:dataTable id="dttabelaProjeto"
 						emptyMessage="Nenhum registro encontrado." paginator="true"
 						value="#{projetoBeans.projetos}" var="projeto" rows="6">
+
 						<p:column headerText="Codigo">
 							<h:outputText value="#{projeto.id_projeto}" />
 						</p:column>
@@ -116,9 +129,8 @@
 						<p:column headerText="Revisado">
 							<h:outputText value="#{projeto.revisado}" />
 						</p:column>
-						<p:column headerText="Cliente">
-							<h:outputText value="#{projeto.cliente.fantasia}" />
-						</p:column>
+						
+
 						<p:column headerText="Opções">
 							<p:commandButton icon="ui-icon-circle-plus"
 								actionListener="#{ordemServicoBeans.puxarProjeto}" oncomplete="PF('dialogoProjeto').hide();"
@@ -126,9 +138,16 @@
 								<f:attribute name="proEditarSelecionado" value="#{projeto}" />
 							</p:commandButton>
 						</p:column>
+						<f:facet name="footer">
+							<h:outputText value="Existem " />
+							<h:outputText value="#{fn:length(projetoBeans.projetos)}" />
+							<h:outputText value=" projetos cadastrados. " />
+							<p:commandButton value="Fechar" oncomplete="PF('dialogoProjeto').hide();" />
+						</f:facet>
 					</p:dataTable>
 				</p:panel>
-			</h:form>
-		</p:dialog>
+			</p:dialog>
+		</h:form>
+		
 	</ui:define>
 </ui:composition>

@@ -101,6 +101,7 @@ public class ProjetoBeans {
 	@PostConstruct
 	public void listar() {
 		try {
+			projetos = new ArrayList<>();
 			ProjetoDAO projetoDAO = new ProjetoDAO();
 			projetos = projetoDAO.listar();
 			novo();

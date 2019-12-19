@@ -93,10 +93,16 @@ public class ClienteBeans {
 	}
 	@PostConstruct
 	public void listar() {
-		novo();
-		clientes = new ArrayList<>();
-		ClienteDAO clienteDAO = new ClienteDAO();
-		clientes = clienteDAO.listar();		
+	try {
+//		novo();
+			clientes = new ArrayList<>();
+			ClienteDAO clienteDAO = new ClienteDAO();
+			clientes = clienteDAO.listar();
+			novo();
+	} catch (Exception e) {
+		Messages.addFlashGlobalError("Ocorreu u erro ao tentar listar o cliente!!!");
+		e.printStackTrace();
+	}	
 	}
 	
 }

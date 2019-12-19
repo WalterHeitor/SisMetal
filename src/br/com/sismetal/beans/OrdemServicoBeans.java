@@ -68,6 +68,7 @@ public class OrdemServicoBeans {
 	
 	public void salvar() {
 		try {
+			ordemServico.setProjeto(projeto);
 			OrdemServicoDAO ordemServicoDAO = new OrdemServicoDAO();
 			ordemServicoDAO.salvar(ordemServico);
 			Messages.addFlashGlobalInfo("Ordem de Serviço Salvo com Sucesso!!!");
