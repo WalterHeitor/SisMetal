@@ -34,11 +34,11 @@ public class OrdemServicoMaoObra implements Serializable{
 	//@Column(unique = true)
     private Long id_osMaoObra;
 	@Temporal(TemporalType.TIMESTAMP)
-    @Column(name="dt_inicio")
-    private Date dt_inicio;
+    @Column(name="dt_inicioAtv")
+    private Date dt_inicioAtv;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="dt_fim")
-    private Date dt_fim;
+    @Column(name="dt_fimAtv")
+    private Date dt_fimAtv;
 	@Column
     private String descricao_servico;
     @Column

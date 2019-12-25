@@ -69,11 +69,26 @@ public class OrdemServicoBeans {
 	public void salvar() {
 		try {
 			ordemServico.setProjeto(projeto);
+			ordemServico.setFuncionarioGerente(funcionarioGerente);
 			OrdemServicoDAO ordemServicoDAO = new OrdemServicoDAO();
 			ordemServicoDAO.salvar(ordemServico);
+			ordemServicos = ordemServicoDAO.listar();
+			novo();
 			Messages.addFlashGlobalInfo("Ordem de Serviço Salvo com Sucesso!!!");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar salvar o Ordem de Serviço!!!");
+		}
+	}
+	public void editar() {
+		try {
+			
+			OrdemServicoDAO ordemServicoDAO = new OrdemServicoDAO();
+			ordemServicoDAO.salvarMerge(ordemServico);
+			ordemServicos = ordemServicoDAO.listar();
+			novo();
+			Messages.addFlashGlobalInfo("Ordem de Serviço Editado com Sucesso!!!");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar Editar o Ordem de Serviço!!!");
 		}
 	}
 	public void puxarOsEditar(ActionEvent event) {
@@ -106,21 +121,13 @@ public class OrdemServicoBeans {
 	public void puxarFuncionarioGerente(ActionEvent event) {
 		try {
 			novoFuncionarioGerente();
-			funcionarioGerente = (Funcionario) event.getComponent().getAttributes().get("proEditarSelecionado");
+			funcionarioGerente = (Funcionario) event.getComponent().getAttributes().get("funEditarSelecionado");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar selcionar o projeto!!!");
 			e.printStackTrace();
 		}
 	}
-	public void editar() {
-		try {
-			OrdemServicoDAO ordemServicoDAO = new OrdemServicoDAO();
-			ordemServicoDAO.salvarMerge(ordemServico);
-			Messages.addFlashGlobalInfo("Ordem de Serviço Editado com Sucesso!!!");
-		} catch (Exception e) {
-			Messages.addFlashGlobalError("Ocorreu u erro ao tentar editar o Ordem de Serviço!!!");
-		}
-	}
+	
 	@PostConstruct
 	public void listar() {
 		try {

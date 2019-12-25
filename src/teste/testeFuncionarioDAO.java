@@ -2,7 +2,6 @@ package teste;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Test;

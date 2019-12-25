@@ -56,6 +56,8 @@ public class ProjetoBeans {
 			projeto.setCliente(cliente);
 			ProjetoDAO projetoDAO = new ProjetoDAO();
 			projetoDAO.salvar(projeto);
+			novo();
+			projetos = projetoDAO.listar();
 			Messages.addFlashGlobalInfo("Projeto Salvo com Sucesso!!!");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar selcionar o projeto!!!");
@@ -63,8 +65,16 @@ public class ProjetoBeans {
 		}
 	}
 	public void editar() {
-		ProjetoDAO projetoDAO = new ProjetoDAO();
-		projetoDAO.salvarMerge(projeto);;
+		try {
+			ProjetoDAO projetoDAO = new ProjetoDAO();
+			projetoDAO.salvarMerge(projeto);
+			novo();
+			projetos = projetoDAO.listar();
+			Messages.addFlashGlobalInfo("Projeto editado com Sucesso!!!");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar Editar o projeto!!!");
+			e.printStackTrace();
+		}
 	}
 	public void puxarProjeto(ActionEvent event) {
 		try {

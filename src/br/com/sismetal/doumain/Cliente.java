@@ -9,6 +9,7 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 @GenericGenerator(
 		 name = "optimized-sequence-emprestimo_ferramenta",
@@ -32,6 +33,7 @@ public class Cliente implements Serializable {
     @Column
     private String fantasia;
     @Column
+   // @CNPJ
     private String cnpj;
 	public Long getId_cliente() {
 		return id_cliente;

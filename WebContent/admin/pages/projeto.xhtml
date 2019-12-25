@@ -111,7 +111,7 @@
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
-
+<!-- _______________________EDITAR______________________ -->
 		<p:dialog header="Projeto" widgetVar="dialogoEdi" draggable="false"
 			resizable="false" global="true" closable="false">
 			<h:form id="formEdi">
@@ -138,7 +138,7 @@
 					
 				</p:panelGrid>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar"
+					<p:commandButton value="Editar"
 						actionListener="#{projetoBeans.editar}"
 						update=":mensagem :formListagem:dttabela :formEdi:pngEdi" />
 					<p:commandButton value="Fechar"
