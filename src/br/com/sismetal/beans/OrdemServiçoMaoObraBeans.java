@@ -1,15 +1,10 @@
 package br.com.sismetal.beans;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 
 import org.omnifaces.util.Messages;
 
-//@SuppressWarnings("serial")
-@ManagedBean
-@ViewScoped
-public class OrdemServicoInsumoBeans {
+public class OrdemServiçoMaoObraBeans {
 
 	
 public void salvar() {

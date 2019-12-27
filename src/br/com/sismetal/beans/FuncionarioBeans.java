@@ -23,56 +23,30 @@ public class FuncionarioBeans implements Serializable {
 	private List<Funcionario> funcionarios;
 	private List<Telefone> telefones;
 	
-	
-	
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
-
-
-
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
-
-
-
 	public List<Funcionario> getFuncionarios() {
 		return funcionarios;
 	}
-
-	
-
 	public Telefone getTelefone() {
 		return telefone;
 	}
-
-
-
 	public void setTelefone(Telefone telefone) {
 		this.telefone = telefone;
 	}
-
-
-
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
 	}
-	
-	
-
 	public List<Telefone> getTelefones() {
 		return telefones;
 	}
-
-
-
 	public void setTelefones(List<Telefone> telefones) {
 		this.telefones = telefones;
 	}
-
-
-
 	@PostConstruct
 	public void listar() {
 		try {
@@ -127,14 +101,9 @@ public class FuncionarioBeans implements Serializable {
 	public void salvar2() {
 		novo();
 		FuncionarioDAO fdao = new FuncionarioDAO();
-		funcionarios = fdao.listar();
-		
-		
-		try {
-			
-			
-			fdao.salvarMerge(funcionario);			
-						
+		funcionarios = fdao.listar();	
+		try {			
+			fdao.salvarMerge(funcionario);									
 			funcionarios = fdao.listar();			
 			JSFUtil.addMensagemSucesso("Funcionario salvo com Sucesso!!!");
 			
@@ -146,8 +115,7 @@ public class FuncionarioBeans implements Serializable {
 
 	public void excluir(ActionEvent evento) {
 		
-		try {
-			
+		try {			
 			novo();
 			funcionario = (Funcionario) evento.getComponent().getAttributes().get("funcExcluirSelecionado");
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
@@ -166,9 +134,7 @@ public class FuncionarioBeans implements Serializable {
 	public void editar(ActionEvent evento) {
 		try {
 			novo();
-			funcionario = (Funcionario) evento.getComponent().getAttributes().get("funcEditarSelecionado");
-			
-			
+			funcionario = (Funcionario) evento.getComponent().getAttributes().get("funcEditarSelecionado");			
 		} catch (Exception e) {
 			JSFUtil.addMensagemErro("erro ao editar Funcionario: e.getMessage() " + e.getMessage());
 			e.printStackTrace();

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="conteudo">
+
+		<h:outputText
+			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
+
+		<h:form id="formListagem">
+			<p:panel header="Listagem de Insumos">
+				<p:dataTable id="dttabela"
+					emptyMessage="Nenhum registro encontrado." paginator="true"
+					value="#{insumoBeans.insumos}" var="insumo" rows="6">
+					<f:facet name="header">
+						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
+					</f:facet>
+
+					<p:column headerText="Codigo">
+						<h:outputText value="#{insumo.id_insumo}" />
+					</p:column>
+					<p:column headerText="Descrição">
+						<h:outputText value="#{insumo.descricao_produto}" />
+					</p:column>
+					<p:column headerText="Preço">
+						<h:outputText value="#{insumo.preco}" />
+					</p:column>
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{insumoBeans.excluir}"
+							update=":mensagem :formListagem:dttabela ">
+							<p:confirm header="Confirmação"
+								message="Deseja excluir o cliente?" icon="ui-icon-alert" />
+							<f:attribute name="Insumo_SelecionadoEx" value="#{insumo}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil"
+							actionListener="#{insumoBeans.puxarEditar}"
+							update=":mensagem  :formEdi:pngEdi"
+							oncomplete="PF('dialogoEdi').show();">
+							<f:attribute name="Insumo_SelecionadoEd" value="#{insumo}" />
+						</p:commandButton>
+					</p:column>
+					<f:facet name="footer">
+						<h:outputText value="Existem " />
+						<h:outputText value="#{fn:length(insumoBeans.insumos)}" />
+						<h:outputText value=" Insumos cadastrados. " />
+					</f:facet>
+				</p:dataTable>
+				<!-- dialogo excluir -->
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</p:panel>
+		</h:form>
+		<!-- ********		________________Cadastro_________________ 		*********-->
+		<p:dialog header="Cadastro de Ordem de Serviço" widgetVar="dialogo"
+			draggable="false" resizable="false" closable="false" global="true">
+			<h:form id="formCad">
+				<p:panelGrid columns="2" id="pngCad">
+				<p:outputLabel value="Codigo:"/>
+				<p:inputText value="#{insumoBeans.insumo.id_insumo}"/>
+				<p:outputLabel value="Descrição:"/>
+				<p:inputText value="#{insumoBeans.insumo.descricao_produto}"/>
+				<p:outputLabel value="Preço:"/>
+				<p:inputText value="#{insumoBeans.insumo.preco}"/>
+				</p:panelGrid>
+				<h:panelGrid columns="2">
+				<p:commandButton value="Salvar"
+						actionListener="#{insumoBeans.salvar}"
+						update=":mensagem :formListagem:dttabela :formCad:pngCad" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+		<!-- ********		________________ Editar _________________ 		*********-->
+		<p:dialog header="Editar Ordem de Serviço" widgetVar="dialogoEdi"
+			draggable="false" resizable="false" closable="false" global="true">
+			<h:form id="formEdi">
+				<p:panelGrid columns="2" id="pngEdi">
+				<p:outputLabel value="Codigo:"/>
+				<p:inputText value="#{insumoBeans.insumo.id_insumo}"/>
+				<p:outputLabel value="Descrição:"/>
+				<p:inputText value="#{insumoBeans.insumo.descricao_produto}"/>
+				<p:outputLabel value="Preço:"/>
+				<p:inputText value="#{insumoBeans.insumo.preco}"/>
+				</p:panelGrid>
+				<h:panelGrid columns="2">
+				<p:commandButton value="Editar"
+						actionListener="#{insumoBeans.editar}"
+						update=":mensagem :formListagem:dttabela :formEdi:pngEdi" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogoEdi').hide();" />
+				</h:panelGrid>
+				</h:form>
+				</p:dialog>
+				
+				
+
+	</ui:define>
+
+
+
+
+</ui:composition>
