@@ -1,5 +1,7 @@
 package br.com.sismetal.dao;
 
-public class OrdemServicoInsumoDAO extends GenericDAO<OrdemServicoInsumoDAO>{
+import br.com.sismetal.doumain.OrdemServicoInsumo;
+
+public class OrdemServicoInsumoDAO extends GenericDAO<OrdemServicoInsumo>{
 
 }

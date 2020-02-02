@@ -27,8 +27,14 @@
 					<p:column headerText="Descrição">
 						<h:outputText value="#{insumo.descricao_produto}" />
 					</p:column>
-					<p:column headerText="Preço">
-						<h:outputText value="#{insumo.preco}" />
+					<p:column headerText="Quantidade">
+						<h:outputText value="#{insumo.quantidade}" />
+					</p:column>
+					<p:column headerText="Unidade">
+						<h:outputText value="#{insumo.unidade}" />
+					</p:column>
+					<p:column headerText="Preço Unitário">
+						<h:outputText value="#{insumo.preco} R$" />
 					</p:column>
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
@@ -66,12 +72,27 @@
 			draggable="false" resizable="false" closable="false" global="true">
 			<h:form id="formCad">
 				<p:panelGrid columns="2" id="pngCad">
-				<p:outputLabel value="Codigo:"/>
-				<p:inputText value="#{insumoBeans.insumo.id_insumo}"/>
-				<p:outputLabel value="Descrição:"/>
-				<p:inputText value="#{insumoBeans.insumo.descricao_produto}"/>
-				<p:outputLabel value="Preço:"/>
-				<p:inputText value="#{insumoBeans.insumo.preco}"/>
+				
+				<p:outputLabel for="desc" value="Descrição:"/>
+				<p:inputText id="desc" value="#{insumoBeans.insumo.descricao_produto}"
+				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				<p:outputLabel for="prc" value="Preço Und:"/>
+				<p:inputText id="prc" value="#{insumoBeans.insumo.preco}"
+				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				<p:outputLabel for="qtd" value="Quantidade:"/>
+				<p:inputText id="qtd" value="#{insumoBeans.insumo.quantidade}"
+				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				<p:outputLabel value="Unidade:"/>
+				<p:selectOneMenu value="#{insumoBeans.insumo.unidade}">
+						<f:selectItem itemValue="" itemLabel="selecione a unidade" />
+						<f:selectItem itemValue="Quantidade" itemLabel="Quantidade" />
+						<f:selectItem itemValue="Gramas" itemLabel="Gramas" />
+						<f:selectItem itemValue="Metros" itemLabel="Metros" />
+						<f:selectItem itemValue="Litros" itemLabel="Litros" />
+					</p:selectOneMenu>
+				<p:outputLabel for="cod" value="Codigo:"/>
+				<p:inputText id="cod" value="#{insumoBeans.insumo.id_insumo}"
+				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
 				</p:panelGrid>
 				<h:panelGrid columns="2">
 				<p:commandButton value="Salvar"
@@ -87,12 +108,26 @@
 			draggable="false" resizable="false" closable="false" global="true">
 			<h:form id="formEdi">
 				<p:panelGrid columns="2" id="pngEdi">
+				
+				<p:outputLabel for="desc" value="Descrição:"/>
+				<p:inputText id="desc" value="#{insumoBeans.insumo.descricao_produto}"
+				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				<p:outputLabel for="prc" value="Preço Und:"/>
+				<p:inputText id="prc" value="#{insumoBeans.insumo.preco}"
+				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				<p:outputLabel for="qtd" value="Qauntidade:"/>
+				<p:inputText id="qtd" value="#{insumoBeans.insumo.quantidade}"
+				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				<p:outputLabel value="Unidade:"/>
+				<p:selectOneMenu value="#{insumoBeans.insumo.unidade}">
+						<f:selectItem itemValue="" itemLabel="selecione a unidade" />
+						<f:selectItem itemValue="Quantidade" itemLabel="Quantidade" />
+						<f:selectItem itemValue="Gramas" itemLabel="Gramas" />
+						<f:selectItem itemValue="Metros" itemLabel="Metros" />
+						<f:selectItem itemValue="Litros" itemLabel="Litros" />
+					</p:selectOneMenu>
 				<p:outputLabel value="Codigo:"/>
-				<p:inputText value="#{insumoBeans.insumo.id_insumo}"/>
-				<p:outputLabel value="Descrição:"/>
-				<p:inputText value="#{insumoBeans.insumo.descricao_produto}"/>
-				<p:outputLabel value="Preço:"/>
-				<p:inputText value="#{insumoBeans.insumo.preco}"/>
+				<p:inputText value="#{insumoBeans.insumo.id_insumo}" readonly="true"/>
 				</p:panelGrid>
 				<h:panelGrid columns="2">
 				<p:commandButton value="Editar"

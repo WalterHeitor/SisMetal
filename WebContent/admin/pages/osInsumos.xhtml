@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="conteudo">
+
+		<h:outputText
+			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
+		<h:form id="osIns">
+			<p:panel header="OS DE MATERIAL DE CONSUMO">
+				<p:panelGrid columns="2" id="pngosIns">
+				
+					<h:outputLabel value="Data de entrega :" />
+					<p:calendar value="#{ordemServicoInsumoBeans.ordemServicoInsumo.dtEntrInsumo}" />
+				
+					<h:outputLabel
+						value="Ordem de serviço N° : #{ordemServicoInsumoBeans.ordemServico.id_ordem_servico}" />
+						
+					<p:commandButton value="Adicionar N°" icon="ui-icon-circle-zoomout"
+						oncomplete="PF('dialogoOS').show();" />
+						
+					<h:outputLabel
+						value="Requisitante : #{ordemServicoInsumoBeans.funcionarioFabrica.nome}" />
+						
+					<p:commandButton value="Adicionar"
+						oncomplete="PF('dialogoFunc').show();" />
+						
+					<h:outputLabel
+						value="Encarregado : #{ordemServicoInsumoBeans.funcionarioGerente.nome}" />
+						
+					<p:commandButton value="Adicionar"
+						oncomplete="PF('dialogoEnc').show();" />
+						
+					
+					
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+		<h:form>
+		
+		<p:panel header="Insumo">
+		<h:panelGrid columns="2">
+					<p:panel header="Adicionarda tabela">
+						<h:outputLabel
+							value="Codigo de Barras : #{ordemServicoInsumoBeans.insumo.id_insumo}" />
+						<p:commandButton value="Buscar" oncomplete="PF('dlgInsumo').show();"/>
+					</p:panel>
+					<p:panel header="Adicionar por Código">
+						<h:outputLabel value="Codigo de Barras :" />
+						<p:inputText />
+					</p:panel>
+					</h:panelGrid>
+					</p:panel>
+		
+		</h:form>
+		<!-- dialogo funcionarios  encarregado -->
+		<p:dialog global="true" header="Encarregados" widgetVar="dialogoEnc"
+			draggable="false" resizable="false" closable="false">
+			<h:form id="formListagemEnc">
+				<p:panel header="Lista de Funcionarios">
+					<p:dataTable id="dttabelaFunc"
+						emptyMessage="Nenhum registro encontrado." paginator="true"
+						value="#{funcionarioBeans.funcionarios}" var="funcionario"
+						rows="6">
+
+						<p:column headerText="Matricula"
+							filterBy="#{funcionario.matricula}">
+							<h:outputText value="#{funcionario.matricula}" />
+						</p:column>
+
+						<p:column headerText="Nome" filterBy="#{funcionario.nome}">
+							<h:outputText value="#{funcionario.nome}" />
+						</p:column>
+
+						<p:column headerText="CPF" filterBy="#{funcionario.cpf_func}">
+							<h:outputText value="#{funcionario.cpf_func}" />
+						</p:column>
+
+						<p:column headerText="Cargo">
+							<h:outputText value="#{funcionario.cargo_func}" />
+						</p:column>
+
+						<p:column headerText="Opções">
+
+							<p:commandButton icon="ui-icon-circle-plus"
+								actionListener="#{ordemServicoInsumoBeans.puxarFuncionarioGerente}"
+								oncomplete="PF('dialogoEnc').hide();"
+								update=":mensagem :osIns:pngosIns">
+								<f:attribute name="funcSelecionado" value="#{funcionario}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</p:dialog>
+
+		<!-- dialogo funcionarios -->
+		<p:dialog global="true" header="Funcionarios" widgetVar="dialogoFunc"
+			draggable="false" resizable="false" closable="false">
+			<h:form id="formListagemFunc">
+				<p:panel header="Lista de Funcionarios">
+					<p:dataTable id="dttabelaFunc"
+						emptyMessage="Nenhum registro encontrado." paginator="true"
+						value="#{funcionarioBeans.funcionarios}" var="funcionario"
+						rows="6">
+
+						<p:column headerText="Matricula"
+							filterBy="#{funcionario.matricula}">
+							<h:outputText value="#{funcionario.matricula}" />
+						</p:column>
+
+						<p:column headerText="Nome" filterBy="#{funcionario.nome}">
+							<h:outputText value="#{funcionario.nome}" />
+						</p:column>
+
+						<p:column headerText="CPF" filterBy="#{funcionario.cpf_func}">
+							<h:outputText value="#{funcionario.cpf_func}" />
+						</p:column>
+
+						<p:column headerText="Cargo">
+							<h:outputText value="#{funcionario.cargo_func}" />
+						</p:column>
+
+						<p:column headerText="Opções">
+
+							<p:commandButton icon="ui-icon-circle-plus"
+								actionListener="#{ordemServicoInsumoBeans.puxarFuncionarioFabrica}"
+								oncomplete="PF('dialogoFunc').hide();"
+								update=":mensagem :osIns:pngosIns">
+								<f:attribute name="funcSelecionado" value="#{funcionario}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</p:dialog>
+		<!-- dialogo Ordem serviço -->
+		<p:dialog global="true" header="Ordem Serviços Insumos"
+			widgetVar="dialogoOS" draggable="false" resizable="false"
+			closable="false">
+			<h:form id="formListagemOS">
+				<p:panel header="Listagem de Ordem de Serviços">
+					<p:dataTable id="dttabelaOS"
+						emptyMessage="Nenhum registro encontrado." paginator="true"
+						value="#{ordemServicoBeans.ordemServicos}" var="os" rows="6">
+
+						<p:column headerText="Codigo">
+							<h:outputText value="#{os.id_ordem_servico}" />
+						</p:column>
+						<p:column headerText="Titulo Projeto">
+							<h:outputText value="#{os.projeto.titulo_projeto}" />
+						</p:column>
+						<p:column headerText="Opções">
+
+							<p:commandButton icon="ui-icon-circle-plus"
+								actionListener="#{ordemServicoInsumoBeans.puxarOS}"
+								oncomplete="PF('dialogoOS').hide();"
+								update=":mensagem :osIns:pngosIns">
+								<f:attribute name="OSSelecionado" value="#{os}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</p:dialog>
+
+		<!-- dialogo Insumo -->
+		<p:dialog global="true" header="Insumos" widgetVar="dlgInsumo"
+			draggable="false" resizable="false" closable="false">
+			<h:form id="formListagemInsumo">
+				<p:panel header="Listagem de Insumos">
+					<p:dataTable id="dttabela"
+						emptyMessage="Nenhum registro encontrado." paginator="true"
+						value="#{insumoBeans.insumos}" var="insumo" rows="6">
+						
+						<p:column headerText="Codigo">
+							<h:outputText value="#{insumo.id_insumo}" />
+						</p:column>
+						<p:column headerText="Descrição">
+							<h:outputText value="#{insumo.descricao_produto}" />
+						</p:column>
+						<p:column headerText="Quantidade">
+							<h:outputText value="#{insumo.quantidade}" />
+						</p:column>
+						<p:column headerText="Unidade">
+							<h:outputText value="#{insumo.unidade}" />
+						</p:column>
+						<p:column headerText="Preço Unitário">
+							<h:outputText value="#{insumo.preco} R$" />
+						</p:column>
+						<p:column headerText="Opções">
+
+							<p:commandButton icon="ui-icon-circle-plus"
+								actionListener="#{ordemServicoInsumoBeans.puxarInsumo}"
+								oncomplete="PF('dlgQtd').show();"
+								update=":mensagem :osIns:pngosIns :formqtdIns:pngQtd">
+								<f:attribute name="InsumoSelecionado" value="#{insumo}" />
+							</p:commandButton>
+						</p:column>
+						<f:facet name="footer">
+							<h:outputText value="Existem " />
+							<h:outputText value="#{fn:length(insumoBeans.insumos)}" />
+							<h:outputText value=" Insumos cadastrados. " />
+							<p:commandButton value="Fechar" oncomplete="PF('dlgInsumo').hide();" />
+						</f:facet>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</p:dialog>
+		
+		<!-- dialogo QTD OS Insumo -->
+		<p:dialog global="true" header="QTD Requisitada" widgetVar="dlgQtd"
+			draggable="false" resizable="false" closable="false">
+			<h:form id="formqtdIns">
+				<p:panel header="Quantidade de Insumos">
+				<p:panelGrid id="pngQtd" columns="2">
+				<h:outputLabel value="Quantidade de Insumo:" />
+				 <p:growl> <h:inputText
+						value="#{ordemServicoInsumoBeans.ordemServicoInsumo.qtdInsumo}" />
+						<p:outputLabel value="#{ordemServicoInsumoBeans.insumo.unidade}"/></p:growl>
+				<p:commandButton value="OK" oncomplete="PF('dlgQtd').hide();"
+				update=":mensagem :osIns:pngosIns"/>
+				<p:commandButton value="Fechar" oncomplete="PF('dlgQtd').hide();" />
+				</p:panelGrid>
+				</p:panel>
+				</h:form>
+				</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

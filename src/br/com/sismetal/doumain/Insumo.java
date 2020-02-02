@@ -20,7 +20,9 @@ public class Insumo implements Serializable {
     @Column
     private String descricao_produto;
     @Column
-    private float unidade;
+    private String unidade;
+    @Column
+    private float quantidade;
     @Column
     private BigDecimal preco;
     
@@ -36,12 +38,7 @@ public class Insumo implements Serializable {
 	public void setDescricao_produto(String descricao_produto) {
 		this.descricao_produto = descricao_produto;
 	}
-	public float getUnidade() {
-		return unidade;
-	}
-	public void setUnidade(float unidade) {
-		this.unidade = unidade;
-	}
+	
 	public BigDecimal getPreco() {
 		return preco;
 	}
@@ -52,17 +49,30 @@ public class Insumo implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Insumo(String id_insumo, String descricao_produto, float unidade, BigDecimal preco) {
+	public String getUnidade() {
+		return unidade;
+	}
+	public void setUnidade(String unidade) {
+		this.unidade = unidade;
+	}
+	public float getQuantidade() {
+		return quantidade;
+	}
+	public void setQuantidade(float quantidade) {
+		this.quantidade = quantidade;
+	}
+	public Insumo(String id_insumo, String descricao_produto, String unidade, float quantidade, BigDecimal preco) {
 		super();
 		this.id_insumo = id_insumo;
 		this.descricao_produto = descricao_produto;
 		this.unidade = unidade;
+		this.quantidade = quantidade;
 		this.preco = preco;
 	}
 	@Override
 	public String toString() {
 		return "Insumo [id_insumo=" + id_insumo + ", descricao_produto=" + descricao_produto + ", unidade=" + unidade
-				+ ", preco=" + preco + "]";
+				+ ", quantidade=" + quantidade + ", preco=" + preco + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -87,6 +97,8 @@ public class Insumo implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 

@@ -9,21 +9,24 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.hibernate.validator.constraints.br.CNPJ;
 
 @GenericGenerator(
-		 name = "optimized-sequence-emprestimo_ferramenta",
+		 name = "optimized-sequence-cliente",
 		 strategy = "enhanced-sequence",
 		 parameters = {
 		 @Parameter(name="prefer_sequence_per_entity", value="true"),
 		 @Parameter(name="optimizer", value="hilo"),
 		 @Parameter(name="increment_size", value="1")})
-		@SuppressWarnings("serial")
+		//@SuppressWarnings("serial")
 		@Entity
 public class Cliente implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
-    @GeneratedValue(generator="optimized-sequence-emprestimo_ferramenta")
+    @GeneratedValue(generator="optimized-sequence-cliente")
 	//@Column(unique = true)
     private Long id_cliente;
     @Column
