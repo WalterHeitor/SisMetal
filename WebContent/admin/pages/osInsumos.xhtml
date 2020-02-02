@@ -13,7 +13,7 @@
 			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
 		<h:form id="osIns">
 			<p:panel header="OS DE MATERIAL DE CONSUMO">
-				<p:panelGrid columns="2" id="pngosIns">
+				<p:panelGrid columns="4" id="pngosIns">
 				
 					<h:outputLabel value="Data de entrega :" />
 					<p:calendar value="#{ordemServicoInsumoBeans.ordemServicoInsumo.dtEntrInsumo}" />
@@ -27,36 +27,28 @@
 					<h:outputLabel
 						value="Requisitante : #{ordemServicoInsumoBeans.funcionarioFabrica.nome}" />
 						
-					<p:commandButton value="Adicionar"
+					<p:commandButton value="Adicionar" icon="ui-icon-circle-zoomout"
 						oncomplete="PF('dialogoFunc').show();" />
 						
 					<h:outputLabel
 						value="Encarregado : #{ordemServicoInsumoBeans.funcionarioGerente.nome}" />
 						
-					<p:commandButton value="Adicionar"
+					<p:commandButton value="Adicionar" icon="ui-icon-circle-zoomout"
 						oncomplete="PF('dialogoEnc').show();" />
 						
-					
-					
 				</p:panelGrid>
 			</p:panel>
 		</h:form>
-		<h:form>
 		
+	<h:form>		
 		<p:panel header="Insumo">
 		<h:panelGrid columns="2">
-					<p:panel header="Adicionarda tabela">
 						<h:outputLabel
 							value="Codigo de Barras : #{ordemServicoInsumoBeans.insumo.id_insumo}" />
-						<p:commandButton value="Buscar" oncomplete="PF('dlgInsumo').show();"/>
-					</p:panel>
-					<p:panel header="Adicionar por Código">
-						<h:outputLabel value="Codigo de Barras :" />
-						<p:inputText />
-					</p:panel>
+						<p:commandButton value="Buscar" icon="ui-icon-circle-zoomout" oncomplete="PF('dlgInsumo').show();"/>
+					
 					</h:panelGrid>
-					</p:panel>
-		
+					</p:panel>		
 		</h:form>
 		<!-- dialogo funcionarios  encarregado -->
 		<p:dialog global="true" header="Encarregados" widgetVar="dialogoEnc"
@@ -223,7 +215,7 @@
 				 <p:growl> <h:inputText
 						value="#{ordemServicoInsumoBeans.ordemServicoInsumo.qtdInsumo}" />
 						<p:outputLabel value="#{ordemServicoInsumoBeans.insumo.unidade}"/></p:growl>
-				<p:commandButton value="OK" oncomplete="PF('dlgQtd').hide();"
+				<p:commandButton value="OK" oncomplete="PF('dlgQtd').hide(), PF('dlgInsumo').hide();"
 				update=":mensagem :osIns:pngosIns"/>
 				<p:commandButton value="Fechar" oncomplete="PF('dlgQtd').hide();" />
 				</p:panelGrid>
