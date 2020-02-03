@@ -66,6 +66,9 @@
 				<p:column headerText="Codigo" filterBy="#{osIns.id_ordem_servico_insumo}">
 						<h:outputText value="#{ordemServicoInsumoBeans.insumo.id_insumo}" />
 					</p:column>
+					<p:column>
+					<h:outputText value="#{ordemServicoInsumoBeans.insumo.descricao_produto}" />
+					</p:column>
 				</p:dataTable>
 		</p:panel>
 		
@@ -235,7 +238,7 @@
 				 <p:growl> <h:inputText
 						value="#{ordemServicoInsumoBeans.ordemServicoInsumo.qtdInsumo}" />
 						<p:outputLabel value="#{ordemServicoInsumoBeans.insumo.unidade}"/></p:growl>
-				<p:commandButton value="OK" oncomplete="PF('dlgQtd').hide(), PF('dlgInsumo').hide();"
+				<p:commandButton value="OK" actionListener="#{ordemServicoInsumoBeans.addInsOs()}" oncomplete="PF('dlgQtd').hide(), PF('dlgInsumo').hide();"
 				update=":mensagem :osIns:pngosIns"/>
 				<p:commandButton value="Fechar" oncomplete="PF('dlgQtd').hide();" />
 				</p:panelGrid>

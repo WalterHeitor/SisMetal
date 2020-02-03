@@ -177,8 +177,12 @@ public class OrdemServicoInsumoBeans {
 		}
 	}
 	public void addInsOs() {
-		ordemServicoInsumo.setInsumo(insumo);
-		ordemServicoInsumos.add(ordemServicoInsumo);
-		novoInsumo();
+		try {
+			ordemServicoInsumo.setInsumo(insumo);
+			ordemServicoInsumos.add(ordemServicoInsumo);
+			novoInsumo();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }
