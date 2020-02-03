@@ -1,5 +1,6 @@
 package br.com.sismetal.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -99,9 +100,13 @@ public class OrdemServicoInsumoBeans {
 	public void novoOrdemSInsumo() {
 		ordemServicoInsumo = new OrdemServicoInsumo();
 	}
+	public void novoListInsumo() {
+		ordemServicoInsumos = new ArrayList<>();
+	}
 	@PostConstruct
 	public void novo() {
 		novoOrdemSInsumo();
+		novoListInsumo();
 	}
 //-------------------------------------------- fim novo()
 	public void puxarFuncionarioGerente(ActionEvent event) {
@@ -160,7 +165,7 @@ public class OrdemServicoInsumoBeans {
 		}
 	}
 
-	@PostConstruct
+	//@PostConstruct
 	public void listar() {
 		try {
 			OrdemServicoInsumoDAO ordemServicoInsumoDAO = new OrdemServicoInsumoDAO();
@@ -170,5 +175,10 @@ public class OrdemServicoInsumoBeans {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar salvar o cliente!!!");
 			e.printStackTrace();
 		}
+	}
+	public void addInsOs() {
+		ordemServicoInsumo.setInsumo(insumo);
+		ordemServicoInsumos.add(ordemServicoInsumo);
+		novoInsumo();
 	}
 }
