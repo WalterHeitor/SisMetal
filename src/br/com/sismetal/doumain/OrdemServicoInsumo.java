@@ -118,6 +118,37 @@ public class OrdemServicoInsumo implements Serializable{
 	public void setFuncionarioGerente(Funcionario funcionarioGerente) {
 		this.funcionarioGerente = funcionarioGerente;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id_ordem_servico_insumo == null) ? 0 : id_ordem_servico_insumo.hashCode());
+		result = prime * result + ((insumo == null) ? 0 : insumo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrdemServicoInsumo other = (OrdemServicoInsumo) obj;
+		if (id_ordem_servico_insumo == null) {
+			if (other.id_ordem_servico_insumo != null)
+				return false;
+		} else if (!id_ordem_servico_insumo.equals(other.id_ordem_servico_insumo))
+			return false;
+		if (insumo == null) {
+			if (other.insumo != null)
+				return false;
+		} else if (!insumo.equals(other.insumo))
+			return false;
+		return true;
+	}
 	
     
 	

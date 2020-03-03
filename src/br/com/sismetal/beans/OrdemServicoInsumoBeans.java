@@ -10,6 +10,7 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
+import br.com.sismetal.dao.InsumoDAO;
 import br.com.sismetal.dao.OrdemServicoInsumoDAO;
 import br.com.sismetal.doumain.Funcionario;
 import br.com.sismetal.doumain.Insumo;
@@ -21,6 +22,7 @@ import br.com.sismetal.doumain.OrdemServicoInsumo;
 @ViewScoped
 public class OrdemServicoInsumoBeans {
 
+	private boolean rend = false;
 	private OrdemServicoInsumo ordemServicoInsumo;
 	private List<OrdemServicoInsumo> ordemServicoInsumos;
 	private Insumo insumo;
@@ -29,6 +31,23 @@ public class OrdemServicoInsumoBeans {
 	private List<OrdemServico> ordemServicos;
 	private Funcionario funcionarioGerente;
 	private Funcionario funcionarioFabrica;
+	private String acao = "";
+	
+	public String getAcao() {
+		return acao;
+	}
+
+	public void setAcao(String acao) {
+		this.acao = acao;
+	}
+
+	public boolean isRend() {
+		return rend;
+	}
+
+	public void setRend(boolean rend) {
+		this.rend = rend;
+	}
 
 	public OrdemServicoInsumo getOrdemServicoInsumo() {
 		return ordemServicoInsumo;
@@ -94,6 +113,20 @@ public class OrdemServicoInsumoBeans {
 		this.funcionarioFabrica = funcionarioFabrica;
 	}
 //--------------------------------------------novo()
+	public void novoRend() {
+		
+		try {
+			rend = true;
+			acao = "novo";
+			novo();
+			Messages.addFlashGlobalInfo("Rendernizado com Sucesso!!!");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar rendenizar!!!");
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void novoInsumo() {
 		insumo = new Insumo();
 	}
@@ -102,9 +135,14 @@ public class OrdemServicoInsumoBeans {
 	}
 	public void novoListInsumo() {
 		ordemServicoInsumos = new ArrayList<>();
+		
+		
 	}
-	@PostConstruct
+	//@PostConstruct
 	public void novo() {
+		insumos = new ArrayList<>();
+		InsumoDAO insumoDAO = new InsumoDAO();
+		insumos = insumoDAO.listar();
 		novoOrdemSInsumo();
 		novoListInsumo();
 	}
@@ -123,6 +161,7 @@ public class OrdemServicoInsumoBeans {
 
 		ordemServico = (OrdemServico) event.getComponent().getAttributes()
 				.get("OSSelecionado");
+		
 	}
 	public void salvar() {
 
@@ -177,12 +216,47 @@ public class OrdemServicoInsumoBeans {
 		}
 	}
 	public void addInsOs() {
+		float qtd = 0;
+		
 		try {
+			boolean ins = false;
+			ordemServicoInsumo.setOrdemServico(ordemServico);
+			ordemServicoInsumo.setFuncionarioGerente(funcionarioGerente);
+			ordemServicoInsumo.setFuncionarioFabrica(funcionarioFabrica);
 			ordemServicoInsumo.setInsumo(insumo);
-			ordemServicoInsumos.add(ordemServicoInsumo);
-			novoInsumo();
+System.out.println("1- "+insumo.getQuantidade());
+			qtd = insumo.getQuantidade() - ordemServicoInsumo.getQtdInsumo();
+
+			if(qtd < 0) {
+				Messages.addFlashGlobalWarn("A quantidade requisitada e superior a do estoque");
+			}else {
+				for(OrdemServicoInsumo insumo1: ordemServicoInsumos ) {
+					if(insumo.getId_insumo().equals(insumo1.getInsumo().getId_insumo())) {
+						ins = true;
+						insumo1.setQtdInsumo(insumo1.getQtdInsumo()+ordemServicoInsumo.getQtdInsumo());
+					}
+				}
+				if(ins == true) {
+					insumo.setQuantidade(qtd);
+					novoInsumo();
+					novoOrdemSInsumo();
+					System.out.println("passou por aki"+ins);
+				}else {
+					insumo.setQuantidade(qtd);
+					ordemServicoInsumos.add(ordemServicoInsumo);
+					novoInsumo();
+					novoOrdemSInsumo();
+				}				
+			}			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
+	public void baixaEstoque() {
+		
+	}
+	
+	
+	
+	
 }
