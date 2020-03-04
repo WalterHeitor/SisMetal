@@ -23,8 +23,8 @@
 					<p:inputText value="#{ordemServicoInsumoBeans.ordemServicoInsumo.id_ordem_servico_insumo}" />
 				
 					<h:outputLabel for="cal" value="Data de entrega :" />
-					<p:calendar id="cal" value="#{ordemServicoInsumoBeans.ordemServicoInsumo.dtEntrInsumo}" />
-					<p:message for="cal" display="Insira a data" />
+					<p:calendar id="cal" value="#{ordemServicoInsumoBeans.ordemServicoInsumo.dtEntrInsumo}" required="true" requiredMessage="Insira a data!"/>
+					
 					<h:outputLabel
 						value="Ordem de serviço N° : #{ordemServicoInsumoBeans.ordemServico.id_ordem_servico}" />
 						
@@ -81,6 +81,13 @@
 					</p:column>
 					<p:column headerText="QTD requisitada">
 					<h:outputText value="#{osIns.qtdInsumo}" />
+					</p:column>
+					<p:column headerText="Remover">
+					<p:commandButton icon="ui-icon-trash" 
+					 actionListener="#{ordemServicoInsumoBeans.remover}"
+					 update=":ListInsumo:dttabelaIns :formListagemInsumo:dttabela">
+					 <f:attribute name="remIns" value="#{osIns}"/>
+					 </p:commandButton>
 					</p:column>
 					<f:facet name="footer">
 							<h:outputText value="Existem " />

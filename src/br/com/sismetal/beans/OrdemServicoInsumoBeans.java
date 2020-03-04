@@ -229,11 +229,13 @@ System.out.println("1- "+insumo.getQuantidade());
 
 			if(qtd < 0) {
 				Messages.addFlashGlobalWarn("A quantidade requisitada e superior a do estoque");
+				System.out.println("1 - "+ins);
 			}else {
 				for(OrdemServicoInsumo insumo1: ordemServicoInsumos ) {
 					if(insumo.getId_insumo().equals(insumo1.getInsumo().getId_insumo())) {
 						ins = true;
 						insumo1.setQtdInsumo(insumo1.getQtdInsumo()+ordemServicoInsumo.getQtdInsumo());
+						System.out.println("2 - "+ins);
 					}
 				}
 				if(ins == true) {
@@ -241,18 +243,42 @@ System.out.println("1- "+insumo.getQuantidade());
 					novoInsumo();
 					novoOrdemSInsumo();
 					System.out.println("passou por aki"+ins);
+					System.out.println("3 - "+ins);
 				}else {
 					insumo.setQuantidade(qtd);
 					ordemServicoInsumos.add(ordemServicoInsumo);
 					novoInsumo();
 					novoOrdemSInsumo();
+					System.out.println("4 - "+ins);
 				}				
 			}			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
-	public void baixaEstoque() {
+	public void remover(ActionEvent event) {
+		try {
+			System.out.println("chamou func");
+			novoOrdemSInsumo();
+			ordemServicoInsumo = (OrdemServicoInsumo) event.getComponent().getAttributes().get("remIns");
+			
+			insumo = (Insumo) event.getComponent().getAttributes().get("InsumoSelecionado");
+			
+			System.out.println(ordemServicoInsumo);
+			for(Insumo insumo1 : insumos) {
+				System.out.println("chamou for");
+				if(insumo1.getId_insumo().equals(ordemServicoInsumo.getInsumo().getId_insumo())) {
+					System.out.println("entrou if");
+					insumo1.setQuantidade(ordemServicoInsumo.getQtdInsumo() + insumo1.getQuantidade());
+					ordemServicoInsumos.remove(ordemServicoInsumo);
+				}
+				
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 	}
 	
