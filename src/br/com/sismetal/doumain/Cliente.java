@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -19,11 +20,8 @@ import org.hibernate.annotations.Parameter;
 		 @Parameter(name="increment_size", value="1")})
 		//@SuppressWarnings("serial")
 		@Entity
+		@Table(name ="cliente")
 public class Cliente implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(generator="optimized-sequence-cliente")

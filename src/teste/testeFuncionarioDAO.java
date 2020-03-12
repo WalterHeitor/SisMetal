@@ -53,18 +53,18 @@ public class testeFuncionarioDAO {
 			System.out.println("CCCCC"+emprestimoFerramenta1);
 		}
 	}
-	@Test
+	
 	public void salvar() {
 		
 		//Funcionario fun1 = new Funcionario("0123456", "talita", 1, "798337hh400991", "supervisorii", "tatita@hotmail.com", "010fccff33e578",tel2);
 		Funcionario func2 = new Funcionario("0215060970", "walter heitor", "fabrica", "79809499191", "caldereiro", "ativo", "walhei33@hotmail.com", "010578");
 		FuncionarioDAO fdao = new FuncionarioDAO();
 		fdao.salvar(func2);
-		Telefone tel2 = new Telefone();
+		/*Telefone tel2 = new Telefone();
 		tel2.setNum_telefone("3431-1770");
 		tel2.setFuncionario(func2);
 		TelefoneDAO telefoneDAO = new TelefoneDAO();
-		telefoneDAO.salvar(tel2);
+		telefoneDAO.salvar(tel2);*/
 		
 		
 		
@@ -118,7 +118,7 @@ public class testeFuncionarioDAO {
 		Funcionario f = fdao.autenticar(email, senha);
 		System.out.println("Funcionario Autentica:  "+f);
 	}
-	
+	@Test
 	public void testconexao() {
 		try {
 			Connection conexao = HibernateUtil.getConexao();

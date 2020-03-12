@@ -23,10 +23,12 @@ import br.com.sismetal.doumain.OrdemServicoInsumo;
 public class OrdemServicoInsumoBeans {
 
 	private boolean rend = false;
+	private boolean rend2 = false;
 	private OrdemServicoInsumo ordemServicoInsumo;
 	private List<OrdemServicoInsumo> ordemServicoInsumos;
 	private Insumo insumo;
 	private List<Insumo> insumos;
+	private List<Insumo> insumosSave;
 	private OrdemServico ordemServico;
 	private List<OrdemServico> ordemServicos;
 	private Funcionario funcionarioGerente;
@@ -47,6 +49,14 @@ public class OrdemServicoInsumoBeans {
 
 	public void setRend(boolean rend) {
 		this.rend = rend;
+	}
+
+	public boolean isRend2() {
+		return rend2;
+	}
+
+	public void setRend2(boolean rend2) {
+		this.rend2 = rend2;
 	}
 
 	public OrdemServicoInsumo getOrdemServicoInsumo() {
@@ -75,6 +85,14 @@ public class OrdemServicoInsumoBeans {
 
 	public List<Insumo> getInsumos() {
 		return insumos;
+	}
+
+	public List<Insumo> getInsumosSave() {
+		return insumosSave;
+	}
+
+	public void setInsumosSave(List<Insumo> insumosSave) {
+		this.insumosSave = insumosSave;
 	}
 
 	public void setInsumos(List<Insumo> insumos) {
@@ -141,6 +159,7 @@ public class OrdemServicoInsumoBeans {
 	//@PostConstruct
 	public void novo() {
 		insumos = new ArrayList<>();
+		insumosSave = new ArrayList<>();
 		InsumoDAO insumoDAO = new InsumoDAO();
 		insumos = insumoDAO.listar();
 		novoOrdemSInsumo();
@@ -166,8 +185,16 @@ public class OrdemServicoInsumoBeans {
 	public void salvar() {
 
 		try {
+			OrdemServicoInsumoDAO ordemServicoInsumoDAO = new OrdemServicoInsumoDAO();
+			for(OrdemServicoInsumo ordemServicoInsumo: ordemServicoInsumos) {
+				ordemServicoInsumoDAO.salvar(ordemServicoInsumo);
+			}
+			InsumoDAO insumoDAO = new InsumoDAO();
+			for(Insumo insSave: insumosSave) {
+				insumoDAO.salvarMerge(insSave);
+			}
 
-			Messages.addFlashGlobalInfo("Cliente Salvo com Sucesso!!!");
+			Messages.addFlashGlobalInfo("Ordem de serviço Salvo com Sucesso!!!");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar salvar o cliente!!!");
 			e.printStackTrace();
@@ -203,6 +230,33 @@ public class OrdemServicoInsumoBeans {
 			e.printStackTrace();
 		}
 	}
+	public void checkOS() {
+		try {
+			
+			if(funcionarioFabrica == null) {
+				Messages.addFlashGlobalError("Preencha o funcionario !!!");
+			}
+			
+			if(funcionarioGerente == null) {
+				Messages.addFlashGlobalError("Preencha o gerente !!!");
+			}
+			if(ordemServico == null) {
+				Messages.addFlashGlobalError("Preencha a Ordem Serviço !!!");
+			}
+			if(ordemServicoInsumo.getDtEntrInsumo() == null) {
+				Messages.addFlashGlobalError("Preencha a data !!!");
+			}
+			if(funcionarioFabrica != null && funcionarioGerente != null && 
+					ordemServico != null && ordemServicoInsumo.getDtEntrInsumo() != null) {
+				rend2 = true;
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+	}
 
 	//@PostConstruct
 	public void listar() {
@@ -216,9 +270,11 @@ public class OrdemServicoInsumoBeans {
 		}
 	}
 	public void addInsOs() {
-		float qtd = 0;
+		
 		
 		try {
+			Insumo insumo2 = new Insumo();
+			float qtd = 0;
 			boolean ins = false;
 			ordemServicoInsumo.setOrdemServico(ordemServico);
 			ordemServicoInsumo.setFuncionarioGerente(funcionarioGerente);
@@ -226,30 +282,33 @@ public class OrdemServicoInsumoBeans {
 			ordemServicoInsumo.setInsumo(insumo);
 System.out.println("1- "+insumo.getQuantidade());
 			qtd = insumo.getQuantidade() - ordemServicoInsumo.getQtdInsumo();
+			ordemServicoInsumo.setPreco(insumo.getPreco());;
 
 			if(qtd < 0) {
 				Messages.addFlashGlobalWarn("A quantidade requisitada e superior a do estoque");
-				System.out.println("1 - "+ins);
 			}else {
 				for(OrdemServicoInsumo insumo1: ordemServicoInsumos ) {
 					if(insumo.getId_insumo().equals(insumo1.getInsumo().getId_insumo())) {
 						ins = true;
 						insumo1.setQtdInsumo(insumo1.getQtdInsumo()+ordemServicoInsumo.getQtdInsumo());
-						System.out.println("2 - "+ins);
+						System.out.println("1 - ins for"+ins);
 					}
 				}
 				if(ins == true) {
+					
 					insumo.setQuantidade(qtd);
 					novoInsumo();
 					novoOrdemSInsumo();
-					System.out.println("passou por aki"+ins);
-					System.out.println("3 - "+ins);
+					System.out.println("2 - ins true"+ins);
 				}else {
-					insumo.setQuantidade(qtd);
+					insumo.setQuantidade(qtd);				
 					ordemServicoInsumos.add(ordemServicoInsumo);
+					System.out.println("add.ordemServ");
+					insumo2 = insumo;
+					insumosSave.add(insumo2);
 					novoInsumo();
 					novoOrdemSInsumo();
-					System.out.println("4 - "+ins);
+					System.out.println("3 - ins false"+ins);
 				}				
 			}			
 		} catch (Exception e) {
@@ -258,17 +317,11 @@ System.out.println("1- "+insumo.getQuantidade());
 	}
 	public void remover(ActionEvent event) {
 		try {
-			System.out.println("chamou func");
 			novoOrdemSInsumo();
-			ordemServicoInsumo = (OrdemServicoInsumo) event.getComponent().getAttributes().get("remIns");
-			
+			ordemServicoInsumo = (OrdemServicoInsumo) event.getComponent().getAttributes().get("remIns");		
 			insumo = (Insumo) event.getComponent().getAttributes().get("InsumoSelecionado");
-			
-			System.out.println(ordemServicoInsumo);
 			for(Insumo insumo1 : insumos) {
-				System.out.println("chamou for");
 				if(insumo1.getId_insumo().equals(ordemServicoInsumo.getInsumo().getId_insumo())) {
-					System.out.println("entrou if");
 					insumo1.setQuantidade(ordemServicoInsumo.getQtdInsumo() + insumo1.getQuantidade());
 					ordemServicoInsumos.remove(ordemServicoInsumo);
 				}
