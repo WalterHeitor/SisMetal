@@ -9,6 +9,8 @@
 	template="/Templates/modeloSistema.xhtml"
 	>
 	<ui:define name="conteudo" >
+	<h:outputText
+			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
 	<h:form id="formListagem">
 		<p:panel header="Lista de Ferramentas">
 			<p:dataTable id="dttabela" emptyMessage="Nenhum registro encontrado."

@@ -8,6 +8,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.omnifaces.util.Messages;
+
 import br.com.sismetal.dao.FuncionarioDAO;
 import br.com.sismetal.doumain.Funcionario;
 import br.com.sismetal.doumain.Telefone;
@@ -67,35 +70,49 @@ public class FuncionarioBeans implements Serializable {
 
 	
 	public void salvar() {
-		try {
-			FuncionarioDAO fdao = new FuncionarioDAO();
-			fdao.salvar(funcionario);
+		if(funcionario.getSenhaSemCriptografia().equals(funcionario.getSenha())) {
+			try {
+				SimpleHash hash = new SimpleHash("md5", funcionario.getSenhaSemCriptografia());
+				funcionario.setSenha(hash.toHex());
+				FuncionarioDAO fdao = new FuncionarioDAO();
+				fdao.salvar(funcionario);
+				
+				novo();
+				
+				funcionarios = fdao.listar();
+				
+				JSFUtil.addMensagemSucesso("Funcionario salvo com Sucesso!!!");
+			} catch (Exception e) {
+				JSFUtil.addMensagemErro("erro ao salvar Funcionario: e.getMessage() " + e.getMessage());
+				e.printStackTrace();
+			}
+		}else {
+			Messages.addFlashGlobalError("Senha não Confere !!!");
 			
-			novo();
-			
-			funcionarios = fdao.listar();
-			
-			JSFUtil.addMensagemSucesso("Funcionario salvo com Sucesso!!!");
-		} catch (Exception e) {
-			JSFUtil.addMensagemErro("erro ao salvar Funcionario: e.getMessage() " + e.getMessage());
-			e.printStackTrace();
 		}
 	}
 	
 	public void salvarEditar() {
-		try {
-			FuncionarioDAO fdao = new FuncionarioDAO();
-			fdao.salvarMerge(funcionario);
-			
-			novo();
-			
-			funcionarios = fdao.listar();
-			
-			JSFUtil.addMensagemSucesso("Funcionario salvo com Sucesso!!!");
-		} catch (Exception e) {
-			JSFUtil.addMensagemErro("erro ao salvar Funcionario: e.getMessage() " + e.getMessage());
-			e.printStackTrace();
+		if(funcionario.getSenhaSemCriptografia().equals(funcionario.getSenha())) {
+			try {
+				SimpleHash hash = new SimpleHash("md5", funcionario.getSenhaSemCriptografia());
+				funcionario.setSenha(hash.toHex());
+				FuncionarioDAO fdao = new FuncionarioDAO();
+				fdao.salvarMerge(funcionario);
+				
+				novo();
+				
+				funcionarios = fdao.listar();
+				
+				JSFUtil.addMensagemSucesso("Funcionario salvo com Sucesso!!!");
+			} catch (Exception e) {
+				JSFUtil.addMensagemErro("erro ao salvar Funcionario: e.getMessage() " + e.getMessage());
+				e.printStackTrace();
+			}
+		}else {
+			Messages.addFlashGlobalError("Senha não Confere !!!");
 		}
+		
 	}
 	
 	public void salvar2() {
@@ -134,7 +151,9 @@ public class FuncionarioBeans implements Serializable {
 	public void editar(ActionEvent evento) {
 		try {
 			novo();
-			funcionario = (Funcionario) evento.getComponent().getAttributes().get("funcEditarSelecionado");			
+			funcionario = (Funcionario) evento.getComponent().getAttributes().get("funcEditarSelecionado");	
+			funcionario.setSenha("");
+			Messages.addGlobalInfo("Insira uma nova senha");
 		} catch (Exception e) {
 			JSFUtil.addMensagemErro("erro ao editar Funcionario: e.getMessage() " + e.getMessage());
 			e.printStackTrace();

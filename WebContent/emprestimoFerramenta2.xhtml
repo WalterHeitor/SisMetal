@@ -9,6 +9,7 @@
 	template="/Templates/modeloSistema.xhtml">
 	<ui:define name="conteudo">
 		<!-- dialogo tabela funcionarios-almoxarifado -->
+		
 		<h:form>
 			<p:dialog header="Funcionarios - Tabela " widgetVar="dialogoTabAlmox"
 				draggable="false" resizable="false" global="true" closable="false">
@@ -117,6 +118,8 @@
 		</h:form>
 		<!-- fim dialogo tabela-funcionarios -->
 
+		<h:outputText
+			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" /><br />
 
 		<!-- Cadastro Almoxarifado -->
 		<p:commandButton icon="ui-icon-circle-plus"

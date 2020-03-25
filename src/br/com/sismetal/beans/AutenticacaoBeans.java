@@ -49,7 +49,7 @@ public class AutenticacaoBeans {
 				return;
 			}
 			
-			Faces.redirect("faces/admin/pages/index.xhtml");
+			Faces.redirect("faces/index.xhtml");
 		} catch (IOException e) {
 			
 			e.printStackTrace();

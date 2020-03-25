@@ -11,24 +11,29 @@ import br.com.sismetal.doumain.Funcionario;
 
 public class AutenticacaoListener implements PhaseListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public void afterPhase(PhaseEvent arg0) {
 		
 		String paginaAtual = Faces.getViewId();		
 		boolean pagAuten = false;
-		pagAuten = paginaAtual.contains("faces/admin/pages/autenticacao.xhtml");
+		pagAuten = paginaAtual.contains("faces/autenticar/autenticacao.xhtml");
 		if(!pagAuten) {
 			AutenticacaoBeans autenticacaoBeans = null;
 			autenticacaoBeans = Faces.getSessionAttribute("autenticacaoBeans");
 			if(autenticacaoBeans == null) {
 				
-				Faces.navigate("faces/admin/pages/autenticacao.xhtml");
+				Faces.navigate("faces/autenticar/autenticacao.xhtml");
 				return;
 			}
 			Funcionario funcionario = new Funcionario();
 			funcionario = autenticacaoBeans.getUsuarioLogado();
 			if(funcionario == null) {
-				Faces.navigate("faces/admin/pages/auenticacao.xhtml");
+				Faces.navigate("faces/autenticar/autenticacao.xhtml");
 				return;
 			}
 		}
