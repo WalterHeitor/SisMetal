@@ -109,7 +109,8 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="Editar"
 						actionListener="#{clienteBeans.editar}"
-						update=":mensagem :formListagem:dttabela :formCliente:pnlGcli" />
+						update=":mensagem :formListagem:dttabela :formCliente:pnlGcli" 
+						oncomplete="PF('dialogoEditar').hide();" />
 					<p:commandButton value="Fechar"
 						oncomplete="PF('dialogoEditar').hide();" />
 				</h:panelGrid>

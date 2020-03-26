@@ -8,8 +8,8 @@
 ferramenta.descricao_ferr
 	FROM public.emprestimo_ferramenta,  funcionario,public.funcionario funcionario2, ferramenta 
 	where emprestimo_ferramenta.funcionario_almoxarifado = funcionario.matricula and
-	emprestimo_ferramenta.funcionario_fabrica = funcionario2.matricula 
-	and emprestimo_ferramenta.ferramenta_codigo_barra = ferramenta.codigobarra;]]>
+	emprestimo_ferramenta.funcionario_fabrica = funcionario2.matricula
+		and emprestimo_ferramenta.ferramenta_codigo_barra = ferramenta.codigobarra]]>
 	</queryString>
 	<field name="id_emprestimo_ferramenta" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.label" value="id_emprestimo_ferramenta"/>

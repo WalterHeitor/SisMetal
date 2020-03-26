@@ -214,14 +214,14 @@
 						value="#{funcionarioBeans.funcionario.email_func}" />
 
 					<p:outputLabel value="Senha" />
-					<p:password maxlength="16" size="30"
+					<p:inputText 
 						value="#{funcionarioBeans.funcionario.senha}">
-						<!-- <f:validateBean />-->						
-					</p:password>
+						 <f:validateBean />						
+					</p:inputText>
 					
 					<p:outputLabel value="Confirmar Senha"/>
-					<p:password maxlength="16" size="30"
-					value="#{funcionarioBeans.funcionario.senhaSemCriptografia}"></p:password>
+					<p:inputText
+					value="#{funcionarioBeans.funcionario.senhaSemCriptografia}"></p:inputText>
 
 					<p:outputLabel value="Setor:" />
 					<p:selectOneMenu value="#{funcionarioBeans.funcionario.setor}">
@@ -254,10 +254,11 @@
 				</h:panelGrid>
 
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar"
+					<p:commandButton value="Editar"
 						actionListener="#{funcionarioBeans.salvarEditar()}"
-						update=":mensagem  :formEditar:pnGridEditar :formListagem:dttabela " />
-					<p:commandButton value="Fechar"
+						update=":mensagem  :formEditar:pnGridEditar :formListagem:dttabela " 
+						oncomplete="PF('dialogoEditar').hide();"/>
+					<p:commandButton value="Fechar" 
 						oncomplete="PF('dialogoEditar').hide();" />
 				</h:panelGrid>
 			</h:form>

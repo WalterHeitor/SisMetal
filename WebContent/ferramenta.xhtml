@@ -191,7 +191,8 @@
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar"
 					actionListener="#{ferramentaBeans.salvarEditar}"
-					update=":mensagem  :formEditar:pnGridEditar :formListagem:dttabela " />
+					update=":mensagem  :formEditar:pnGridEditar :formListagem:dttabela "
+					oncomplete="PF('dialogoEditar').hide();" />
 				<p:commandButton value="Fechar" oncomplete="PF('dialogoEditar').hide();" />
 			</h:panelGrid>
 		</h:form>

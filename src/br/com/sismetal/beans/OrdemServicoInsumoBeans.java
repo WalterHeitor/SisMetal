@@ -3,7 +3,6 @@ package br.com.sismetal.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -193,7 +192,8 @@ public class OrdemServicoInsumoBeans {
 			for(Insumo insSave: insumosSave) {
 				insumoDAO.salvarMerge(insSave);
 			}
-
+			novoRend();
+			rend = false;
 			Messages.addFlashGlobalInfo("Ordem de serviço Salvo com Sucesso!!!");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar salvar o cliente!!!");

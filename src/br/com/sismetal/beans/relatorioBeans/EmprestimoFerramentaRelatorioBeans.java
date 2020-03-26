@@ -35,6 +35,10 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 public class EmprestimoFerramentaRelatorioBeans implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EmprestimoFerramenta emprestimoFerramenta;
 	private List<EmprestimoFerramenta>emprestimoFerramentasRel;
 	private List<EmprestimoFerramenta>emprestimoFerramentasRelDAO;

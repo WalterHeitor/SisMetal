@@ -2,8 +2,6 @@ package br.com.sismetal.dao;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 

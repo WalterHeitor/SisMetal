@@ -8,21 +8,27 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	template="/Templates/modeloSistema.xhtml">
 	<ui:define name="conteudo">
-	<h:outputText
-			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" /><br/>
+		<h:outputText
+			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
+		<br />
 
-		<p:commandButton icon="ui-icon-circle-plus"
-			value="Adicionar funcionario fabrica"
-			oncomplete="PF('dialogoTabFabri').show();">
-
+		<p:commandButton value="Novo"
+			actionListener="#{emprestimoFerramentaBeans.novoTela}"
+			update=":mensagem :formListagemEmpresDevolucao:dttabelaEmpres :formListagemDevolucao:dttabelaEmpresDevolucao">
 		</p:commandButton>
+
+
 		<h:form id="formListagemEmpresDevolucao">
 			<!-- Cadastro Fabrica -->
 			<p:outputLabel for="funFabr" value="Nome do colaborador:" />
 			<p:inputText id="funFabr"
 				value="#{emprestimoFerramentaBeans.funcionarioFabrica.nome}"
-				required="true" requiredMessage="O campo 'Nome' é obrigatório" /> 
+				required="true" requiredMessage="O campo 'Nome' é obrigatório" />
+			<p:commandButton icon="ui-icon-circle-plus"
+				value="Adicionar funcionario fabrica"
+				oncomplete="PF('dialogoTabFabri').show();">
 
+			</p:commandButton>
 			<p:commandButton value="Listar"
 				actionListener="#{emprestimoFerramentaBeans.listarNomeStatus}"
 				update=":formListagemEmpresDevolucao:dttabelaEmpres" />
@@ -70,28 +76,29 @@
 						<p:commandButton icon="ui-icon-circle-plus" value="Adicionar"
 							actionListener="#{emprestimoFerramentaBeans.entregaEmprestimo}"
 							update=":mensagem :formListagemEmpresDevolucao:dttabelaEmpres :formListagemDevolucao:dttabelaEmpresDevolucao">
-												
+
 							<f:attribute name="EmprFerrSelecionado"
 								value="#{emprestimoFerramenta}" />
 						</p:commandButton>
-						
-						<p:commandButton icon="ui-icon-circle-plus" value="Adicionar estragada"
+
+						<p:commandButton icon="ui-icon-circle-plus"
+							value="Adicionar estragada"
 							actionListener="#{emprestimoFerramentaBeans.novoFerrEstragada}"
 							update=":formDialogoFerEstr"
-							oncomplete="PF('dialogoDevFerEstr').show();">												
+							oncomplete="PF('dialogoDevFerEstr').show();">
 							<f:attribute name="estragFerrSelecionado"
 								value="#{emprestimoFerramenta}" />
 						</p:commandButton>
-						
+
 					</p:column>
-				<f:facet name="footer">
-					<h:outputText value="Existem " />
-					<h:outputText
-						value="#{fn:length(emprestimoFerramentaBeans.emprestimoFerramentaEmprestado)}" />
-					<h:outputText value=" ferramentas emprestadas. " />
-				</f:facet>
+					<f:facet name="footer">
+						<h:outputText value="Existem " />
+						<h:outputText
+							value="#{fn:length(emprestimoFerramentaBeans.emprestimoFerramentaEmprestado)}" />
+						<h:outputText value=" ferramentas emprestadas. " />
+					</f:facet>
 				</p:dataTable>
-				
+
 			</p:panel>
 		</h:form>
 		<!-- Listagem para devoluçao -->
@@ -153,16 +160,17 @@
 								value="#{emprestimoFerramenta}" />
 						</p:commandButton>
 					</p:column>
-				<f:facet name="footer">
-					<h:outputText value="Existem " />
-					<h:outputText
-						value="#{fn:length(emprestimoFerramentaBeans.emprestimoFerramentaDevolvidas)}" />
-					<h:outputText value=" ferramentas á serem devolvidas. " />
-				</f:facet>
+					<f:facet name="footer">
+						<h:outputText value="Existem " />
+						<h:outputText
+							value="#{fn:length(emprestimoFerramentaBeans.emprestimoFerramentaDevolvidas)}" />
+						<h:outputText value=" ferramentas á serem devolvidas. " />
+					</f:facet>
 				</p:dataTable>
-				
-				<p:commandButton value="Devolver" actionListener="#{emprestimoFerramentaBeans.merge}"
-				update="mensagem"/>
+
+				<p:commandButton value="Devolver"
+					actionListener="#{emprestimoFerramentaBeans.merge}"
+					update="mensagem :formListagemEmpresDevolucao:dttabelaEmpres :formListagemDevolucao:dttabelaEmpresDevolucao" />
 			</p:panel>
 		</h:form>
 		<!-- fim listagem devoluçao -->
@@ -223,27 +231,28 @@
 		</h:form>
 		<!-- fim dialogo tabela-funcionarios -->
 		<!-- dialogo entrega de ferramenta estragadas -->
-		
-			<p:dialog header="Funcionarios - Fabrica - Tabela"
-				widgetVar="dialogoDevFerEstr" draggable="false" resizable="false"
-				global="true" closable="false">
-				<h:form id="formDialogoFerEstr">
-				<p:outputLabel for="descEstr" value="Descrição do estrago:"/>
-				<p:inputText id="descEstr" value="#{emprestimoFerramentaBeans.descricaoEstragada}"/>
+
+		<p:dialog header="Funcionarios - Fabrica - Tabela"
+			widgetVar="dialogoDevFerEstr" draggable="false" resizable="false"
+			global="true" closable="false">
+			<h:form id="formDialogoFerEstr">
+				<p:outputLabel for="descEstr" value="Descrição do estrago:" />
+				<p:inputText id="descEstr"
+					value="#{emprestimoFerramentaBeans.descricaoEstragada}" />
 				<p:commandButton icon="ui-icon-circle-plus" value="Adicionar"
-							actionListener="#{emprestimoFerramentaBeans.entregaferramentaEstragada}"
-							update=":mensagem :formListagemEmpresDevolucao:dttabelaEmpres :formListagemDevolucao:dttabelaEmpresDevolucao"
-							oncomplete="PF('dialogoDevFerEstr').hide();">
-												
-							<f:attribute name="estragFerrSelecionado"
-								value="#{emprestimoFerramenta}" />
+					actionListener="#{emprestimoFerramentaBeans.entregaferramentaEstragada}"
+					update=":mensagem :formListagemEmpresDevolucao:dttabelaEmpres :formListagemDevolucao:dttabelaEmpresDevolucao"
+					oncomplete="PF('dialogoDevFerEstr').hide();">
+
+					<f:attribute name="estragFerrSelecionado"
+						value="#{emprestimoFerramenta}" />
 				</p:commandButton>
-				
+
 				<p:commandButton value="Cancelar"
-							oncomplete="PF('dialogoDevFerEstr').hide();" />
-				</h:form>
-				</p:dialog>
-				
+					oncomplete="PF('dialogoDevFerEstr').hide();" />
+			</h:form>
+		</p:dialog>
+
 		<!-- fim - dialogo entrega de ferramenta estragadas  -->
 	</ui:define>
 </ui:composition>

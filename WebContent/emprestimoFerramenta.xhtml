@@ -116,9 +116,13 @@
 			</p:dialog>
 		</h:form>
 		<!-- fim dialogo tabela-funcionarios -->
-
+<!-- ###################### INICIO DA PAGINA ##################### -->
 		<h:outputText
 			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" /> <br/>
+		<p:commandButton value="Novo" actionListener="#{emprestimoFerramentaBeans.novoTela}" 
+		update=":mensagem :formCadastro:pnGridCadastro :formCadastro:dttabelaFerr
+		 :formListagemEmpres:dttabelaEmpres">
+		</p:commandButton>
 
 		<h:form id="formCadastro">
 
@@ -256,7 +260,8 @@
 				</p:dataTable>
 				<p:commandButton value="Salvar"
 					actionListener="#{emprestimoFerramentaBeans.salvar}"
-					update=":mensagem" />
+					update=":mensagem :formCadastro:pnGridCadastro :formCadastro:dttabelaFerr
+		 :formListagemEmpres:dttabelaEmpres" />
 			</p:panel>
 		</h:form>
 	</ui:define>

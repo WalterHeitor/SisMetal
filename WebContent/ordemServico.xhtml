@@ -127,8 +127,9 @@
 				<p:panelGrid columns="2">
 					<p:commandButton value="Salvar"
 						actionListener="#{ordemServicoBeans.editar}"
-						update=":mensagem :formListagem:dttabela :formCad:pngCad" />
-					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+						update=":mensagem :formListagem:dttabela :formCad:pngCad" 
+						oncomplete="PF('dialogoEdi').hide();"/>
+					<p:commandButton value="Fechar" oncomplete="PF('dialogoEdi').hide();" />
 				</p:panelGrid>
 			</h:form>
 		</p:dialog>

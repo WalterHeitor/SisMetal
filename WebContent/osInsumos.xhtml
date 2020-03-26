@@ -98,10 +98,10 @@
 						</f:facet>
 				</p:dataTable>
 				<p:commandButton value="Salvar" actionListener="#{ordemServicoInsumoBeans.salvar}" 
-				update=":mensagem" />
+				update=":mensagem :panel :ListInsumo:dttabelaIns" />
 		</p:panel>
 		</h:form>
-		
+		<!-- ###########################  FIM DA PAG ###################### -->
 		<!-- dialogo funcionarios  encarregado -->
 		<p:dialog global="true" header="Encarregados" widgetVar="dialogoEnc"
 			draggable="false" resizable="false" closable="false">

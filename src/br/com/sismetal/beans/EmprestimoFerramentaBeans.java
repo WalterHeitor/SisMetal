@@ -10,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Messages;
+
 import br.com.sismetal.dao.DevolucaoFerramentaEstragadaDAO;
 import br.com.sismetal.dao.EmprestimoFerramentaDAO;
 import br.com.sismetal.dao.FerramentaDAO;
@@ -185,6 +187,26 @@ public class EmprestimoFerramentaBeans implements Serializable {
 		emprestimoFerramentas = new ArrayList<>();
 		listarStatusNaoEmprestado();
 
+	}
+	public void novoTela() {
+		try {
+			local_ferr = "";
+			funcionarioAlmoxarifado = new Funcionario();
+			funcionarioFabrica = new Funcionario();
+			ferramenta = new Ferramenta();
+			emprestimoFerramenta = new EmprestimoFerramenta();
+			devolucaoFerramentaEstragada = new DevolucaoFerramentaEstragada();
+			ferramentas = new ArrayList<>();
+			emprestimoFerramentas = new ArrayList<>();
+			emprestimoFerramentaEmprestado = new ArrayList<>();
+			emprestimoFerramentaDevolvidas = new ArrayList<>();
+			devolucoesFerramentasEstragas = new ArrayList<>();
+			listarStatusNaoEmprestado();
+			Messages.addGlobalInfo("Nova tela com sucesso!!");
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro Novo Emprestimo!!");
+			// TODO: handle exception
+		}
 	}
 
 	@PostConstruct
@@ -398,6 +420,7 @@ public void entregaferramentaEstragada() {
 				FerramentaDAO ferramentaDAO = new FerramentaDAO();
 				ferramentaDAO.salvarMerge(ferramenta);
 			}
+			novoTela();
 			JSFUtil.addMensagemSucesso("Emprestimo Ferramenta salvo com Sucesso!!!");
 
 		} catch (Exception e) {
@@ -421,6 +444,7 @@ public void entregaferramentaEstragada() {
 				DevolucaoFerramentaEstragadaDAO devolucaoFerramentaEstragadaDAO = new DevolucaoFerramentaEstragadaDAO();
 				devolucaoFerramentaEstragadaDAO.salvarMerge(devolucaoFerramentaEstragada);
 			}
+			novoTela();
 			JSFUtil.addMensagemSucesso("Emprestimo Ferramenta devolvido com Sucesso!!!");
 		} catch (Exception e) {
 			JSFUtil.addMensagemErro("erro ao devolver Ferramneta: e.getMessage() " + e.getMessage());

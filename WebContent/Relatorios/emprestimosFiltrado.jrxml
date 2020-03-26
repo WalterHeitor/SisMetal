@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="emprestimos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fac23fa6-1fe3-471f-9749-8e0539be9a94">
-	<property name="com.jaspersoft.studio.data.sql.tables">
-		<![CDATA[ZnVuY2lvbmFyaW8gLDI2NCwyMCxkZjM0NzI0Mi1hMjAxLTQ3OTgtOGZlNC04YzYyYjlkMjQzNmI7
-ZnVuY2lvbmFyaW8gLDQxMSwyMCw2N2NkMmYzYy0yYzBlLTQ1MGItOTg1ZS04MzIzZDQ1ZTVmYzc7
-ZW1wcmVzdGltb19mZXJyYW1lbnRhICwyMCw1MSw0ZWY3NDliNy1lOGIxLTQyOTUtYWExZS1lNDUx
-NzRjYjA2NjM7ZmVycmFtZW50YSAsNjExLDExMywxOTI1ZjI5ZC0yNDc5LTQ1MmQtOGJlOS1lZmM4
-ZTQzMzE1MTY7]]>
-	</property>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SisMetal Data Adapter "/>
 	<parameter name="nomeColaborador" class="java.lang.String"/>
 	<queryString language="SQL">

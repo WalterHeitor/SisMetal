@@ -132,7 +132,8 @@
 				<h:panelGrid columns="2">
 				<p:commandButton value="Editar"
 						actionListener="#{insumoBeans.editar}"
-						update=":mensagem :formListagem:dttabela :formEdi:pngEdi" />
+						update=":mensagem :formListagem:dttabela :formEdi:pngEdi"
+						oncomplete="PF('dialogoEdi').hide();" />
 					<p:commandButton value="Fechar" oncomplete="PF('dialogoEdi').hide();" />
 				</h:panelGrid>
 				</h:form>

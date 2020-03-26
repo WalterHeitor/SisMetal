@@ -18,6 +18,7 @@ public class FerramentaDAO extends GenericDAO<Ferramenta>{
 			Query consulta = sessao.createQuery(hql);
 			consulta.setParameter(0, status);
 			
+			@SuppressWarnings("unchecked")
 			List<Ferramenta>ferramentas = consulta.list();
 			return ferramentas;
 		

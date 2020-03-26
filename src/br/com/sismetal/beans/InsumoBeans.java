@@ -19,6 +19,7 @@ public class InsumoBeans {
 
 	private Insumo insumo;
 	private List<Insumo> insumos;
+	private float qtd;
 
 	public Insumo getInsumo() {
 		return insumo;
@@ -34,6 +35,14 @@ public class InsumoBeans {
 
 	public void setInsumos(List<Insumo> insumos) {
 		this.insumos = insumos;
+	}		
+
+	public float getQtd() {
+		return qtd;
+	}
+
+	public void setQtd(float qtd) {
+		this.qtd = qtd;
 	}
 
 	public void novo() {
@@ -60,10 +69,24 @@ public class InsumoBeans {
 	public void editar() {
 
 		try {
-			novo();
+			
 			InsumoDAO insumoDAO = new InsumoDAO();
-			insumoDAO.salvar(insumo);
+			insumoDAO.salvarMerge(insumo);
 			insumos = insumoDAO.listar();
+			novo();
+			Messages.addFlashGlobalInfo("Insumo Editado com Sucesso!!!");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar editar o Insumo!!!");
+			e.printStackTrace();
+		}
+	}
+	public void lancarQTD() {
+		try {
+			insumo.setQuantidade(insumo.getQuantidade() + qtd);
+			InsumoDAO insumoDAO = new InsumoDAO();
+			insumoDAO.salvarMerge(insumo);
+			insumos = insumoDAO.listar();
+			qtd = 0;
 			novo();
 			Messages.addFlashGlobalInfo("Insumo Editado com Sucesso!!!");
 		} catch (Exception e) {
@@ -74,7 +97,7 @@ public class InsumoBeans {
 
 	public void puxarEditar(ActionEvent event) {
 		try {
-			novo();
+			//novo();
 			insumo = (Insumo) event.getComponent().getAttributes().get("Insumo_SelecionadoEd");
 			
 		} catch (Exception e) {
