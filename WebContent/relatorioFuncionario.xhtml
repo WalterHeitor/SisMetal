@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="conteudo">
+		<h:outputText
+			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
+		<br />
+		<h:form id="formListagem">
+			<p:panel header="Lista de Funcionarios Ativos">
+				<p:dataTable id="dttabela"
+					emptyMessage="Nenhum registro encontrado." paginator="true"
+					value="#{funcionarioRelatorioBeans.funcionarios}" var="funcionario" rows="6">
+					<f:facet name="header">
+						<p:commandButton value="Imprimir" actionListener="#{funcionarioRelatorioBeans.imprimir()}"/>
+					</f:facet>
+
+					<p:column headerText="Matricula">
+						<h:outputText value="#{funcionario.matricula}" />
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{funcionario.nome}" />
+					</p:column>
+
+					<p:column headerText="CPF">
+						<h:outputText value="#{funcionario.cpf_func}" />
+					</p:column>
+
+					<p:column headerText="Setor">
+						<h:outputText value="#{funcionario.setor}" />
+					</p:column>
+
+					<p:column headerText="Cargo">
+						<h:outputText value="#{funcionario.cargo_func}" />
+					</p:column>
+
+					<p:column headerText="Email">
+						<h:outputText value="#{funcionario.email_func}" />
+					</p:column>
+
+					<f:facet name="footer">
+						<h:outputText value="Existem " />
+						<h:outputText value="#{fn:length(funcionarioBeans.funcionarios)}" />
+						<h:outputText value=" colaboradores cadastrados. " />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+

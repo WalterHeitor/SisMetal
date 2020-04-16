@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="conteudo">
+		<h:outputText
+			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
+			<p:commandButton value="Listar Ferr. Estargadas" actionListener="#{relatorioFerramentasAtivasBeans.listarFerrEstragada}"
+			update=":formListagem"/>
+		<p:panel rendered="#{relatorioFerramentasAtivasBeans.rend}">
+		
+			<h:form id="formListagem">
+				<p:panel header="Lista de Ferramentas">
+					<p:dataTable id="dttabela"
+						emptyMessage="Nenhum registro encontrado." paginator="true"
+						value="#{ferramentaBeans.ferramentas}" var="ferramenta" rows="6">
+						<f:facet name="header">
+							<p:commandButton value="Imprimir"
+								actionListener="#{relatorioFerramentasAtivasBeans.imprimirRelFerr}" />
+						</f:facet>
+
+						<p:column headerText="Codigo">
+							<h:outputText value="#{ferramenta.codigoBarra}" />
+						</p:column>
+
+						<p:column headerText="Descrição">
+							<h:outputText value="#{ferramenta.descricao_ferr}" />
+						</p:column>
+
+						<p:column headerText="Categoria">
+							<h:outputText value="#{ferramenta.categoria_ferr}" />
+						</p:column>
+
+						<p:column headerText="Local da Ferramenta">
+							<h:outputText value="#{ferramenta.local_ferr}" />
+						</p:column>
+
+						<p:column headerText="Status">
+							<h:outputText value="#{ferramenta.status}" />
+						</p:column>
+
+						<p:column headerText="Data Entrega">
+							<h:outputText value="#{ferramenta.dt_entrega_ferr}">
+								<f:convertDateTime locale="pt_BR" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Nota Fiscal">
+							<h:outputText value="#{ferramenta.num_nota_fiscal_ferr}" />
+						</p:column>
+
+
+						<f:facet name="footer">
+							<h:outputText value="Existem " />
+							<h:outputText value="#{fn:length(ferramentaBeans.ferramentas)}" />
+							<h:outputText value=" ferramentas cadastradas. " />
+						</f:facet>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

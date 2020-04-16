@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FerramentasAtivas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3bd5df41-fa3f-4c8d-bccc-a25295606956">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[ZmVycmFtZW50YSBBUyAsMTM2LDYzLDIxM2MyOGI2LTBiZTYtNGI5ZS1hZGFmLTgwMzZlMjE3YzEz
+MTs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SisMetal Data Adapter "/>
+	<queryString language="SQL">
+		<![CDATA[SELECT ferramenta.codigobarra,
+	ferramenta.categoria_ferr,
+	ferramenta.descricao_ferr,
+	ferramenta.local_ferr,
+	ferramenta.num_nota_fiscal_ferr,
+	ferramenta.status,
+	ferramenta.dt_entrega_ferr
+FROM ferramenta]]>
+	</queryString>
+	<field name="codigobarra" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="codigobarra"/>
+	</field>
+	<field name="categoria_ferr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="categoria_ferr"/>
+	</field>
+	<field name="descricao_ferr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descricao_ferr"/>
+	</field>
+	<field name="local_ferr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="local_ferr"/>
+	</field>
+	<field name="num_nota_fiscal_ferr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="num_nota_fiscal_ferr"/>
+	</field>
+	<field name="status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+	</field>
+	<field name="dt_entrega_ferr" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="dt_entrega_ferr"/>
+	</field>
+	<group name="codigobarra">
+		<groupExpression><![CDATA[$F{codigobarra}]]></groupExpression>
+	</group>
+	<group name="categoria_ferr">
+		<groupExpression><![CDATA[$F{categoria_ferr}]]></groupExpression>
+	</group>
+	<group name="descricao_ferr">
+		<groupExpression><![CDATA[$F{descricao_ferr}]]></groupExpression>
+	</group>
+	<group name="local_ferr">
+		<groupExpression><![CDATA[$F{local_ferr}]]></groupExpression>
+	</group>
+	<group name="num_nota_fiscal_ferr">
+		<groupExpression><![CDATA[$F{num_nota_fiscal_ferr}]]></groupExpression>
+	</group>
+	<group name="status">
+		<groupExpression><![CDATA[$F{status}]]></groupExpression>
+	</group>
+	<group name="dt_entrega_ferr">
+		<groupExpression><![CDATA[$F{dt_entrega_ferr}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79" uuid="b6348429-0ca7-4624-ba1b-20f16721ad25"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="20"/>
+				</textElement>
+				<text><![CDATA[			Relatorio de Ferramentas				SisMetalGer]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="34" uuid="839ab703-2c7c-4ef5-8343-7aaedfcc9dcd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="348410d2-a06b-4465-acd7-90b21eb779a7"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="0" width="310" height="34" uuid="f9501966-6649-41e8-ac4c-d41dc0516f04">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c94f8d3b-68d3-46d5-a1b1-a31c84a33322"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Descrição da Ferramenta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="90" height="34" uuid="f0c6705b-75bf-4ba3-9826-2e597536fc6e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e05e4644-32b1-42ac-8b5a-b978dac56853"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="80" height="34" uuid="196f4fc4-bab3-4b83-9e80-ca207f427d5d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95f6cc32-a52b-40af-a7d2-c16e147e61bf"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="70" height="30" uuid="278622c5-0604-4844-9de6-aa506d116e71">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="348410d2-a06b-4465-acd7-90b21eb779a7"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codigobarra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="310" height="30" uuid="7fbc9f34-50fa-484c-bdf4-1f798811cc41">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c94f8d3b-68d3-46d5-a1b1-a31c84a33322"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descricao_ferr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="90" height="30" uuid="3a57532a-6ab4-4bfa-b3c5-ae65f1f0349b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e05e4644-32b1-42ac-8b5a-b978dac56853"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{categoria_ferr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="80" height="30" uuid="db5fb42b-e9cc-40fc-b585-c50a24266c97">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95f6cc32-a52b-40af-a7d2-c16e147e61bf"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

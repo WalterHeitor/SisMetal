@@ -120,30 +120,35 @@
 			<h:form id="formCadastro">
 				<h:panelGrid columns="2" id="pnGridCadastro">
 					<p:outputLabel value="Matricula:" />
-					<p:inputText maxlength="50" size="30"
+					<p:inputText maxlength="50" size="30" 
+					placeholder="Numeração do codigo de barras"
 						value="#{funcionarioBeans.funcionario.matricula}" />
 
 					<p:outputLabel value="CPF:" />
 					<p:inputMask mask="999.999.999-99" maxlength="50" size="30"
+					placeholder="Numero do CPF"
 						value="#{funcionarioBeans.funcionario.cpf_func}">
 					</p:inputMask>
 
 					<p:outputLabel value="Nome:" />
 					<p:inputText maxlength="100" size="30"
-						value="#{funcionarioBeans.funcionario.nome}" />
+						value="#{funcionarioBeans.funcionario.nome}" placeholder="Nome do funcionario"/>
 
 					<p:outputLabel value="Email:" />
 					<p:inputText maxlength="30" size="30"
+					placeholder="E-mail do funcionario"
 						value="#{funcionarioBeans.funcionario.email_func}" />
 
 					<p:outputLabel value="Senha" />
 					<p:password maxlength="16" size="30"
+					placeholder="Senha Max: 16 caracter"
 						value="#{funcionarioBeans.funcionario.senha}">
 						<f:validateBean />
 					</p:password>
 					
 					<p:outputLabel value="Confirmar Senha" />
 					<p:password maxlength="16" size="30"
+					placeholder="Confirme a senha"
 						value="#{funcionarioBeans.funcionario.senhaSemCriptografia}">
 						<f:validateBean />
 					</p:password>

@@ -68,20 +68,21 @@
 			</p:panel>
 		</h:form>
 		<!-- ********		________________Cadastro_________________ 		*********-->
-		<p:dialog header="Cadastro de Ordem de Serviço" widgetVar="dialogo"
+		<p:dialog header="Cadastro de Insumos" widgetVar="dialogo"
 			draggable="false" resizable="false" closable="false" global="true">
 			<h:form id="formCad">
 				<p:panelGrid columns="2" id="pngCad">
 				
 				<p:outputLabel for="desc" value="Descrição:"/>
 				<p:inputText id="desc" value="#{insumoBeans.insumo.descricao_produto}"
-				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				placeholder="Descrição do insumo"
+				required="true" requiredMessage="O campo 'Descriçao' e obrigatorio"/>
 				<p:outputLabel for="prc" value="Preço Und:"/>
 				<p:inputText id="prc" value="#{insumoBeans.insumo.preco}"
-				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				required="true" requiredMessage="O campo 'Preço' e obrigatorio"/>
 				<p:outputLabel for="qtd" value="Quantidade:"/>
 				<p:inputText id="qtd" value="#{insumoBeans.insumo.quantidade}"
-				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				required="true" requiredMessage="O campo 'Quantidade' e obrigatorio"/>
 				<p:outputLabel value="Unidade:"/>
 				<p:selectOneMenu value="#{insumoBeans.insumo.unidade}">
 						<f:selectItem itemValue="" itemLabel="selecione a unidade" />
@@ -104,20 +105,20 @@
 		</p:dialog>
 		
 		<!-- ********		________________ Editar _________________ 		*********-->
-		<p:dialog header="Editar Ordem de Serviço" widgetVar="dialogoEdi"
+		<p:dialog header="Editar Insumos" widgetVar="dialogoEdi"
 			draggable="false" resizable="false" closable="false" global="true">
 			<h:form id="formEdi">
 				<p:panelGrid columns="2" id="pngEdi">
 				
 				<p:outputLabel for="desc" value="Descrição:"/>
 				<p:inputText id="desc" value="#{insumoBeans.insumo.descricao_produto}"
-				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				required="true" requiredMessage="O campo 'Descrição' e obrigatorio"/>
 				<p:outputLabel for="prc" value="Preço Und:"/>
 				<p:inputText id="prc" value="#{insumoBeans.insumo.preco}"
-				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				required="true" requiredMessage="O campo 'Preço' e obrigatorio"/>
 				<p:outputLabel for="qtd" value="Qauntidade:"/>
 				<p:inputText id="qtd" value="#{insumoBeans.insumo.quantidade}"
-				required="true" requiredMessage="Ocampo 'Codigo' e obrigatorio"/>
+				required="true" requiredMessage="O campo 'Quantidade' e obrigatorio"/>
 				<p:outputLabel value="Unidade:"/>
 				<p:selectOneMenu value="#{insumoBeans.insumo.unidade}">
 						<f:selectItem itemValue="" itemLabel="selecione a unidade" />

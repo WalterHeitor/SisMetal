@@ -1,6 +1,7 @@
 package teste;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -118,7 +119,7 @@ public class testeFuncionarioDAO {
 		Funcionario f = fdao.autenticar(email, senha);
 		System.out.println("Funcionario Autentica:  "+f);
 	}
-	@Test
+	
 	public void testconexao() {
 		try {
 			Connection conexao = HibernateUtil.getConexao();
@@ -126,6 +127,15 @@ public class testeFuncionarioDAO {
 			System.out.println(conexao);
 		} catch (Exception e) {
 			System.out.println("erro ao conexao"+ e);
+		}
+	}
+	@Test
+	public void funcAtivo() {
+		List<Funcionario> funcionarios = new ArrayList<>();
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+		funcionarios = funcionarioDAO.buscarFuncAtivo();
+		for(Funcionario funcionario: funcionarios) {
+			System.out.println("func :"+ funcionario);
 		}
 	}
 }

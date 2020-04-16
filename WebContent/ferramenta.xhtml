@@ -97,12 +97,12 @@
 		<h:form id="formCadastro">
 			<h:panelGrid columns="2" id="pnGridCadastro">
 				<p:outputLabel for="cod" value="Codigo:" />
-				<p:inputText id="cod"
+				<p:inputText id="cod" placeholder="Codigo de barras"
 					value="#{ferramentaBeans.ferramenta.codigoBarra}" 
 					required="true" requiredMessage="'O campo codigo e obrigatorio!!!"/>
 
 				<p:outputLabel for="desc" value="Descrição:" />
-				<p:inputText id="desc"
+				<p:inputText id="desc" placeholder="Descrição da ferramenta"
 					value="#{ferramentaBeans.ferramenta.descricao_ferr}"
 					required="true" requiredMessage="'O campo descrição e obrigatorio!!!" />
 
@@ -114,7 +114,7 @@
 				<f:selectItem itemValue="Equipamento-pesado" itemLabel="Equipamento-pesado" />
 				</p:selectOneMenu>
 				<p:outputLabel for="loc" value="Local:" />
-				<p:inputText id="loc"
+				<p:inputText id="loc" placeholder="Cidade onde ferramenta se encontra"
 					value="#{ferramentaBeans.ferramenta.local_ferr}"
 					required="true" requiredMessage="'O campo local e obrigatorio!!!">
 				</p:inputText>
@@ -132,7 +132,7 @@
 				required="true" requiredMessage="'O campo Data entrega e obrigatorio!!!"/>
 				
 				<p:outputLabel for="nfis" value="Numero da nota fiscal:" />
-				<p:inputText id="nfis" 
+				<p:inputText id="nfis"  
 					value="#{ferramentaBeans.ferramenta.num_nota_fiscal_ferr}"
 					required="true" requiredMessage="'O campo Numero da nota fiscal e obrigatorio!!!">
 				</p:inputText>
@@ -158,15 +158,19 @@
 					value="#{ferramentaBeans.ferramenta.codigoBarra}" />
 
 				<p:outputLabel value="Descrição:" />
-				<p:inputText 
+				<p:inputText placeholder="Descrição da ferramenta"
 					value="#{ferramentaBeans.ferramenta.descricao_ferr}" />
 
-				<p:outputLabel value="Categoria:" />
-				<p:inputText 
-					value="#{ferramentaBeans.ferramenta.categoria_ferr}" />
+				<p:outputLabel for="cat" value="Categoria:" />
+				<p:selectOneMenu value="#{ferramentaBeans.ferramenta.categoria_ferr}"
+				id="cat" required="true" requiredMessage="'O campo Categoria e obrigatorio!!!">
+				<f:selectItem itemValue="Manual" itemLabel="Manual" />
+				<f:selectItem itemValue="Eletrica" itemLabel="Eletrica" />
+				<f:selectItem itemValue="Equipamento-pesado" itemLabel="Equipamento-pesado" />
+				</p:selectOneMenu>
 
 				<p:outputLabel value="Local:" />
-				<p:inputText maxlength="8" 
+				<p:inputText placeholder="Cidade onde ferramenta se encontra"
 					value="#{ferramentaBeans.ferramenta.local_ferr}">
 				</p:inputText>
 
