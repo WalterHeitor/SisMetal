@@ -2,8 +2,10 @@ package br.com.sismetal.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.sismetal.doumain.Ferramenta;
 import br.com.sismetal.util.HibernateUtil;
@@ -25,8 +27,30 @@ public class FerramentaDAO extends GenericDAO<Ferramenta>{
 		} catch (Exception e) {
 			System.out.println("erro ao listar por nome: "+e);
 			e.printStackTrace();
+			throw e;
+		}finally {
+			sessao.close();
 		}
-		return null;
+		
+	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Ferramenta>listarEstragadas(){
+		
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			String status = "Estragada";
+			Criteria consulta = sessao.createCriteria(Ferramenta.class);
+			consulta.add(Restrictions.eq("status", status));
+			List<Ferramenta>ferramentas = consulta.list();
+			return ferramentas;
+		} catch (Exception e) {
+			System.out.println("erro ao listar por status: "+e);
+			e.printStackTrace();
+			throw e;
+		}finally {
+			sessao.close();
+		}
+		
 	}
 }

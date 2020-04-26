@@ -120,7 +120,7 @@ public class FerramentaBeans implements Serializable {
 			FerramentaDAO ferramentaDAO = new FerramentaDAO();
 			ferramentaDAO.excluir(ferramenta);
 			ferramentas = ferramentaDAO.listar();
-			JSFUtil.addMensagemSucesso("Ferrmenta deletado com Sucesso!!!");
+			JSFUtil.addMensagemSucesso("Ferramenta deletado com Sucesso!!!");
 		} catch (Exception e) {
 			JSFUtil.addMensagemErro("erro ao excluir Ferramenta: e.getMessage() " + e.getMessage());
 			e.printStackTrace();

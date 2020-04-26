@@ -10,15 +10,15 @@
 	<ui:define name="conteudo">
 		<h:outputText
 			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
-			<p:commandButton value="Listar Ferr. Estargadas" actionListener="#{relatorioFerramentasAtivasBeans.listarFerrEstragada}"
-			update=":formListagem"/>
-		<p:panel rendered="#{relatorioFerramentasAtivasBeans.rend}">
+			<h:form><p:commandButton value="Listar Ferr. Estargadas" 
+			actionListener="#{relatorioFerramentasAtivasBeans.listarFerrEstragada}"
+			update=":formListagem:dttabela"/></h:form>
 		
 			<h:form id="formListagem">
 				<p:panel header="Lista de Ferramentas">
 					<p:dataTable id="dttabela"
 						emptyMessage="Nenhum registro encontrado." paginator="true"
-						value="#{ferramentaBeans.ferramentas}" var="ferramenta" rows="6">
+						value="#{relatorioFerramentasAtivasBeans.ferramentas}" var="ferramenta" rows="6" >
 						<f:facet name="header">
 							<p:commandButton value="Imprimir"
 								actionListener="#{relatorioFerramentasAtivasBeans.imprimirRelFerr}" />
@@ -63,6 +63,5 @@
 					</p:dataTable>
 				</p:panel>
 			</h:form>
-		</p:panel>
 	</ui:define>
 </ui:composition>

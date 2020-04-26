@@ -2,6 +2,7 @@ package br.com.sismetal.beans.relatorioBeans;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
+import br.com.sismetal.dao.FerramentaDAO;
 import br.com.sismetal.doumain.Ferramenta;
 import br.com.sismetal.util.HibernateUtil;
 import net.sf.jasperreports.engine.JRException;
@@ -30,7 +32,7 @@ public class RelatorioFerramentasAtivasBeans implements Serializable{
 
 	private Ferramenta ferramenta;
 	private List<Ferramenta> ferramentas;
-	private boolean rend = false;
+	
 	
 	public Ferramenta getFerramenta() {
 		return ferramenta;
@@ -44,15 +46,12 @@ public class RelatorioFerramentasAtivasBeans implements Serializable{
 	public void setFerramentas(List<Ferramenta> ferramentas) {
 		this.ferramentas = ferramentas;
 	}
-	public boolean isRend() {
-		return rend;
-	}
-	public void setRend(boolean rend) {
-		this.rend = rend;
-	}
+	
 	
 	public void listarFerrEstragada() {
-		rend = true;
+		FerramentaDAO ferramentaDAO = new FerramentaDAO();
+		ferramentas = new ArrayList<>();
+		ferramentas = ferramentaDAO.listarEstragadas();
 	}
 	
 	public void imprimirRelFerr() {
