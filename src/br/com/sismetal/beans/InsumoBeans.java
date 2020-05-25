@@ -88,9 +88,9 @@ public class InsumoBeans {
 			insumos = insumoDAO.listar();
 			qtd = 0;
 			novo();
-			Messages.addFlashGlobalInfo("Insumo Editado com Sucesso!!!");
+			Messages.addFlashGlobalInfo("Insumo Lançado com Sucesso!!!");
 		} catch (Exception e) {
-			Messages.addFlashGlobalError("Ocorreu u erro ao tentar editar o Insumo!!!");
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar lançar o Insumo!!!");
 			e.printStackTrace();
 		}
 	}

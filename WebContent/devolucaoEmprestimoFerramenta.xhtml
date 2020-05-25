@@ -14,16 +14,14 @@
 
 		<p:commandButton value="Novo"
 			actionListener="#{emprestimoFerramentaBeans.novoTela}"
-			update=":mensagem :formListagemEmpresDevolucao:dttabelaEmpres :formListagemDevolucao:dttabelaEmpresDevolucao">
+			update=":mensagem :formListagemEmpresDevolucao :formListagemEmpresDevolucao:dttabelaEmpres :formListagemDevolucao:dttabelaEmpresDevolucao">
 		</p:commandButton>
 
 
 		<h:form id="formListagemEmpresDevolucao">
-			<!-- Cadastro Fabrica -->
-			<p:outputLabel for="funFabr" value="Nome do colaborador:" />
-			<p:inputText id="funFabr"
-				value="#{emprestimoFerramentaBeans.funcionarioFabrica.nome}"
-				required="true" requiredMessage="O campo 'Nome' é obrigatório" />
+			<!-- Cadastro Fabrica-->
+			<p:outputLabel  value="Nome do colaborador:" />
+			<h:outputText value="#{emprestimoFerramentaBeans.funcionarioFabrica.nome}" />
 			<p:commandButton icon="ui-icon-circle-plus"
 				value="Adicionar funcionario fabrica"
 				oncomplete="PF('dialogoTabFabri').show();">
@@ -31,7 +29,7 @@
 			</p:commandButton>
 			<p:commandButton value="Listar"
 				actionListener="#{emprestimoFerramentaBeans.listarNomeStatus}"
-				update=":formListagemEmpresDevolucao:dttabelaEmpres" />
+				update=":mensagem :formListagemEmpresDevolucao:dttabelaEmpres" />
 
 			<p:panel header="Lista de Emprestimos">
 				<p:dataTable id="dttabelaEmpres"
@@ -231,7 +229,7 @@
 		<!-- fim dialogo tabela-funcionarios -->
 		<!-- dialogo entrega de ferramenta estragadas -->
 
-		<p:dialog header="Funcionarios - Fabrica - Tabela"
+		<p:dialog header="Devolução - Ferramenta - Estragada"
 			widgetVar="dialogoDevFerEstr" draggable="false" resizable="false"
 			global="true" closable="false">
 			<h:form id="formDialogoFerEstr">

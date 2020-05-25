@@ -193,6 +193,7 @@ public class EmprestimoFerramentaBeans implements Serializable {
 			local_ferr = "";
 			funcionarioAlmoxarifado = new Funcionario();
 			funcionarioFabrica = new Funcionario();
+			funcionarioFabrica.setNome("");
 			ferramenta = new Ferramenta();
 			emprestimoFerramenta = new EmprestimoFerramenta();
 			devolucaoFerramentaEstragada = new DevolucaoFerramentaEstragada();
@@ -234,16 +235,24 @@ public class EmprestimoFerramentaBeans implements Serializable {
 	}
 
 	public void listarNomeStatus() {
-		try {
-			emprestimoFerramentaEmprestado = new ArrayList<>();
-			emprestimoFerramentaDevolvidas = new ArrayList<>();
-			devolucoesFerramentasEstragas = new ArrayList<>();
-			EmprestimoFerramentaDAO emprestimoFerramentaDAO = new EmprestimoFerramentaDAO();
-			emprestimoFerramentaEmprestado = emprestimoFerramentaDAO.listarNomeStatus(funcionarioFabrica.getNome(),
-					"emprestado");
-		} catch (Exception e) {
-			// TODO: handle exception
+		
+		if(funcionarioFabrica != null) {
+			try {
+				emprestimoFerramentaEmprestado = new ArrayList<>();
+				emprestimoFerramentaDevolvidas = new ArrayList<>();
+				devolucoesFerramentasEstragas = new ArrayList<>();
+				EmprestimoFerramentaDAO emprestimoFerramentaDAO = new EmprestimoFerramentaDAO();
+				emprestimoFerramentaEmprestado = emprestimoFerramentaDAO.listarNomeStatus(funcionarioFabrica.getNome(),
+							"emprestado");
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+		}else {
+			Messages.addFlashGlobalError("Adicione o nome do colaborador e obrigatorio!!!");
 		}
+		
 	}
 
 
@@ -283,8 +292,14 @@ public class EmprestimoFerramentaBeans implements Serializable {
 	 */
 	public void puxarFerrTable(ActionEvent event) {
 
-		ferramenta = (Ferramenta) event.getComponent().getAttributes().get("ferrEmprFerrSelecionado");
-		Addsalvar();
+		
+		if((funcionarioAlmoxarifado == null) || (funcionarioFabrica == null )) {
+			Messages.addFlashGlobalError("Campo funcionario Almoxarife ou Fabrica Obrigatorio !!!");
+		}else {
+			ferramenta = (Ferramenta) event.getComponent().getAttributes().get("ferrEmprFerrSelecionado");
+			Addsalvar();
+		}
+		
 
 	}
 
@@ -381,16 +396,13 @@ public class EmprestimoFerramentaBeans implements Serializable {
 
 public void entregaferramentaEstragada() {
 
-	try {
-		
-		
-		
+	try {		
 		FerramentaDAO ferramentaDAO = new FerramentaDAO();
 		ferramenta = ferramentaDAO.buscarPorString(emprestimoFerramenta.getFerramenta().getCodigoBarra());
 		ferramenta.setStatus("estragada");
 		ferramentas.add(ferramenta);
 		emprestimoFerramenta.setFerramenta(ferramenta);
-		emprestimoFerramenta.setDt_entrega(dt_entrega);		
+		emprestimoFerramenta.setDt_entrega(new Date());		
 		emprestimoFerramentaDevolvidas.add(emprestimoFerramenta);
 		emprestimoFerramentaEmprestado.remove(emprestimoFerramenta);
 		devolucaoFerramentaEstragada.setEmprestimoFerramenta(emprestimoFerramenta);
@@ -399,6 +411,7 @@ public void entregaferramentaEstragada() {
 		emprestimoFerramenta = new EmprestimoFerramenta();
 		devolucaoFerramentaEstragada = new DevolucaoFerramentaEstragada();
 		ferramenta = new Ferramenta();
+		descricaoEstragada = "";
 
 		JSFUtil.addMensagemSucesso("Devolução do emprestimo Ferramenta estrada adicionada a lista com Sucesso!!!");
 	} catch (Exception e) {

@@ -21,10 +21,10 @@
 						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
 					</f:facet>
 
-					<p:column headerText="Codigo">
+					<p:column headerText="Codigo" filterBy="#{insumo.id_insumo}">
 						<h:outputText value="#{insumo.id_insumo}" />
 					</p:column>
-					<p:column headerText="Descrição">
+					<p:column headerText="Descrição" filterBy="#{insumo.descricao_produto}">
 						<h:outputText value="#{insumo.descricao_produto}" />
 					</p:column>
 					<p:column headerText="Quantidade">
@@ -41,7 +41,7 @@
 							actionListener="#{insumoBeans.excluir}"
 							update=":mensagem :formListagem:dttabela ">
 							<p:confirm header="Confirmação"
-								message="Deseja excluir o cliente?" icon="ui-icon-alert" />
+								message="Deseja excluir o Insumo?" icon="ui-icon-alert" />
 							<f:attribute name="Insumo_SelecionadoEx" value="#{insumo}" />
 						</p:commandButton>
 

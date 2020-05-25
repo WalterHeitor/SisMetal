@@ -32,6 +32,7 @@ public class OrdemServicoInsumoBeans {
 	private List<OrdemServico> ordemServicos;
 	private Funcionario funcionarioGerente;
 	private Funcionario funcionarioFabrica;
+	private Funcionario funcionarioAlmoxarife;
 	private String acao = "";
 	
 	public String getAcao() {
@@ -129,7 +130,16 @@ public class OrdemServicoInsumoBeans {
 	public void setFuncionarioFabrica(Funcionario funcionarioFabrica) {
 		this.funcionarioFabrica = funcionarioFabrica;
 	}
-//--------------------------------------------novo()
+	
+public Funcionario getFuncionarioAlmoxarife() {
+		return funcionarioAlmoxarife;
+	}
+
+	public void setFuncionarioAlmoxarife(Funcionario funcionarioAlmoxarife) {
+		this.funcionarioAlmoxarife = funcionarioAlmoxarife;
+	}
+
+	//--------------------------------------------novo()
 	public void novoRend() {
 		
 		try {
@@ -173,6 +183,11 @@ public class OrdemServicoInsumoBeans {
 	public void puxarFuncionarioFabrica(ActionEvent event) {
 
 		funcionarioFabrica = (Funcionario) event.getComponent().getAttributes()
+				.get("funcSelecionado");
+	}
+	public void puxarFuncionarioAlmoxarifado(ActionEvent event) {
+
+		funcionarioAlmoxarife = (Funcionario) event.getComponent().getAttributes()
 				.get("funcSelecionado");
 	}
 	public void puxarOS(ActionEvent event) {

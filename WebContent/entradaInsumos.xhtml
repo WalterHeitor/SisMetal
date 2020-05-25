@@ -17,9 +17,7 @@
 				<p:dataTable id="dttabela"
 					emptyMessage="Nenhum registro encontrado." paginator="true"
 					value="#{insumoBeans.insumos}" var="insumo" rows="6">
-					<f:facet name="header">
-						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
-					</f:facet>
+					
 
 					<p:column headerText="Codigo">
 						<h:outputText value="#{insumo.id_insumo}" />
@@ -38,7 +36,7 @@
 					</p:column>
 					<p:column headerText="Opções">
 
-						<p:commandButton icon="ui-icon-pencil"
+						<p:commandButton icon="ui-icon-pencil" value="Lançar"
 							actionListener="#{insumoBeans.puxarEditar}"
 							update=":mensagem  :formEdi:pngEdi"
 							oncomplete="PF('dialogoEdi').show();">
@@ -70,7 +68,7 @@
 
 						</p:panelGrid>
 						<h:panelGrid columns="2">
-							<p:commandButton value="Editar"
+							<p:commandButton icon="ui-icon-pencil" value="Lançar"
 								actionListener="#{insumoBeans.lancarQTD}"
 								update=":mensagem :formListagem:dttabela :formEdi:pngEdi"
 								oncomplete="PF('dialogoEdi').hide();" />
