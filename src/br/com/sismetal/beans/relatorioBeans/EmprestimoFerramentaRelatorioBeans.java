@@ -11,13 +11,16 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.component.datatable.DataTable;
 
 import br.com.sismetal.dao.EmprestimoFerramentaDAO;
+import br.com.sismetal.dao.FuncionarioDAO;
 import br.com.sismetal.doumain.EmprestimoFerramenta;
+import br.com.sismetal.doumain.Funcionario;
 import br.com.sismetal.util.HibernateUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -39,10 +42,18 @@ public class EmprestimoFerramentaRelatorioBeans implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Funcionario funcionario;
 	private EmprestimoFerramenta emprestimoFerramenta;
 	private List<EmprestimoFerramenta>emprestimoFerramentasRel;
 	private List<EmprestimoFerramenta>emprestimoFerramentasRelDAO;
 	
+	
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 	public EmprestimoFerramenta getEmprestimoFerramenta() {
 		return emprestimoFerramenta;
 	}
@@ -68,6 +79,18 @@ public class EmprestimoFerramentaRelatorioBeans implements Serializable{
 	public void novoEmp() {
 		emprestimoFerramentasRel = new ArrayList<>();
 	}
+	/**
+	 * função que puxa da tabela o funcionario
+	 * 
+	 * @param event
+	 */
+	public void puxarFuncionarioFabriTable(ActionEvent event) {
+
+		funcionario = (Funcionario) event.getComponent().getAttributes().get("funcEmprFerrSelecionadoFabri");
+		novoEmp();
+		EmprestimoFerramentaDAO efnd = new EmprestimoFerramentaDAO();
+		emprestimoFerramentasRel = efnd.listarNomeFunc(funcionario);
+	}
 	@PostConstruct
 	public void buscarEmpNaoDevolvidos() {
 		novoEmp();
@@ -75,12 +98,22 @@ public class EmprestimoFerramentaRelatorioBeans implements Serializable{
 		emprestimoFerramentasRel =  efnd.listarDevFalse(emprestimoFerramenta);
 		novoEF();
 	}
+	public void listarPorNome() {
+		novoEmp();
+		EmprestimoFerramentaDAO efnd = new EmprestimoFerramentaDAO();
+		emprestimoFerramentasRel = efnd.listarNome(emprestimoFerramenta);
+	}
 	public void imprimir() {
 		try {
-			DataTable tabela = (DataTable) Faces.getViewRoot().findComponent
-					("formListagemEmpres:dttabelaEmpres");
-			Map<String, Object> filtros = tabela.getFilters();
-			String funNome = (String) filtros.get("funcionarioFabrica.nome");
+			//DataTable tabela = (DataTable) Faces.getViewRoot().findComponent("formListagemEmpres:dttabelaEmpres");
+			//Map<String, Object> filtros = tabela.getFilters();
+			//String funNome = (String) filtros.get("funcionarioFabrica.nome");
+			String funNome;
+			if(funcionario == null) {
+				funNome = "";
+			}else {
+			 funNome = funcionario.getNome();
+			}
 			String caminho = Faces.getRealPath("/Relatorios/emprestimosFiltrado.jasper");
 			Map<String, Object> parametros = new HashMap<>();          
 			if(funNome == null) {

@@ -39,7 +39,7 @@ public class FerramentaDAO extends GenericDAO<Ferramenta>{
 		
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		try {
-			String status = "Estragada";
+			String status = "estragada";
 			Criteria consulta = sessao.createCriteria(Ferramenta.class);
 			consulta.add(Restrictions.eq("status", status));
 			List<Ferramenta>ferramentas = consulta.list();
