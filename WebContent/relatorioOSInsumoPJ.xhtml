@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="conteudo">
+		<h:outputText
+			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
+		<h:form id="pj">
+		<h:outputText value="Projeto : #{ordemServicoInsumoBeans.projeto.titulo_projeto}   " />
+			<p:commandButton value="Filtrar" icon="ui-icon-circle-zoomout"
+						oncomplete="PF('dialogoProjeto').show();" />
+		</h:form>
+
+
+		<h:form id="formPJ">
+			<p:panel header="Lista de Proj. Insumos">
+				<p:dataTable id="dttabelaPJ"
+					emptyMessage="Nenhum registro encontrado." paginator="true"
+					value="#{ordemServicoInsumoBeans.ordemServicoInsumos}"
+					var="osi" rows="6">
+					<f:facet name="header">
+						<p:commandButton value="Imprimir"
+							actionListener="#{ordemServicoInsumoBeans.imprimirPJ}" />
+					</f:facet>
+					
+					<p:column headerText="Titulo projeto">
+						<h:outputText value="#{osi.ordemServico.projeto.titulo_projeto}" />
+					</p:column>
+
+					<p:column headerText="Almoxarife">
+						<h:outputText value="#{osi.funcionarioAlmoxarifado.nome}" />
+					</p:column>
+					
+					<p:column headerText="Gerente">						
+						<h:outputText value="#{osi.funcionarioGerente.nome}" />
+					</p:column>
+
+					<p:column headerText="Coaborador">						
+						<h:outputText value="#{osi.funcionarioFabrica.nome}" />
+					</p:column>
+					
+					<p:column headerText="Descrição produto">						
+						<h:outputText value="#{osi.insumo.descricao_produto}" />
+					</p:column>
+					
+					<p:column headerText="Preço">						
+						<h:outputText value="#{osi.preco}" />
+					</p:column>
+
+					<p:column headerText="Data entrga">
+						<h:outputText value="#{osi.dtEntrInsumo}" />
+					</p:column>
+
+					<f:facet name="footer">
+						<h:outputText value="Existem " />
+						<h:outputText
+							value="#{fn:length(ordemServicoInsumoBeans.ordemServicoInsumos)}" />
+						<h:outputText value=" insumos lançados. " />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+		
+		<!-- ********		________________ Adicionar Projeto _________________ 		*********-->
+		
+			<p:dialog header="Adicionar - Projeto" widgetVar="dialogoProjeto"
+				draggable="false" resizable="false" global="true" closable="false">
+				<h:form id="formAdcProjeto">
+				<p:panel header="Lista de Projetos">
+					<p:dataTable id="dttabelaProjeto"
+						emptyMessage="Nenhum registro encontrado." paginator="true"
+						value="#{projetoBeans.projetos}" var="projeto" rows="6">
+
+						<p:column headerText="Codigo">
+							<h:outputText value="#{projeto.id_projeto}" />
+						</p:column>
+						<p:column headerText="Titulo">
+							<h:outputText value="#{projeto.titulo_projeto}" />
+						</p:column>
+						<p:column headerText="Subtitulo">
+							<h:outputText value="#{projeto.subtitulo_projeto}" />
+						</p:column>
+						<p:column headerText="Local">
+							<h:outputText value="#{projeto.local_projeto}" />
+						</p:column>
+						<p:column headerText="Projetado">
+							<h:outputText value="#{projeto.projetado}" />
+						</p:column>
+						<p:column headerText="Desenhado">
+							<h:outputText value="#{projeto.desenhado}" />
+						</p:column>
+						<p:column headerText="Aprovado">
+							<h:outputText value="#{projeto.aprovado}" />
+						</p:column>
+						<p:column headerText="Revisado">
+							<h:outputText value="#{projeto.revisado}" />
+						</p:column>
+
+
+						<p:column headerText="Opções">
+							<p:commandButton icon="ui-icon-circle-plus" value="Adicionar"
+								actionListener="#{ordemServicoInsumoBeans.puxarProjeto}"
+								oncomplete="PF('dialogoProjeto').hide();"
+								update=":mensagem :formPJ:dttabelaPJ :pj ">
+								<f:attribute name="proEditarSelecionado" value="#{projeto}" />
+							</p:commandButton>
+						</p:column>
+						<f:facet name="footer">
+							<h:outputText value="Existem " />
+							<h:outputText value="#{fn:length(projetoBeans.projetos)}" />
+							<h:outputText value=" projetos cadastrados. " />
+							<p:commandButton value="Fechar"
+								oncomplete="PF('dialogoProjeto').hide();" />
+						</f:facet>
+					</p:dataTable>
+				</p:panel>
+				</h:form>
+			</p:dialog>
+		
+
+		
+	</ui:define>
+</ui:composition>

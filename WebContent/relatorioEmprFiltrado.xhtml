@@ -10,7 +10,7 @@
 	<ui:define name="conteudo">
 		<h:outputText
 			value="Bem vindo !!! #{autenticacaoBeans.usuarioLogado.nome}" />
-		<h:form>
+		<h:form id="emp">
 		<h:outputText value="Funcionario #{emprestimoFerramentaRelatorioBeans.funcionario.nome}" />
 			<p:commandButton icon="ui-icon-circle-plus"
 				value="Filtrar funcionario"
@@ -96,7 +96,7 @@
 					<p:column headerText="Adicionar">
 						<p:commandButton icon="ui-icon-circle-plus"
 							actionListener="#{emprestimoFerramentaRelatorioBeans.puxarFuncionarioFabriTable}"
-							update=":formListagemEmpres:dttabelaEmpres" oncomplete="PF('dialogoTabFabri').hide();">
+							update=":formListagemEmpres:dttabelaEmpres :emp" oncomplete="PF('dialogoTabFabri').hide();">
 							<f:attribute name="funcEmprFerrSelecionadoFabri"
 								value="#{funcionario}" />
 						</p:commandButton>

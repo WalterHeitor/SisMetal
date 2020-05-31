@@ -15,10 +15,8 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
-import org.primefaces.component.datatable.DataTable;
 
 import br.com.sismetal.dao.EmprestimoFerramentaDAO;
-import br.com.sismetal.dao.FuncionarioDAO;
 import br.com.sismetal.doumain.EmprestimoFerramenta;
 import br.com.sismetal.doumain.Funcionario;
 import br.com.sismetal.util.HibernateUtil;
@@ -118,11 +116,9 @@ public class EmprestimoFerramentaRelatorioBeans implements Serializable{
 			Map<String, Object> parametros = new HashMap<>();          
 			if(funNome == null) {
 				parametros.put("nomeColaborador", "%%");
-				System.out.println("1"+funNome);
 			}else {  
 				funNome = "%"+funNome+"%";
 				parametros.put("nomeColaborador", funNome);
-				System.out.println("2"+funNome);
 			}
 			Connection conexao = HibernateUtil.getConexao();
 				JasperPrint relatorio = JasperFillManager.fillReport(caminho, parametros, conexao);

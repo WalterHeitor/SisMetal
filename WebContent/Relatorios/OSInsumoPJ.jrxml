@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OSInsumoPJ" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="94db4a8b-bbae-4bcf-bebd-0893a49e950f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="metalger Adapter "/>
+	<parameter name="nPJ" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select osi.id_ordem_servico_insumo,osi.dtentrinsumo, osi.preco, qtdinsumo, 
+FA.nome as Almoxarife, FF.nome as Colaborador,
+FG.nome as Gerente, ins.descricao_produto, ordem_servico, PJ.titulo_projeto as TituloProjeto
+from ordem_servico_insumo osi, ordem_servico os, insumo ins,
+public.funcionario FA, public.funcionario FF, public.funcionario FG,
+public.projeto PJ
+WHERE 
+  osi.funcionario_fabrica = FF.matricula and osi.funcionario_almoxarifado = FA.matricula
+and osi.funcionario_gerente = FG.matricula and osi.ordem_servico = os.id_ordem_servico 
+and osi.insumo = ins.id_insumo and PJ.id_projeto = os.projeto
+and PJ.id_projeto LIKE  $P{nPJ} ]]>
+	</queryString>
+	<field name="id_ordem_servico_insumo" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id_ordem_servico_insumo"/>
+	</field>
+	<field name="dtentrinsumo" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="dtentrinsumo"/>
+	</field>
+	<field name="preco" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="preco"/>
+	</field>
+	<field name="qtdinsumo" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="qtdinsumo"/>
+	</field>
+	<field name="almoxarife" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="almoxarife"/>
+	</field>
+	<field name="colaborador" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="colaborador"/>
+	</field>
+	<field name="gerente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gerente"/>
+	</field>
+	<field name="descricao_produto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descricao_produto"/>
+	</field>
+	<field name="ordem_servico" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ordem_servico"/>
+	</field>
+	<field name="tituloprojeto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tituloprojeto"/>
+	</field>
+	<group name="id_ordem_servico_insumo">
+		<groupExpression><![CDATA[$F{id_ordem_servico_insumo}]]></groupExpression>
+	</group>
+	<group name="dtentrinsumo">
+		<groupExpression><![CDATA[$F{dtentrinsumo}]]></groupExpression>
+	</group>
+	<group name="preco">
+		<groupExpression><![CDATA[$F{preco}]]></groupExpression>
+	</group>
+	<group name="qtdinsumo">
+		<groupExpression><![CDATA[$F{qtdinsumo}]]></groupExpression>
+	</group>
+	<group name="almoxarife">
+		<groupExpression><![CDATA[$F{almoxarife}]]></groupExpression>
+	</group>
+	<group name="colaborador">
+		<groupExpression><![CDATA[$F{colaborador}]]></groupExpression>
+	</group>
+	<group name="gerente">
+		<groupExpression><![CDATA[$F{gerente}]]></groupExpression>
+	</group>
+	<group name="descricao_produto">
+		<groupExpression><![CDATA[$F{descricao_produto}]]></groupExpression>
+	</group>
+	<group name="ordem_servico">
+		<groupExpression><![CDATA[$F{ordem_servico}]]></groupExpression>
+	</group>
+	<group name="tituloprojeto">
+		<groupExpression><![CDATA[$F{tituloprojeto}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="800" height="50" uuid="56daec55-b1da-4e9e-be8d-560bacd77c04"/>
+				<textElement textAlignment="Center">
+					<font fontName="Rockwell Extra Bold" size="26"/>
+				</textElement>
+				<text><![CDATA[Relatorio de Insumos por Projeto SisMetalGer]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="120" y="0" width="100" height="31" uuid="c590e16f-e291-4a92-a966-12584487153c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="514a959a-d2bc-4d90-9f6b-9a78a3ca50e5"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[almoxarife]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="0" width="100" height="31" uuid="78bae7f3-df50-4034-9ff0-1695e9be1b0f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6755b1b-f03e-4702-9d40-1a4eb9312e8e"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[colaborador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="100" height="31" uuid="1fe9d193-c982-4608-85d0-7d3d53c2bffa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f5a8709-43a3-4b4c-86a0-e1ea7083efe9"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[gerente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="0" width="100" height="31" uuid="d5f4da78-7126-4e99-82cb-f76c71e76482">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b471de4b-c4ed-4c44-8191-776ad6ae1029"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[descricao produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="0" width="100" height="31" uuid="548a63b8-b3bd-4708-bb43-1ee14f4041e6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3e44ce35-2ae6-4515-ba81-c9b7890d765d"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[preço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="0" width="100" height="31" uuid="d1dae603-606a-4ffa-9b9b-e724981569bc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c6224b4-9b72-46cf-8d1a-22015d610289"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTD insumo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="0" width="100" height="31" uuid="749d5c0a-d493-4823-b82f-ff5b45b37c04">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41486af9-b9d7-4100-b457-ca52344c3622"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titulo projeto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="620" y="0" width="80" height="30" uuid="ff773a6f-8995-42d9-bdea-b85b8abf86de">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cd532ede-de3a-4303-a532-5693caf49c82"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Data entrega]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="120" y="0" width="100" height="30" uuid="c46e63fd-35e2-40fb-8fa3-5b0ee3bc77f9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="514a959a-d2bc-4d90-9f6b-9a78a3ca50e5"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{almoxarife}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="100" height="30" uuid="52560ed1-7866-4183-af66-cc31c26eed20">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6755b1b-f03e-4702-9d40-1a4eb9312e8e"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{colaborador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="0" width="100" height="30" uuid="79f553f5-21c7-4a4c-88e0-743c5781a7e6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f5a8709-43a3-4b4c-86a0-e1ea7083efe9"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{gerente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="100" height="30" uuid="4ecfebf0-2298-41dd-8125-072895afd534">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b471de4b-c4ed-4c44-8191-776ad6ae1029"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{descricao_produto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="520" y="0" width="100" height="30" uuid="22cef8af-0b87-4759-8d9c-b48e66e4e9a0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3e44ce35-2ae6-4515-ba81-c9b7890d765d"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{preco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="700" y="0" width="100" height="30" uuid="57a3ce56-8a78-4223-a24b-c55b32abdd40">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c6224b4-9b72-46cf-8d1a-22015d610289"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{qtdinsumo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="0" width="100" height="30" uuid="57581ae3-4a0a-4eef-bcf7-f851234d8137">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41486af9-b9d7-4100-b457-ca52344c3622"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tituloprojeto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="620" y="0" width="80" height="30" uuid="d4ac20ca-8040-445c-a71c-d9b4359b934c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cd532ede-de3a-4303-a532-5693caf49c82"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dtentrinsumo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

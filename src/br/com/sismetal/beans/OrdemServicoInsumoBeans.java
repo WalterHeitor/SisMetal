@@ -1,12 +1,17 @@
 package br.com.sismetal.beans;
 
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
 import br.com.sismetal.dao.InsumoDAO;
@@ -15,6 +20,12 @@ import br.com.sismetal.doumain.Funcionario;
 import br.com.sismetal.doumain.Insumo;
 import br.com.sismetal.doumain.OrdemServico;
 import br.com.sismetal.doumain.OrdemServicoInsumo;
+import br.com.sismetal.doumain.Projeto;
+import br.com.sismetal.util.HibernateUtil;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
 
 //@SuppressWarnings("serial")
 @ManagedBean
@@ -33,8 +44,9 @@ public class OrdemServicoInsumoBeans {
 	private Funcionario funcionarioGerente;
 	private Funcionario funcionarioFabrica;
 	private Funcionario funcionarioAlmoxarife;
+	private Projeto projeto;
 	private String acao = "";
-	
+
 	public String getAcao() {
 		return acao;
 	}
@@ -114,7 +126,7 @@ public class OrdemServicoInsumoBeans {
 	public void setOrdemServicos(List<OrdemServico> ordemServicos) {
 		this.ordemServicos = ordemServicos;
 	}
-	
+
 	public Funcionario getFuncionarioGerente() {
 		return funcionarioGerente;
 	}
@@ -130,8 +142,8 @@ public class OrdemServicoInsumoBeans {
 	public void setFuncionarioFabrica(Funcionario funcionarioFabrica) {
 		this.funcionarioFabrica = funcionarioFabrica;
 	}
-	
-public Funcionario getFuncionarioAlmoxarife() {
+
+	public Funcionario getFuncionarioAlmoxarife() {
 		return funcionarioAlmoxarife;
 	}
 
@@ -139,9 +151,17 @@ public Funcionario getFuncionarioAlmoxarife() {
 		this.funcionarioAlmoxarife = funcionarioAlmoxarife;
 	}
 
-	//--------------------------------------------novo()
+	public Projeto getProjeto() {
+		return projeto;
+	}
+
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
+	}
+
+	// --------------------------------------------novo()
 	public void novoRend() {
-		
+
 		try {
 			rend = true;
 			acao = "novo";
@@ -151,21 +171,23 @@ public Funcionario getFuncionarioAlmoxarife() {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar rendenizar!!!");
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void novoInsumo() {
 		insumo = new Insumo();
 	}
+
 	public void novoOrdemSInsumo() {
 		ordemServicoInsumo = new OrdemServicoInsumo();
 	}
+
 	public void novoListInsumo() {
 		ordemServicoInsumos = new ArrayList<>();
-		
-		
+
 	}
-	//@PostConstruct
+
+	// @PostConstruct
 	public void novo() {
 		insumos = new ArrayList<>();
 		insumosSave = new ArrayList<>();
@@ -174,37 +196,51 @@ public Funcionario getFuncionarioAlmoxarife() {
 		novoOrdemSInsumo();
 		novoListInsumo();
 	}
+
 //-------------------------------------------- fim novo()
 	public void puxarFuncionarioGerente(ActionEvent event) {
 
-		funcionarioGerente = (Funcionario) event.getComponent().getAttributes()
-				.get("funcSelecionado");
+		funcionarioGerente = (Funcionario) event.getComponent().getAttributes().get("funcSelecionado");
 	}
+
 	public void puxarFuncionarioFabrica(ActionEvent event) {
 
-		funcionarioFabrica = (Funcionario) event.getComponent().getAttributes()
-				.get("funcSelecionado");
+		funcionarioFabrica = (Funcionario) event.getComponent().getAttributes().get("funcSelecionado");
 	}
+
 	public void puxarFuncionarioAlmoxarifado(ActionEvent event) {
 
-		funcionarioAlmoxarife = (Funcionario) event.getComponent().getAttributes()
-				.get("funcSelecionado");
+		funcionarioAlmoxarife = (Funcionario) event.getComponent().getAttributes().get("funcSelecionado");
 	}
+
 	public void puxarOS(ActionEvent event) {
 
-		ordemServico = (OrdemServico) event.getComponent().getAttributes()
-				.get("OSSelecionado");
-		
+		ordemServico = (OrdemServico) event.getComponent().getAttributes().get("OSSelecionado");
+		OrdemServicoInsumoDAO ordemServicoInsumoDAO = new OrdemServicoInsumoDAO();
+		ordemServicoInsumos = ordemServicoInsumoDAO.listarFiltroOS(ordemServico);
 	}
+	
+	public void puxarProjeto(ActionEvent event) {
+		try {
+			
+			projeto = (Projeto) event.getComponent().getAttributes().get("proEditarSelecionado");
+			OrdemServicoInsumoDAO ordemServicoInsumoDAO = new OrdemServicoInsumoDAO();
+			ordemServicoInsumos = ordemServicoInsumoDAO.listarFiltroPJ(projeto);
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar selcionar o projeto!!!");
+			e.printStackTrace();
+		}
+	}
+
 	public void salvar() {
 
 		try {
 			OrdemServicoInsumoDAO ordemServicoInsumoDAO = new OrdemServicoInsumoDAO();
-			for(OrdemServicoInsumo ordemServicoInsumo: ordemServicoInsumos) {
+			for (OrdemServicoInsumo ordemServicoInsumo : ordemServicoInsumos) {
 				ordemServicoInsumoDAO.salvar(ordemServicoInsumo);
 			}
 			InsumoDAO insumoDAO = new InsumoDAO();
-			for(Insumo insSave: insumosSave) {
+			for (Insumo insSave : insumosSave) {
 				insumoDAO.salvarMerge(insSave);
 			}
 			novoRend();
@@ -235,6 +271,7 @@ public Funcionario getFuncionarioAlmoxarife() {
 			e.printStackTrace();
 		}
 	}
+
 	public void puxarInsumo(ActionEvent event) {
 		try {
 			novoInsumo();
@@ -245,35 +282,35 @@ public Funcionario getFuncionarioAlmoxarife() {
 			e.printStackTrace();
 		}
 	}
+
 	public void checkOS() {
 		try {
-			
-			if(funcionarioFabrica == null) {
+
+			if (funcionarioFabrica == null) {
 				Messages.addFlashGlobalError("Preencha o funcionario !!!");
 			}
-			
-			if(funcionarioGerente == null) {
+
+			if (funcionarioGerente == null) {
 				Messages.addFlashGlobalError("Preencha o gerente !!!");
 			}
-			if(ordemServico == null) {
+			if (ordemServico == null) {
 				Messages.addFlashGlobalError("Preencha a Ordem Serviço !!!");
 			}
-			if(ordemServicoInsumo.getDtEntrInsumo() == null) {
+			if (ordemServicoInsumo.getDtEntrInsumo() == null) {
 				Messages.addFlashGlobalError("Preencha a data !!!");
 			}
-			if(funcionarioFabrica != null && funcionarioGerente != null && 
-					ordemServico != null && ordemServicoInsumo.getDtEntrInsumo() != null) {
+			if (funcionarioFabrica != null && funcionarioGerente != null && ordemServico != null
+					&& ordemServicoInsumo.getDtEntrInsumo() != null) {
 				rend2 = true;
-				
+
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		
+
 	}
 
-	//@PostConstruct
+	@PostConstruct
 	public void listar() {
 		try {
 			OrdemServicoInsumoDAO ordemServicoInsumoDAO = new OrdemServicoInsumoDAO();
@@ -284,9 +321,9 @@ public Funcionario getFuncionarioAlmoxarife() {
 			e.printStackTrace();
 		}
 	}
+
 	public void addInsOs() {
-		
-		
+
 		try {
 			Insumo insumo2 = new Insumo();
 			float qtd = 0;
@@ -294,63 +331,112 @@ public Funcionario getFuncionarioAlmoxarife() {
 			ordemServicoInsumo.setOrdemServico(ordemServico);
 			ordemServicoInsumo.setFuncionarioGerente(funcionarioGerente);
 			ordemServicoInsumo.setFuncionarioFabrica(funcionarioFabrica);
+			ordemServicoInsumo.setFuncionarioAlmoxarifado(funcionarioAlmoxarife);
 			ordemServicoInsumo.setInsumo(insumo);
-System.out.println("1- "+insumo.getQuantidade());
+			System.out.println("1- " + insumo.getQuantidade());
 			qtd = insumo.getQuantidade() - ordemServicoInsumo.getQtdInsumo();
-			ordemServicoInsumo.setPreco(insumo.getPreco());;
+			ordemServicoInsumo.setPreco(insumo.getPreco());
+			;
 
-			if(qtd < 0) {
+			if (qtd < 0) {
 				Messages.addFlashGlobalWarn("A quantidade requisitada e superior a do estoque");
-			}else {
-				for(OrdemServicoInsumo insumo1: ordemServicoInsumos ) {
-					if(insumo.getId_insumo().equals(insumo1.getInsumo().getId_insumo())) {
+			} else {
+				for (OrdemServicoInsumo insumo1 : ordemServicoInsumos) {
+					if (insumo.getId_insumo().equals(insumo1.getInsumo().getId_insumo())) {
 						ins = true;
-						insumo1.setQtdInsumo(insumo1.getQtdInsumo()+ordemServicoInsumo.getQtdInsumo());
-						System.out.println("1 - ins for"+ins);
+						insumo1.setQtdInsumo(insumo1.getQtdInsumo() + ordemServicoInsumo.getQtdInsumo());
+						System.out.println("1 - ins for" + ins);
 					}
 				}
-				if(ins == true) {
-					
+				if (ins == true) {
+
 					insumo.setQuantidade(qtd);
 					novoInsumo();
 					novoOrdemSInsumo();
-					System.out.println("2 - ins true"+ins);
-				}else {
-					insumo.setQuantidade(qtd);				
+					System.out.println("2 - ins true" + ins);
+				} else {
+					insumo.setQuantidade(qtd);
 					ordemServicoInsumos.add(ordemServicoInsumo);
 					System.out.println("add.ordemServ");
 					insumo2 = insumo;
 					insumosSave.add(insumo2);
 					novoInsumo();
 					novoOrdemSInsumo();
-					System.out.println("3 - ins false"+ins);
-				}				
-			}			
+					System.out.println("3 - ins false" + ins);
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
+
 	public void remover(ActionEvent event) {
 		try {
 			novoOrdemSInsumo();
-			ordemServicoInsumo = (OrdemServicoInsumo) event.getComponent().getAttributes().get("remIns");		
+			ordemServicoInsumo = (OrdemServicoInsumo) event.getComponent().getAttributes().get("remIns");
 			insumo = (Insumo) event.getComponent().getAttributes().get("InsumoSelecionado");
-			for(Insumo insumo1 : insumos) {
-				if(insumo1.getId_insumo().equals(ordemServicoInsumo.getInsumo().getId_insumo())) {
+			for (Insumo insumo1 : insumos) {
+				if (insumo1.getId_insumo().equals(ordemServicoInsumo.getInsumo().getId_insumo())) {
 					insumo1.setQuantidade(ordemServicoInsumo.getQtdInsumo() + insumo1.getQuantidade());
 					ordemServicoInsumos.remove(ordemServicoInsumo);
 				}
-				
+
 			}
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
+	}
+
+	public void imprimirOSI() {
+		try {
+
+			String osi;
+			if (ordemServico == null) {
+				osi = "";
+			} else {
+				osi = ordemServico.getId_ordem_servico();
+			}
+			String caminho = Faces.getRealPath("/Relatorios/osInsumos.jasper");
+			Map<String, Object> parametros = new HashMap<>();
+			if (osi == null) {
+				parametros.put("nOS", "%%");
+			} else {
+				parametros.put("nOS", "%" + osi + "%");
+			}
+			Connection conexao = HibernateUtil.getConexao();
+			JasperPrint relatorio = JasperFillManager.fillReport(caminho, parametros, conexao);
+			JasperPrintManager.printReport(relatorio, true);
+		} catch (JRException e) {
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar carregar o relatorio");
+			e.printStackTrace();
+		}
 	}
 	
-	
-	
-	
+	public void imprimirPJ() {
+		try {
+
+			String pj;
+			if (projeto == null) {
+				pj = "";
+			} else {
+				pj = projeto.getId_projeto();
+			}
+			String caminho = Faces.getRealPath("/Relatorios/OSInsumoPJ.jasper");
+			Map<String, Object> parametros = new HashMap<>();
+			if (pj == null) {
+				parametros.put("nPJ", "%%");
+			} else {
+				parametros.put("nPJ", "%" + pj + "%");
+			}
+			Connection conexao = HibernateUtil.getConexao();
+			JasperPrint relatorio = JasperFillManager.fillReport(caminho, parametros, conexao);
+			JasperPrintManager.printReport(relatorio, true);
+		} catch (JRException e) {
+			Messages.addFlashGlobalError("Ocorreu u erro ao tentar carregar o relatorio");
+			e.printStackTrace();
+		}
+	}
+
 }
