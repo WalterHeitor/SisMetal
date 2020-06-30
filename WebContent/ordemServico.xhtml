@@ -16,7 +16,8 @@
 					emptyMessage="Nenhum registro encontrado." paginator="true"
 					value="#{ordemServicoBeans.ordemServicos}" var="os" rows="6">
 					<f:facet name="header">
-						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
+						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" 
+						/>
 					</f:facet>
 					<p:column headerText="Codigo">
 						<h:outputText value="#{os.id_ordem_servico}" />
@@ -39,7 +40,8 @@
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{ordemServicoBeans.puxarOsExcluir}"
-							update=":mensagem :formListagem:dttabela ">
+							update=":mensagem :formListagem:dttabela "
+							rendered="#{autenticacaoBeans.d}">
 							<p:confirm header="Confirmação"
 								message="Deseja excluir o cliente?" icon="ui-icon-alert" />
 							<f:attribute name="OS_SelecionadoEx" value="#{os}" />
@@ -48,7 +50,8 @@
 						<p:commandButton icon="ui-icon-pencil"
 							actionListener="#{ordemServicoBeans.puxarOsEditar}"
 							update=":mensagem  :formEdi:pngEdi"
-							oncomplete="PF('dialogoEdi').show();">
+							oncomplete="PF('dialogoEdi').show();"
+							>
 							<f:attribute name="OS_SelecionadoEd" value="#{os}" />
 						</p:commandButton>
 					</p:column>

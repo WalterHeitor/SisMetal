@@ -30,29 +30,41 @@
 						<p:menuitem value="Sair" />
 					</p:submenu>
 					<p:submenu label="Cadastros" >
-						<p:menuitem value="Clientes" outcome="/cliente.xhtml" />
+						<p:menuitem value="Clientes" outcome="/cliente.xhtml" 
+						rendered="#{autenticacaoBeans.c}"/>
 						<p:menuitem value="Funcionarios" outcome="/funcionarios.xhtml" />
-						<p:menuitem value="Ferramentas" outcome="/ferramenta.xhtml" />
-						<p:menuitem value="Insumos" outcome="/insumo.xhtml" />
-						<p:menuitem value="Projetos" outcome="/projeto.xhtml" />
-						<p:menuitem value="Ordem Serviços" outcome="/ordemServico.xhtml" />
+						<p:menuitem value="Ferramentas" outcome="/ferramenta.xhtml" 
+						rendered="#{autenticacaoBeans.c}"/>
+						<p:menuitem value="Insumos" outcome="/insumo.xhtml" 
+						rendered="#{autenticacaoBeans.c}"/>
+						<p:menuitem value="Projetos" outcome="/projeto.xhtml" 
+						rendered="#{autenticacaoBeans.c}"/>
+						<p:menuitem value="Ordem Serviços" outcome="/ordemServico.xhtml" 
+						rendered="#{autenticacaoBeans.c}"/>
 					</p:submenu>
-					<p:submenu label="Ferramentas">
+					<p:submenu label="Ferramentas"
+					rendered="#{autenticacaoBeans.c}">
 						<p:menuitem value="Emprestimos" outcome="/emprestimoFerramenta.xhtml" 
 						actionListener="#{emprestimoFerramentaBeans.novoEmprestimo()}"/>
 						<p:menuitem value="Devolução" outcome="/devolucaoEmprestimoFerramenta.xhtml"/>
 					</p:submenu>
-					<p:submenu label="Lançamentos">
+					<p:submenu label="Lançamentos"
+					rendered="#{autenticacaoBeans.c}">
 					<p:menuitem value="OS Insumos" outcome="/osInsumos.xhtml" />
 					<p:menuitem value="Insumos" outcome="/entradaInsumos.xhtml" />
 					</p:submenu>
 					<p:submenu label="Relatorios">
-					<p:menuitem value="Funcionarios" outcome="/relatorioFuncionario.xhtml"/>
-					<p:menuitem value="Ferramentas (Invetário)" outcome="/relatorioInventario.xhtml" />
-					<p:menuitem value="Ferramentas (Estragada)" outcome="/relatorioEstragadas.xhtml" />
+					<p:menuitem value="Funcionarios" outcome="/relatorioFuncionario.xhtml"
+					rendered="#{autenticacaoBeans.r}"/>
+					<p:menuitem value="Ferramentas (Invetário)" outcome="/relatorioInventario.xhtml" 
+					rendered="#{autenticacaoBeans.r}"/>
+					<p:menuitem value="Ferramentas (Estragada)" outcome="/relatorioEstragadas.xhtml" 
+					rendered="#{autenticacaoBeans.r}"/>
 					<p:menuitem value="Emprestimos " outcome="/relatorioEmprFiltrado.xhtml" />
-					<p:menuitem value="O.S. Insumos " outcome="/relatorioOSInsumos.xhtml" />
-					<p:menuitem value="Proj. Insumos " outcome="/relatorioOSInsumoPJ.xhtml" />
+					<p:menuitem value="O.S. Insumos " outcome="/relatorioOSInsumos.xhtml" 
+					rendered="#{autenticacaoBeans.r}"/>
+					<p:menuitem value="Proj. Insumos " outcome="/relatorioOSInsumoPJ.xhtml" 
+					rendered="#{autenticacaoBeans.r}"/>
 					</p:submenu>
 					<p:submenu label="Ajuda">
 					</p:submenu>

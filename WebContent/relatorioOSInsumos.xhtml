@@ -21,8 +21,10 @@
 			<p:panel header="Lista de OS Insumos">
 				<p:dataTable id="dttabelaOSI"
 					emptyMessage="Nenhum registro encontrado." paginator="true"
-					value="#{ordemServicoInsumoBeans.ordemServicoInsumos}"
-					var="osi" rows="6">
+					value="#{ordemServicoInsumoBeans.ordemServicoInsumosRel}"
+					var="osi" rows="4" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} 
+					{PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					rowsPerPageTemplate="4,10,15">
 					<f:facet name="header">
 						<p:commandButton value="Imprimir"
 							actionListener="#{ordemServicoInsumoBeans.imprimirOSI}" />
@@ -59,7 +61,7 @@
 					<f:facet name="footer">
 						<h:outputText value="Existem " />
 						<h:outputText
-							value="#{fn:length(ordemServicoInsumoBeans.ordemServicoInsumos)}" />
+							value="#{fn:length(ordemServicoInsumoBeans.ordemServicoInsumosRel)}" />
 						<h:outputText value=" insumos lançados. " />
 					</f:facet>
 				</p:dataTable>

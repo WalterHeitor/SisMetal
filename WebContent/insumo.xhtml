@@ -18,7 +18,8 @@
 					emptyMessage="Nenhum registro encontrado." paginator="true"
 					value="#{insumoBeans.insumos}" var="insumo" rows="6">
 					<f:facet name="header">
-						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
+						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+						/>
 					</f:facet>
 
 					<p:column headerText="Codigo" filterBy="#{insumo.id_insumo}">
@@ -39,7 +40,8 @@
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{insumoBeans.excluir}"
-							update=":mensagem :formListagem:dttabela ">
+							update=":mensagem :formListagem:dttabela "
+							rendered="#{autenticacaoBeans.d}">
 							<p:confirm header="Confirmação"
 								message="Deseja excluir o Insumo?" icon="ui-icon-alert" />
 							<f:attribute name="Insumo_SelecionadoEx" value="#{insumo}" />
@@ -48,7 +50,8 @@
 						<p:commandButton icon="ui-icon-pencil"
 							actionListener="#{insumoBeans.puxarEditar}"
 							update=":mensagem  :formEdi:pngEdi"
-							oncomplete="PF('dialogoEdi').show();">
+							oncomplete="PF('dialogoEdi').show();"
+							>
 							<f:attribute name="Insumo_SelecionadoEd" value="#{insumo}" />
 						</p:commandButton>
 					</p:column>

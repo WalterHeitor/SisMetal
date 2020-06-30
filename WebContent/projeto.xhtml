@@ -18,7 +18,8 @@
 					emptyMessage="Nenhum registro encontrado." paginator="true"
 					value="#{projetoBeans.projetos}" var="projeto" rows="6">
 					<f:facet name="header">
-						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
+						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" 
+						/>
 					</f:facet>
 					<p:column headerText="Codigo">
 						<h:outputText value="#{projeto.id_projeto}" />
@@ -50,7 +51,8 @@
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{projetoBeans.excluir}"
-							update=":mensagem :formListagem:dttabela ">
+							update=":mensagem :formListagem:dttabela "
+							rendered="#{autenticacaoBeans.d}">
 							<p:confirm header="Confirmação"
 								message="Deseja excluir o cliente?" icon="ui-icon-alert" />
 							<f:attribute name="proExcluirSelecionado" value="#{projeto}" />
@@ -59,7 +61,8 @@
 						<p:commandButton icon="ui-icon-pencil"
 							actionListener="#{projetoBeans.puxarProjeto}"
 							update=":mensagem  :formEdi:pngEdi"
-							oncomplete="PF('dialogoEdi').show();">
+							oncomplete="PF('dialogoEdi').show();"
+							>
 							<f:attribute name="proEditarSelecionado" value="#{projeto}" />
 						</p:commandButton>
 					</p:column>

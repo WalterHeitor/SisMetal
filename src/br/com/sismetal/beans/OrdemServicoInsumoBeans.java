@@ -36,6 +36,7 @@ public class OrdemServicoInsumoBeans {
 	private boolean rend2 = false;
 	private OrdemServicoInsumo ordemServicoInsumo;
 	private List<OrdemServicoInsumo> ordemServicoInsumos;
+	private List<OrdemServicoInsumo> ordemServicoInsumosRel;
 	private Insumo insumo;
 	private List<Insumo> insumos;
 	private List<Insumo> insumosSave;
@@ -77,6 +78,15 @@ public class OrdemServicoInsumoBeans {
 
 	public void setOrdemServicoInsumo(OrdemServicoInsumo ordemServicoInsumo) {
 		this.ordemServicoInsumo = ordemServicoInsumo;
+	}
+	
+
+	public List<OrdemServicoInsumo> getOrdemServicoInsumosRel() {
+		return ordemServicoInsumosRel;
+	}
+
+	public void setOrdemServicoInsumosRel(List<OrdemServicoInsumo> ordemServicoInsumosRel) {
+		this.ordemServicoInsumosRel = ordemServicoInsumosRel;
 	}
 
 	public List<OrdemServicoInsumo> getOrdemServicoInsumos() {
@@ -166,6 +176,7 @@ public class OrdemServicoInsumoBeans {
 			rend = true;
 			acao = "novo";
 			novo();
+			novoOrdemSInsumo();
 			Messages.addFlashGlobalInfo("Rendernizado com Sucesso!!!");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar rendenizar!!!");
@@ -217,7 +228,7 @@ public class OrdemServicoInsumoBeans {
 
 		ordemServico = (OrdemServico) event.getComponent().getAttributes().get("OSSelecionado");
 		OrdemServicoInsumoDAO ordemServicoInsumoDAO = new OrdemServicoInsumoDAO();
-		ordemServicoInsumos = ordemServicoInsumoDAO.listarFiltroOS(ordemServico);
+		ordemServicoInsumosRel = ordemServicoInsumoDAO.listarFiltroOS(ordemServico);
 	}
 	
 	public void puxarProjeto(ActionEvent event) {
@@ -225,7 +236,7 @@ public class OrdemServicoInsumoBeans {
 			
 			projeto = (Projeto) event.getComponent().getAttributes().get("proEditarSelecionado");
 			OrdemServicoInsumoDAO ordemServicoInsumoDAO = new OrdemServicoInsumoDAO();
-			ordemServicoInsumos = ordemServicoInsumoDAO.listarFiltroPJ(projeto);
+			ordemServicoInsumosRel = ordemServicoInsumoDAO.listarFiltroPJ(projeto);
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar selcionar o projeto!!!");
 			e.printStackTrace();
@@ -314,7 +325,7 @@ public class OrdemServicoInsumoBeans {
 	public void listar() {
 		try {
 			OrdemServicoInsumoDAO ordemServicoInsumoDAO = new OrdemServicoInsumoDAO();
-			ordemServicoInsumos = ordemServicoInsumoDAO.listar();
+			ordemServicoInsumosRel = ordemServicoInsumoDAO.listar();
 
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ocorreu u erro ao tentar salvar o cliente!!!");

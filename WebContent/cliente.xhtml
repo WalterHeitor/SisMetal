@@ -38,7 +38,8 @@
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{clienteBeans.excluir}"
-							update=":mensagem :formListagem:dttabela ">
+							update=":mensagem :formListagem:dttabela "
+							rendered="#{autenticacaoBeans.d}">
 							<p:confirm header="Confirmação de exclusão"
 								message="Deseja excluir o cliente?" icon="ui-icon-alert" />
 							<f:attribute name="cliExcluirSelecionado" value="#{cliente}" />
